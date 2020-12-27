@@ -1,0 +1,8 @@
+{
+  "editor.formatOnType": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "material-icon-theme.languages.associations": {
+    "javascriptreact": "react"
+  }
+}
