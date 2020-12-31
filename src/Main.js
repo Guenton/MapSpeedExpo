@@ -16,10 +16,13 @@ import { SafeAreaView } from 'react-native';
 
 // Import Components
 import AppBackground from './components/container/AppBackground';
+import StartScreen from './screens/StartScreen';
 
 const Main = () => (
   <SafeAreaView style={{ flex: 1 }}>
-    <AppBackground></AppBackground>
+    <AppBackground>
+      <StartScreen />
+    </AppBackground>
   </SafeAreaView>
 );
 

@@ -1,7 +1,7 @@
 /*
 
 The FadeInView.js Exports a React-Native Functional Component
-- Component is connected not to Redux
+- Component is not connected to Redux
 
 - FadeInView is an Animated.View that will fade-in it's children components
 - Animation props.duration can be passed in milliseconds, else defaults to 5000 (5seconds)
@@ -23,7 +23,7 @@ const FadeInView = (props) => {
 
   // Set Anumation Timing Properties
   const timing = { toValue: 1, duration, useNativeDriver: true };
-  
+
   // Animation effect
   useEffect(() => Animated.timing(fadeAnim, timing).start(), [fadeAnim]);
 
