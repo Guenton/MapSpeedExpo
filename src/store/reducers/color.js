@@ -23,18 +23,18 @@ import { SET_DARK, SET_LIGHT } from '../actions/color';
 // Set Initial State
 const initialState = {
   isDark: false,
-  primary: '#EC1D20',
+  primary: '#A60A0A',
+  primaryTint: '#A60A0A17',
+  primaryOpacity: '#A60A0AD0',
+  accent: '#FFCC01',
+  success: '#AACF39',
+  warning: '#F58319',
+  error: '#EE161F',
+  white: '#FFFFFF',
+  black: '#000000',
   // Below Not used yet
   secondary: '#43b14a',
-  accent: '#ffc918',
   info: '#4f67af',
-  warning: '#F57C00',
-  error: '#BF360C',
-  success: '#43b14a',
-  black: '#000000',
-  white: '#FFFFFF',
-  primaryTint: '#27226617',
-  primaryOpacity: '#272266F0',
   secondaryTint: '#43B14A17',
   secondaryOpacity: '#43B14AF0',
 };
