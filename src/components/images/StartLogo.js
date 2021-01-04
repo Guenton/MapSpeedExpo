@@ -17,11 +17,11 @@ import { Image, Dimensions } from 'react-native';
 // Import Image from Assets
 const startLogo = require('../../assets/images/mapSpeedLogo.png');
 
-// Get Width information from Dimensions API
-const width = Dimensions.get('window').width / 1.6;
-
 const StartLogo = () => (
   <Image style={{ width, alignSelf: 'center' }} source={startLogo} resizeMode="contain" />
 );
+
+// Get Width information from Dimensions API
+const width = Dimensions.get('window').width * 0.8;
 
 export default StartLogo;

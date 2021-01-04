@@ -18,6 +18,7 @@ import { View } from 'react-native';
 import SlideInTopCircle from '../components/animations/SlideInTopCircle';
 import SlideInBottomCircle from '../components/animations/SlideInBottomCircle';
 import StartLogo from '../components/images/StartLogo';
+import StartButton from '../components/buttons/StartButton';
 
 const StartScreen = () => (
   <View style={{ flex: 1 }}>
@@ -26,6 +27,9 @@ const StartScreen = () => (
 
     {/* Start Logo */}
     <StartLogo />
+
+    {/* Start Button */}
+    <StartButton />
 
     {/* Bottom Circle Animation */}
     <SlideInBottomCircle></SlideInBottomCircle>
