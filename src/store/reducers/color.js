@@ -30,6 +30,7 @@ const initialState = {
   success: '#AACF39',
   warning: '#F58319',
   error: '#EE161F',
+  grey: '#1E1E1E',
   white: '#FFFFFF',
   black: '#000000',
   // Below Not used yet
