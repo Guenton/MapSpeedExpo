@@ -20,20 +20,26 @@ import SlideInBottomCircle from '../components/animations/SlideInBottomCircle';
 import StartLogo from '../components/images/StartLogo';
 import StartButton from '../components/buttons/StartButton';
 
-const StartScreen = () => (
-  <View style={{ flex: 1 }}>
-    {/* Top Circle Animation */}
-    <SlideInTopCircle></SlideInTopCircle>
+const StartScreen = () => {
+  // Start Press Handler
+  const onPressStart = () => console.log('start');
 
-    {/* Start Logo */}
-    <StartLogo />
+  // Return Component
+  return (
+    <View style={{ flex: 1 }}>
+      {/* Top Circle Animation */}
+      <SlideInTopCircle></SlideInTopCircle>
 
-    {/* Start Button */}
-    <StartButton />
+      {/* Start Logo */}
+      <StartLogo />
 
-    {/* Bottom Circle Animation */}
-    <SlideInBottomCircle></SlideInBottomCircle>
-  </View>
-);
+      {/* Start Button */}
+      <StartButton onPress={onPressStart} />
+
+      {/* Bottom Circle Animation */}
+      <SlideInBottomCircle></SlideInBottomCircle>
+    </View>
+  );
+};
 
 export default StartScreen;

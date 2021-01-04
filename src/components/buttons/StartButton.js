@@ -9,7 +9,7 @@ const StartButton = (props) => {
   // Set backgroundColor depending on Redux isDark state
   const backgroundColor = props.color.isDark ? props.color.black : props.color.white;
 
-  // Set borderColor depending on Redux isDart state
+  // Set borderColor depending on Redux isDark state
   const borderColor = props.color.isDark ? props.color.primary : props.color.white;
 
   // Set Style for Button
@@ -21,6 +21,7 @@ const StartButton = (props) => {
   // Return Customized Elements Button Component
   return (
     <Button
+      onPress={() => props.onPress()}
       title={props.startLang}
       containerStyle={[styles.container, props.style]}
       buttonStyle={[styles.button, styleButton]}

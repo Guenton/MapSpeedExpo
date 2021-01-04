@@ -19,11 +19,9 @@ The load.js Redux actions expose all load reducer specific actions
 // Export Action String for easy import in Reducer
 export const SET_DARK = 'SET_DARK';
 export const SET_LIGHT = 'SET_LIGHT';
+export const TOGGLE_DARK = 'TOGGLE_DARK';
 
 // Export Action Dispatchers
-export const setDark = () => {
-  return { type: SET_DARK };
-};
-export const setLight = () => {
-  return { type: SET_LIGHT };
-};
+export const setDark = () => ({ type: SET_DARK });
+export const setLight = () => ({ type: SET_LIGHT });
+export const toggleDark = () => ({ type: TOGGLE_DARK });

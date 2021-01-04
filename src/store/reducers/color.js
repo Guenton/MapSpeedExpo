@@ -18,7 +18,7 @@ The Color.js Redux Reducer exposes the Color Reducer and mantains its state
 */
 
 // import Actions
-import { SET_DARK, SET_LIGHT } from '../actions/color';
+import { SET_DARK, SET_LIGHT, TOGGLE_DARK } from '../actions/color';
 
 // Set Initial State
 const initialState = {
@@ -47,6 +47,8 @@ const loadReducer = (state = initialState, action) => {
       return { ...state, isDark: true };
     case SET_LIGHT:
       return { ...state, isDark: false };
+    case TOGGLE_DARK:
+      return { ...state, isDark: !state.isDark };
     default:
       return state;
   }
