@@ -10,7 +10,7 @@ import { ScaledSheet } from 'react-native-size-matters';
 
 // Import Components
 import AppBackground from '../components/container/AppBackground';
-import AppContent from '../components/container/AppContent';
+import FadeInAppContent from '../components/animations/FadeInAppContent';
 import SlideInTopCircle from '../components/animations/SlideInTopCircle';
 import SlideInBottomCircle from '../components/animations/SlideInBottomCircle';
 import StartLogo from '../components/images/StartLogo';
@@ -29,13 +29,13 @@ const StartScreen = () => {
       {/* Top Circle Animation */}
       <SlideInTopCircle start={-500} />
       {/* Application Content */}
-      <AppContent>
+      <FadeInAppContent>
         {/* Start Logo */}
         <StartLogo style={styles.logo} />
 
         {/* Start Button */}
         <StartButton onPress={onPressStart} />
-      </AppContent>
+      </FadeInAppContent>
 
       {/* Bottom Circle Animation */}
       <SlideInBottomCircle start={500} />

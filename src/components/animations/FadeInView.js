@@ -12,8 +12,8 @@ const FadeInView = (props) => {
   // Init fade Opacity to 0;
   const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
 
-  // Set Duration to props.duration or default to 5 seconds
-  const duration = props.duration ? props.duration : 5000;
+  // Set Duration to props.duration or default to 1 seconds
+  const duration = props.duration ? props.duration : 1000;
 
   // Set Anumation Timing Properties
   const timing = { toValue: 1, duration, useNativeDriver: true };
