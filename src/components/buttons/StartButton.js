@@ -1,9 +1,25 @@
+/*
+
+---> TL;DR Start Button Component <---
+
+*/
+
 // Import React Native Dependencies
 import React from 'react';
 import { Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
 import { Button } from 'react-native-elements';
+
+// Get button width based on device width
+const width = Dimensions.get('window').width * 0.3;
+
+// Styles
+const styles = ScaledSheet.create({
+  container: { width, alignSelf: 'center' },
+  button: { borderWidth: '1@s' },
+  title: { fontSize: '16@s' },
+});
 
 const StartButton = (props) => {
   // Set backgroundColor depending on Redux isDark state
@@ -31,16 +47,6 @@ const StartButton = (props) => {
     />
   );
 };
-
-// Get button width based on device width
-const width = Dimensions.get('window').width * 0.3;
-
-// Styles using ScaledSheet
-const styles = ScaledSheet.create({
-  container: { width, alignSelf: 'center' },
-  button: { borderWidth: '1@s' },
-  title: { fontSize: '16@s' },
-});
 
 // Map Redux states to "props" passed to functional component
 const mapStateToProps = (state) => ({ startLang: state.lang.start, color: state.color });

@@ -1,24 +1,23 @@
 /*
 
-The Main.js Exports a React-Native Functional Component
-- Component is not connected to Redux
-
-- Main is the Main entry point of the visual part of this Application
-- All Screen Components will be loaded directly into this component
-
----> TL;DR React Native Component for Application Logo <---
+---> TL;DR Entry Screen right after Splash Screen <---
 
 */
 
 // Import React Dependencies
 import React from 'react';
-import { View } from 'react-native';
+import { ScaledSheet } from 'react-native-size-matters';
 
 // Import Components
+import AppBackground from '../components/container/AppBackground';
+import AppContent from '../components/container/AppContent';
 import SlideInTopCircle from '../components/animations/SlideInTopCircle';
 import SlideInBottomCircle from '../components/animations/SlideInBottomCircle';
 import StartLogo from '../components/images/StartLogo';
 import StartButton from '../components/buttons/StartButton';
+
+// Styles
+const styles = ScaledSheet.create({ logo: { marginTop: '50@vs' } });
 
 const StartScreen = () => {
   // Start Press Handler
@@ -26,19 +25,21 @@ const StartScreen = () => {
 
   // Return Component
   return (
-    <View style={{ flex: 1 }}>
+    <AppBackground>
       {/* Top Circle Animation */}
-      <SlideInTopCircle></SlideInTopCircle>
+      <SlideInTopCircle start={-500} />
+      {/* Application Content */}
+      <AppContent>
+        {/* Start Logo */}
+        <StartLogo style={styles.logo} />
 
-      {/* Start Logo */}
-      <StartLogo />
-
-      {/* Start Button */}
-      <StartButton onPress={onPressStart} />
+        {/* Start Button */}
+        <StartButton onPress={onPressStart} />
+      </AppContent>
 
       {/* Bottom Circle Animation */}
-      <SlideInBottomCircle></SlideInBottomCircle>
-    </View>
+      <SlideInBottomCircle start={500} />
+    </AppBackground>
   );
 };
 

@@ -1,16 +1,10 @@
 /*
 
-The FadeInView.js Exports a React-Native Functional Component
-- Component is not connected to Redux
-
-- FadeInView is an Animated.View that will fade-in it's children components
-- Animation props.duration can be passed in milliseconds, else defaults to 5000 (5seconds)
-
 ---> TL;DR FadeIn Animation Container <---
 
 */
 
-// Import React Dependencies
+// Import React Native Dependencies
 import React, { useRef, useEffect } from 'react';
 import { Animated } from 'react-native';
 

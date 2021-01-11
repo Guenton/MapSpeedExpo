@@ -1,14 +1,15 @@
 /*
 
-The SkylineBG.js Exports a React-Native Functional Component
+The AppBackground.js Exports a React-Native Functional Component
 - Component is connected to Redux
 - Component has access to only the Redux states configured under mapStateToProps
 - Component has access to only the Redux action dispatchers configured under mapDispatchToProps
 
-- SkylineBG is the React-Native component for the Logo Image
-- props can be submitted for height, width, xPadding and yPadding, else defaults will be used
+- AppBackground is the React-Native component Background of the Application
+- A picture is loaded in the background
+- A light primary opacity color is applied to it
 
----> TL;DR React Native Component for Application Logo <---
+---> TL;DR React Native Component for Application Background <---
 
 */
 
