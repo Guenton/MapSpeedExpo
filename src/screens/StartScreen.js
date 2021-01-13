@@ -15,6 +15,8 @@ import SlideInTopCircle from '../components/animations/SlideInTopCircle';
 import SlideInBottomCircle from '../components/animations/SlideInBottomCircle';
 import StartLogo from '../components/images/StartLogo';
 import StartButton from '../components/buttons/StartButton';
+import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
+import GuentonLogo from '../components/images/GuentonLogo';
 
 // Styles
 const styles = ScaledSheet.create({ logo: { marginTop: '50@vs' } });
@@ -35,6 +37,12 @@ const StartScreen = () => {
 
         {/* Start Button */}
         <StartButton onPress={onPressStart} />
+
+        {/* Language Selection Button */}
+        <LanguageSelectFab />
+
+        {/* Guenton Logo */}
+        <GuentonLogo />
       </FadeInAppContent>
 
       {/* Bottom Circle Animation */}

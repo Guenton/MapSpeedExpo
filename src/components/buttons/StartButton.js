@@ -49,7 +49,7 @@ const StartButton = (props) => {
 };
 
 // Map Redux states to "props" passed to functional component
-const mapStateToProps = (state) => ({ startLang: state.lang.start, color: state.color });
+const mapStateToProps = (state) => ({ startLang: state.lang.pack.start, color: state.color });
 
 // Connect Functional Component to Redux and Export
 export default connect(mapStateToProps)(StartButton);

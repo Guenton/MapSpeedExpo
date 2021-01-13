@@ -9,8 +9,16 @@ import { SET_LANG } from '../actions/lang';
 
 // Set Initial State
 const initialState = {
-  lang: 'English',
-  start: 'START',
+  currentLang: 'eng',
+  availableLang: {
+    pap: false,
+    nld: false,
+    spa: false,
+    eng: true,
+  },
+  pack: {
+    start: 'START',
+  },
 };
 
 // Receive Actions and Update State Accordingly
