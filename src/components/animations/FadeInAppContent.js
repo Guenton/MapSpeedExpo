@@ -6,7 +6,7 @@
 
 // Import React Native Dependencies
 import React from 'react';
-import AppContent from '../container/AppContent';
+import AppContent from '../containers/AppContent';
 import FadeInView from './FadeInView';
 
 const FadeInAppContent = (props) => (
