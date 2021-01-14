@@ -22,7 +22,7 @@ const FadeInView = (props) => {
   useEffect(() => Animated.timing(fadeAnim, timing).start(), [fadeAnim]);
 
   return (
-    <Animated.View style={{ ...props.style, opacity: fadeAnim }}>{props.children}</Animated.View>
+    <Animated.View style={[props.style, { opacity: fadeAnim }]}>{props.children}</Animated.View>
   );
 };
 

@@ -21,10 +21,8 @@ const styles = ScaledSheet.create({
     width: width,
     height: width,
     borderRadius: width,
-    // Circle Position
-    position: 'absolute',
-    marginTop: height - width * 1.3,
-    marginLeft: width * 0.3,
+    // Circle Content
+    justifyContent: 'center',
     // Circle Shadows IOS
     shadowColor: '#000',
     shadowOffset: {
@@ -36,7 +34,6 @@ const styles = ScaledSheet.create({
     // Circle Shadows Android
     elevation: 5,
   },
-  flag: { borderWidth: '1@s' },
 });
 
 const LanguageSelectFab = (props) => {

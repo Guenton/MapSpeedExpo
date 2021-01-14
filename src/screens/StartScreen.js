@@ -15,11 +15,13 @@ import SlideInTopCircle from '../components/animations/SlideInTopCircle';
 import SlideInBottomCircle from '../components/animations/SlideInBottomCircle';
 import StartLogo from '../components/images/StartLogo';
 import StartButton from '../components/buttons/StartButton';
-import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
-import GuentonLogo from '../components/images/GuentonLogo';
+import StartScreenFooterView from '../components/views/StartScreenFooterView';
 
 // Styles
-const styles = ScaledSheet.create({ logo: { marginTop: '50@vs' } });
+const styles = ScaledSheet.create({
+  logo: { marginTop: '50@vs' },
+  guenton: { position: 'absolute', alignSelf: 'flex-end' },
+});
 
 const StartScreen = () => {
   // Start Press Handler
@@ -30,6 +32,10 @@ const StartScreen = () => {
     <AppBackground>
       {/* Top Circle Animation */}
       <SlideInTopCircle start={-500} />
+
+      {/* Bottom Circle Animation */}
+      <SlideInBottomCircle start={500} />
+
       {/* Application Content */}
       <FadeInAppContent>
         {/* Start Logo */}
@@ -37,16 +43,9 @@ const StartScreen = () => {
 
         {/* Start Button */}
         <StartButton onPress={onPressStart} />
-
-        {/* Language Selection Button */}
-        <LanguageSelectFab />
-
-        {/* Guenton Logo */}
-        <GuentonLogo />
       </FadeInAppContent>
-
-      {/* Bottom Circle Animation */}
-      <SlideInBottomCircle start={500} />
+      {/* Footer */}
+      <StartScreenFooterView />
     </AppBackground>
   );
 };

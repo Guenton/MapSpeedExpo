@@ -11,7 +11,7 @@ import FadeInView from './FadeInView';
 
 const FadeInAppContent = (props) => (
   <AppContent>
-    <FadeInView>{props.children}</FadeInView>
+    <FadeInView style={{ flex: 1 }}>{props.children}</FadeInView>
   </AppContent>
 );
 
