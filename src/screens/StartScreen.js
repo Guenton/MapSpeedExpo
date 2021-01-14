@@ -13,7 +13,7 @@ import AppBackground from '../components/containers/AppBackground';
 import FadeInAppContent from '../components/animations/FadeInAppContent';
 import SlideInTopCircle from '../components/animations/SlideInTopCircle';
 import SlideInBottomCircle from '../components/animations/SlideInBottomCircle';
-import StartLogo from '../components/images/StartLogo';
+import MapLogo from '../components/images/MapLogo';
 import StartScreenFooterView from '../components/views/StartScreenFooterView';
 import IconFab from '../components/buttons/IconFab';
 
@@ -36,10 +36,10 @@ const StartScreen = () => {
       {/* Application Content */}
       <FadeInAppContent>
         {/* Start Logo */}
-        <StartLogo style={styles.logo} />
+        <MapLogo style={styles.logo} />
 
         {/* Start Floating Action Button */}
-        <IconFab style={styles.start} name="power-off" size={60} onPress={onPressStart} />
+        <IconFab style={styles.start} reverse name="power-off" size={60} onPress={onPressStart} />
       </FadeInAppContent>
       {/* Footer */}
       <StartScreenFooterView />

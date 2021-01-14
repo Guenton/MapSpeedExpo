@@ -38,7 +38,8 @@ const styles = ScaledSheet.create({
 
 const FabContainer = (props) => {
   // Set backgroundColor depending on Redux isDark state
-  const backgroundColor = props.color.isDark ? props.color.grey : props.color.white;
+  let backgroundColor = props.color.isDark ? props.color.grey : props.color.white;
+  backgroundColor = props.reverse ? props.color.primary : backgroundColor;
 
   // Set Size if given by parent ense use default
   const size = props.size
@@ -51,7 +52,7 @@ const FabContainer = (props) => {
   // Return Customized Elements Button Component
   return (
     <View style={[styles.container, styleContainer, props.style]}>
-      <TouchableOpacity style={{ justifyContent: 'center' }} onPress={() => props.onPress()}>
+      <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => props.onPress()}>
         {props.children}
       </TouchableOpacity>
     </View>

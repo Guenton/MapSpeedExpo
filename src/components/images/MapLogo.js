@@ -10,16 +10,16 @@ import { Image, Dimensions } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
 
 // Import Image from Assets
-const startLogo = require('../../assets/images/mapSpeedLogo.png');
+const mapLogo = require('../../assets/images/mapSpeedLogo.png');
 
 // Get Width information from Dimensions API
-const width = Dimensions.get('window').width * 0.35;
+const width = Dimensions.get('window').width * 0.45;
 
 // Styles
 const styles = ScaledSheet.create({ logo: { width, alignSelf: 'center', padding: '25@s' } });
 
-const StartLogo = (props) => (
-  <Image style={[styles.logo, props.style]} source={startLogo} resizeMode="contain" />
+const MapLogo = (props) => (
+  <Image style={[styles.logo, props.style]} source={mapLogo} resizeMode="contain" />
 );
 
-export default StartLogo;
+export default MapLogo;

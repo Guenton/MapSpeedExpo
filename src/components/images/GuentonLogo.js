@@ -6,7 +6,7 @@
 
 // Import React Dependencies
 import React from 'react';
-import { Image, Dimensions, View } from 'react-native';
+import { Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
 
@@ -16,20 +16,17 @@ const guentonBlack = require('../../assets/images/guentonBlack.png');
 
 // Get Width information from Dimensions API
 const width = Dimensions.get('window').width * 0.25;
-const height = Dimensions.get('window').height;
 
 // Styles
-const styles = ScaledSheet.create({
-  logo: { width, height: width * 0.25 },
-});
+const styles = ScaledSheet.create({ logo: { width, height: width * 0.25 } });
 
-const GuentonLogo = (props) => {
-  if (props.isDark) {
-    return <Image style={[styles.logo, props.style]} source={guentonWhite} resizeMode="contain" />;
-  } else {
-    return <Image style={[styles.logo, props.style]} source={guentonBlack} resizeMode="contain" />;
-  }
-};
+const GuentonLogo = (props) => (
+  <Image
+    style={[styles.logo, props.style]}
+    source={props.isDark ? guentonWhite : guentonBlack}
+    resizeMode="contain"
+  />
+);
 
 // Map Redux states to "props" passed to functional component
 const mapStateToProps = (state) => ({ isDark: state.color.isDark });

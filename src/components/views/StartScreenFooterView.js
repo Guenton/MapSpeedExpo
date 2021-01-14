@@ -6,13 +6,18 @@
 
 // Import React Dependencies
 import React from 'react';
-import { Dimensions } from 'react-native';
-import { View } from 'react-native';
+import { connect } from 'react-redux';
+import { Dimensions, View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
+
+// Import Components
 import FadeInFooter from '../animations/FadeInFooter';
 import IconFab from '../buttons/IconFab';
 import LanguageSelectFab from '../buttons/LanguageSelectFab';
 import GuentonLogo from '../images/GuentonLogo';
+
+// Import Redux Actions
+import { toggleDark } from '../../store/actions/color';
 
 // Get Width information from Dimensions API
 const width = Dimensions.get('window').width;
@@ -26,7 +31,7 @@ const styles = ScaledSheet.create({
   guenton: { marginBottom: '5@s', marginRight: '5@s' },
 });
 
-const Footer = (props) => (
+const StartScreenFooterView = (props) => (
   <FadeInFooter>
     <View style={styles.container}>
       {/* Left Section */}
@@ -35,7 +40,12 @@ const Footer = (props) => (
           {/* Language Selection Button */}
           <LanguageSelectFab style={styles.fab} />
           {/* Light/Dark Swith Fab */}
-          <IconFab style={styles.fab} name="adjust" />
+          <IconFab
+            style={styles.fab}
+            reverse={props.isDark}
+            name="adjust"
+            onPress={() => props.toggleDark()}
+          />
         </View>
       </View>
 
@@ -48,5 +58,11 @@ const Footer = (props) => (
   </FadeInFooter>
 );
 
-// Export
-export default Footer;
+// Map Redux states to "props" passed to functional component
+const mapStateToProps = (state) => ({ isDark: state.color.isDark });
+
+// Map Redux dispatch actions to "props" passed to functional component
+const mapDispatchToProps = { toggleDark };
+
+// Connect Functional Component to Redux and Export
+export default connect(mapStateToProps, mapDispatchToProps)(StartScreenFooterView);

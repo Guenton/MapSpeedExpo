@@ -23,14 +23,27 @@ const IconFab = (props) => {
 
   // Return Customized Elements Button Component
   return (
-    <FabContainer style={props.style} size={size} onPress={() => props.onPress()}>
-      <Icon name={name} type="font-awesome-5" color={props.primaryColor} size={iconSize} />
+    <FabContainer
+      style={props.style}
+      size={size}
+      reverse={props.reverse}
+      onPress={() => props.onPress()}>
+      <Icon
+        name={name}
+        type="font-awesome-5"
+        color={props.primaryColor}
+        size={iconSize}
+        reverse={props.reverse}
+      />
     </FabContainer>
   );
 };
 
 // Map Redux states to "props" passed to functional component
-const mapStateToProps = (state) => ({ primaryColor: state.color.primary });
+const mapStateToProps = (state) => ({
+  primaryColor: state.color.primary,
+  isDark: state.color.isDark,
+});
 
 // Connect Functional Component to Redux and Export
 export default connect(mapStateToProps)(IconFab);

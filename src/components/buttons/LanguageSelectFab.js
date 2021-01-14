@@ -6,13 +6,19 @@
 
 // Import React Native Dependencies
 import React from 'react';
-import { Image } from 'react-native';
 import { connect } from 'react-redux';
+
+// Import Components
 import FabContainer from '../containers/FabContainer';
+import LangFlag from '../images/LangFlag';
 
 const LanguageSelectFab = (props) => {
   // Return Customized Elements Button Component
-  return <FabContainer style={[props.style]}></FabContainer>;
+  return (
+    <FabContainer style={[props.style]}>
+      <LangFlag />
+    </FabContainer>
+  );
 };
 
 // Map Redux states to "props" passed to functional component

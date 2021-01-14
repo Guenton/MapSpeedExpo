@@ -24,7 +24,7 @@ const styles = ScaledSheet.create({
     height: width,
     width: width,
     borderRadius: width,
-    marginTop: -width / 1.6,
+    marginTop: -width / 1.8,
     marginLeft: -width / 4,
     position: 'absolute',
     // Circle Shadows IOS
