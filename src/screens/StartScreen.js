@@ -16,16 +16,18 @@ import SlideInBottomCircle from '../components/animations/SlideInBottomCircle';
 import StartLogo from '../components/images/StartLogo';
 import StartButton from '../components/buttons/StartButton';
 import StartScreenFooterView from '../components/views/StartScreenFooterView';
+import StartFab from '../components/buttons/StartFab';
 
 // Styles
 const styles = ScaledSheet.create({
   logo: { marginTop: '50@vs' },
+  start: { alignSelf: 'center' },
   guenton: { position: 'absolute', alignSelf: 'flex-end' },
 });
 
 const StartScreen = () => {
   // Start Press Handler
-  const onPressStart = () => console.log('start');
+  const onPressStart = () => console.log('start pressed');
 
   // Return Component
   return (
@@ -41,8 +43,8 @@ const StartScreen = () => {
         {/* Start Logo */}
         <StartLogo style={styles.logo} />
 
-        {/* Start Button */}
-        <StartButton onPress={onPressStart} />
+        {/* Start Floating Action Button */}
+        <StartFab style={styles.start} onPress={onPressStart} />
       </FadeInAppContent>
       {/* Footer */}
       <StartScreenFooterView />

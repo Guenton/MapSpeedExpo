@@ -1,6 +1,6 @@
 /*
 
----> TL;DR Change Language Floating Action Button <---
+---> TL;DR Floating Action Button Template <---
 
 */
 
@@ -9,6 +9,7 @@ import React from 'react';
 import { Dimensions, View } from 'react-native';
 import { connect } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
+import { TouchableOpacity } from 'react-native';
 
 // Get button width based on device width
 const width = Dimensions.get('window').width * 0.15;
@@ -35,25 +36,30 @@ const styles = ScaledSheet.create({
   },
 });
 
-const LanguageSelectFab = (props) => {
+const FabContainer = (props) => {
   // Set backgroundColor depending on Redux isDark state
   const backgroundColor = props.color.isDark ? props.color.grey : props.color.white;
 
-  // Set borderColor depending on Redux isDark state
-  const borderColor = props.color.isDark ? props.color.primary : props.color.white;
+  // Set Size if given by parent ense use default
+  const size = props.size
+    ? { width: props.size, height: props.size, borderRadius: props.size }
+    : {};
 
   // Set Style for Container
-  const styleContainer = { borderColor, backgroundColor };
-
-  // Set Style for Title
-  const styleTitle = { color: props.color.primary };
+  const styleContainer = { backgroundColor, ...size };
 
   // Return Customized Elements Button Component
-  return <View style={[styles.container, styleContainer, props.style]}></View>;
+  return (
+    <View style={[styles.container, styleContainer, props.style]}>
+      <TouchableOpacity style={{ justifyContent: 'center' }} onPress={() => props.onPress()}>
+        {props.children}
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 // Map Redux states to "props" passed to functional component
 const mapStateToProps = (state) => ({ color: state.color });
 
 // Connect Functional Component to Redux and Export
-export default connect(mapStateToProps)(LanguageSelectFab);
+export default connect(mapStateToProps)(FabContainer);

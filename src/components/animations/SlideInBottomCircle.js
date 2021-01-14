@@ -68,7 +68,7 @@ const SlideInBottomCircle = (props) => {
   const styleBackground = { backgroundColor: circleColor };
 
   // Run Animation whenever start or end props are modified
-  useEffect(() => anim.start(), [props.start, props.end]);
+  useEffect(() => anim.start(), [props.start, props.end, props.color.isDark]);
 
   // Return Circle View
   return <Animated.View style={[styles.circle, styleBackground, styleAnim]}></Animated.View>;
