@@ -14,16 +14,11 @@ import FadeInAppContent from '../components/animations/FadeInAppContent';
 import SlideInTopCircle from '../components/animations/SlideInTopCircle';
 import SlideInBottomCircle from '../components/animations/SlideInBottomCircle';
 import StartLogo from '../components/images/StartLogo';
-import StartButton from '../components/buttons/StartButton';
 import StartScreenFooterView from '../components/views/StartScreenFooterView';
-import StartFab from '../components/buttons/StartFab';
+import IconFab from '../components/buttons/IconFab';
 
 // Styles
-const styles = ScaledSheet.create({
-  logo: { marginTop: '50@vs' },
-  start: { alignSelf: 'center' },
-  guenton: { position: 'absolute', alignSelf: 'flex-end' },
-});
+const styles = ScaledSheet.create({ logo: { marginTop: '50@vs' }, start: { alignSelf: 'center' } });
 
 const StartScreen = () => {
   // Start Press Handler
@@ -44,7 +39,7 @@ const StartScreen = () => {
         <StartLogo style={styles.logo} />
 
         {/* Start Floating Action Button */}
-        <StartFab style={styles.start} onPress={onPressStart} />
+        <IconFab style={styles.start} name="power-off" size={60} onPress={onPressStart} />
       </FadeInAppContent>
       {/* Footer */}
       <StartScreenFooterView />

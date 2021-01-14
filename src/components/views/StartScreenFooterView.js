@@ -10,6 +10,7 @@ import { Dimensions } from 'react-native';
 import { View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
 import FadeInFooter from '../animations/FadeInFooter';
+import IconFab from '../buttons/IconFab';
 import LanguageSelectFab from '../buttons/LanguageSelectFab';
 import GuentonLogo from '../images/GuentonLogo';
 
@@ -20,7 +21,8 @@ const styles = ScaledSheet.create({
   container: { flex: 1, width, flexDirection: 'row', justifyContent: 'space-between' },
   left: { flexDirection: 'column-reverse' },
   right: { flexDirection: 'column-reverse' },
-  fab: { marginBottom: '10@s', marginLeft: '10@s' },
+  bottom: { flexDirection: 'row', padding: '10@s' },
+  fab: { marginRight: '10@s' },
   guenton: { marginBottom: '5@s', marginRight: '5@s' },
 });
 
@@ -29,8 +31,12 @@ const Footer = (props) => (
     <View style={styles.container}>
       {/* Left Section */}
       <View style={styles.left}>
-        {/* Language Selection Button */}
-        <LanguageSelectFab style={styles.fab} />
+        <View style={styles.bottom}>
+          {/* Language Selection Button */}
+          <LanguageSelectFab style={styles.fab} />
+          {/* Light/Dark Swith Fab */}
+          <IconFab style={styles.fab} name="adjust" />
+        </View>
       </View>
 
       {/* Right Section */}
