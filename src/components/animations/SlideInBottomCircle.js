@@ -44,6 +44,9 @@ const SlideInBottomCircle = (props) => {
   // Set Circle Color for depending on Redux isDark State
   const circleColor = props.color.isDark ? props.color.black : props.color.white;
 
+  // Style Background Object
+  const styleBackground = { backgroundColor: circleColor };
+
   // Set Animation Start and End from props or default to 0
   const start = props.start ? props.start : 0;
   const end = props.end ? props.end : 0;
@@ -63,9 +66,6 @@ const SlideInBottomCircle = (props) => {
 
   // Style Transform Object
   const styleAnim = { transform: [{ translateY: transY }] };
-
-  // Style Background Object
-  const styleBackground = { backgroundColor: circleColor };
 
   // Run Animation whenever start or end props are modified
   useEffect(() => anim.start(), [props.start, props.end, props.color.isDark]);

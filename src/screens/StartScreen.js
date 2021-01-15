@@ -39,7 +39,7 @@ const StartScreen = () => {
         <MapLogo style={styles.logo} />
 
         {/* Start Floating Action Button */}
-        <IconFab style={styles.start} reverse name="power-off" size={60} onPress={onPressStart} />
+        <IconFab style={styles.start} name="power-off" size={60} onPress={onPressStart} reverse />
       </FadeInAppContent>
       {/* Footer */}
       <StartScreenFooterView />
