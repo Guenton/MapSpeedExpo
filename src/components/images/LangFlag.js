@@ -9,18 +9,28 @@ import React from 'react';
 import { Image } from 'react-native';
 import { connect } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
+import { TouchableOpacity } from 'react-native';
 
 // Import Image from Assets
 const flagCur = require('../../assets/images/flagCur.png');
-const flagEng = require('../../assets/images/flagEng.png');
 const flagNld = require('../../assets/images/flagNld.png');
 const flagSpa = require('../../assets/images/flagSpa.png');
+const flagEng = require('../../assets/images/flagEng.png');
 
 // Styles
 const styles = ScaledSheet.create({ flag: { width: '25@s', height: '25@s' } });
 
 const LangFlag = (props) => {
-  return <Image style={[styles.flag, props.style]} source={flagEng} resizeMode="contain" />;
+  // Select Image Source depending on flag prop
+  const src = () => {
+    if (props.flag === 'pap') return flagCur;
+    else if (props.flag === 'nld') return flagNld;
+    else if (props.flag === 'spa') return flagSpa;
+    else return flagEng;
+  };
+
+  // return touchable flag cimage
+  return <Image style={[styles.flag, props.style]} source={src()} resizeMode="contain" />;
 };
 
 // Map Redux states to "props" passed to functional component

@@ -15,8 +15,8 @@ import LangFlag from '../images/LangFlag';
 const LanguageSelectFab = (props) => {
   // Return Customized Elements Button Component
   return (
-    <FabContainer style={[props.style]} onPress={() => props.onPress()}>
-      <LangFlag />
+    <FabContainer style={[props.style]} onPress={() => (props.onPress ? props.onPress() : {})}>
+      <LangFlag flag={props.flag} />
     </FabContainer>
   );
 };
