@@ -10,6 +10,10 @@ import { ScaledSheet } from 'react-native-size-matters';
 import { connect } from 'react-redux';
 import Animated, { Easing } from 'react-native-reanimated';
 
+import i18n from 'i18n-js';
+
+i18n.locale = 'pap';
+
 // Import Components
 import LanguageSelectFab from '../buttons/LanguageSelectFab';
 
@@ -24,8 +28,7 @@ const styles = ScaledSheet.create({
     height: '200@s',
     width: '25@s',
     // Rounded Top
-    borderTopLeftRadius: '25@s',
-    borderTopRightRadius: '25@s',
+    borderRadius: '25@s',
     // Fitment behind bottom button
     marginBottom: '-50@s',
     paddingBottom: '50@s',
@@ -38,6 +41,7 @@ const styles = ScaledSheet.create({
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
+    zIndex: -1,
     // Shadows Android
     elevation: 4,
   },
@@ -52,7 +56,7 @@ const SelectAppLangForm = (props) => {
   // React to changes in current Language and update language Array
   useEffect(() => {
     // Make Array from Redux Available Languages Object
-    const array = Object.keys(props.langAvailable);
+    const array = props.langAvailable;
     // Filter and take out the currently active language
     const filtered = array.filter((item) => item !== props.langCurrent);
     // Set the filtered object to state
