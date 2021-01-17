@@ -5,7 +5,7 @@
 */
 
 // import Actions
-import { SET_LANG } from '../actions/lang';
+import { SET_CURRENT_LANG } from '../actions/lang';
 
 // Set Initial State
 const initialState = {
@@ -16,8 +16,8 @@ const initialState = {
 // Receive Actions and Update State Accordingly
 const loadReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_LANG:
-      return { ...state, ...action.languagePack };
+    case SET_CURRENT_LANG:
+      return { ...state, currentLang: action.language };
     default:
       return state;
   }

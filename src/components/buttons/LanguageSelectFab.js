@@ -16,7 +16,7 @@ const LanguageSelectFab = (props) => {
   // Return Customized Elements Button Component
   return (
     <FabContainer style={[props.style]} onPress={() => (props.onPress ? props.onPress() : {})}>
-      <LangFlag flag={props.flag} />
+      <LangFlag flag={props.flag ? props.flag : props.lang} />
     </FabContainer>
   );
 };

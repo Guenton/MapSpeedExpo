@@ -5,20 +5,23 @@
 */
 
 // Import React Dependencies
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { Dimensions, View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
+
+import { Transition, Transitioning } from 'react-native-reanimated';
 
 // Import Components
 import FadeInFooter from '../animations/FadeInFooter';
 import IconFab from '../buttons/IconFab';
 import LanguageSelectFab from '../buttons/LanguageSelectFab';
+import SelectAppLangForm from '../forms/SelectAppLangForm';
 import GuentonLogo from '../images/GuentonLogo';
 
 // Import Redux Actions
 import { toggleDark } from '../../store/actions/color';
-import SelectAppLangForm from '../forms/SelectAppLangForm';
+import { setCurrentLang } from '../../store/actions/lang';
 
 // Get Width information from Dimensions API
 const width = Dimensions.get('window').width;
@@ -32,7 +35,19 @@ const styles = ScaledSheet.create({
   guenton: { marginBottom: '5@s', marginRight: '5@s' },
 });
 
+// Animation Transition Config
+const animTransition = (
+  <Transition.Together>
+    <Transition.In type="slide-bottom" durationMs={200} />
+    <Transition.Change />
+    <Transition.Out type="scale" durationMs={300} />
+  </Transition.Together>
+);
+
 const StartScreenFooterView = (props) => {
+  // Animation Reference
+  const animRef = useRef();
+
   // Init Language Select form to false
   const [showLangs, setShowLangs] = useState(false);
 
@@ -40,12 +55,18 @@ const StartScreenFooterView = (props) => {
   return (
     <FadeInFooter>
       <View style={styles.container}>
-        {/* Left Section */}
-        <View style={styles.left}>
+        {/* Left Section - Animated */}
+        <Transitioning.View ref={animRef} transition={animTransition} style={styles.left}>
           {/* Bottom Buttons */}
           <View style={styles.bottom}>
             {/* Language Selection Button */}
-            <LanguageSelectFab style={styles.fab} onPress={() => setShowLangs(!showLangs)} />
+            <LanguageSelectFab
+              style={styles.fab}
+              onPress={() => {
+                animRef.current.animateNextTransition();
+                setShowLangs(!showLangs);
+              }}
+            />
 
             {/* Light/Dark Swith Fab */}
             <IconFab
@@ -57,8 +78,16 @@ const StartScreenFooterView = (props) => {
           </View>
 
           {/* Language Select Animated Form */}
-          <SelectAppLangForm show={showLangs} />
-        </View>
+          {showLangs && (
+            <SelectAppLangForm
+              onSelect={(selected) => {
+                props.setCurrentLang(selected);
+                animRef.current.animateNextTransition();
+                setShowLangs(false);
+              }}
+            />
+          )}
+        </Transitioning.View>
 
         {/* Right Section */}
         <View style={styles.right}>
@@ -74,7 +103,7 @@ const StartScreenFooterView = (props) => {
 const mapStateToProps = (state) => ({ isDark: state.color.isDark });
 
 // Map Redux dispatch actions to "props" passed to functional component
-const mapDispatchToProps = { toggleDark };
+const mapDispatchToProps = { toggleDark, setCurrentLang };
 
 // Connect Functional Component to Redux and Export
 export default connect(mapStateToProps, mapDispatchToProps)(StartScreenFooterView);

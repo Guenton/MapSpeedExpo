@@ -5,7 +5,7 @@
 */
 
 // Export Action String for easy import in Reducer
-export const SET_LANG = 'SET_LANG';
+export const SET_CURRENT_LANG = 'SET_CURRENT_LANG';
 
 // Export Action Dispatchers
-export const setLang = (languagePack = {}) => ({ type: SET_LANG, languagePack });
+export const setCurrentLang = (language = 'eng') => ({ type: SET_CURRENT_LANG, language });

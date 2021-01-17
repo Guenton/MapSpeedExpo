@@ -16,6 +16,7 @@ i18n.locale = 'pap';
 
 // Import Components
 import LanguageSelectFab from '../buttons/LanguageSelectFab';
+import { View } from 'react-native';
 
 // Destructure Animation Properties
 const { Value, timing } = Animated;
@@ -55,51 +56,36 @@ const SelectAppLangForm = (props) => {
 
   // React to changes in current Language and update language Array
   useEffect(() => {
-    // Make Array from Redux Available Languages Object
-    const array = props.langAvailable;
-    // Filter and take out the currently active language
-    const filtered = array.filter((item) => item !== props.langCurrent);
-    // Set the filtered object to state
-    setLangArray(filtered);
+    // Filter out the currently active language from the available languages and set the rest to state
+    setLangArray(props.langAvailable.filter((item) => item !== props.langCurrent));
   }, [props.langAvailable, props.langCurrent]);
 
-  // Set backgroundColor depending on Redux isDark state
+  // Set backgroundColor depending on Redux isDark state then adapt if button is reverse colored
   let backgroundColor = props.color.isDark ? props.color.grey : props.color.white;
   backgroundColor = props.reverse ? props.color.primary : backgroundColor;
 
   // Set Style for Container
   const styleContainer = { backgroundColor };
 
-  // Set Animation Start and End from props or default to 0
-  const start = props.show ? 0 : 1;
-  const end = props.show ? 1 : 0;
-
-  // Init Animation trans value to 0
-  const trans = new Value(start);
-
-  // Configure Animation Properties
-  const animConfig = {
-    duration: 300,
-    toValue: end,
-    easing: Easing.inOut(Easing.ease),
-  };
-
-  // Move Animation
-  const anim = timing(trans, animConfig);
-
-  // Style Transform Object
-  const styleAnim = { transform: [{ scaleY: trans }], opacity: trans };
-
-  // Run Animation whenever start or end props are modified
-  useEffect(() => anim.start(), [props.show, props.color.isDark]);
-
   // Return SelectAppLangForm
   return (
-    <Animated.View style={[styles.container, styleContainer, styleAnim]}>
-      <LanguageSelectFab style={styles.topButton} flag={langArray[0]} />
-      <LanguageSelectFab style={styles.button} flag={langArray[1]} />
-      <LanguageSelectFab style={styles.button} flag={langArray[2]} />
-    </Animated.View>
+    <View style={[styles.container, styleContainer]}>
+      <LanguageSelectFab
+        style={styles.topButton}
+        flag={langArray[0]}
+        onPress={() => props.onSelect(langArray[0])}
+      />
+      <LanguageSelectFab
+        style={styles.button}
+        flag={langArray[1]}
+        onPress={() => props.onSelect(langArray[1])}
+      />
+      <LanguageSelectFab
+        style={styles.button}
+        flag={langArray[2]}
+        onPress={() => props.onSelect(langArray[2])}
+      />
+    </View>
   );
 };
 
