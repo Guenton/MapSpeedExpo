@@ -9,7 +9,6 @@ import React, { useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { Dimensions, View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
-
 import { Transition, Transitioning } from 'react-native-reanimated';
 
 // Import Components
@@ -26,6 +25,7 @@ import { setCurrentLang } from '../../store/actions/lang';
 // Get Width information from Dimensions API
 const width = Dimensions.get('window').width;
 
+// Styles
 const styles = ScaledSheet.create({
   container: { flex: 1, width, flexDirection: 'row', justifyContent: 'space-between' },
   left: { flexDirection: 'column-reverse' },
