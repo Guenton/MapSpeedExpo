@@ -11,6 +11,7 @@ import { useBackHandler } from '@react-native-community/hooks';
 // Import Components
 import AppBackground from '../components/containers/AppBackground';
 import SlidingCircles from '../components/animations/SlidingCircles';
+import LoginScreenHeaderView from '../components/views/LoginScreenHeaderView';
 
 const LoginScreen = (props) => {
   // Init Circle Animations
@@ -41,6 +42,9 @@ const LoginScreen = (props) => {
         bottomStart={bottomStart}
         bottomEnd={bottomEnd}
       />
+
+      {/* Header Section */}
+      <LoginScreenHeaderView />
     </AppBackground>
   );
 };

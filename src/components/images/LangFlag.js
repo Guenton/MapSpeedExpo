@@ -9,7 +9,6 @@ import React from 'react';
 import { Image } from 'react-native';
 import { connect } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
-import { TouchableOpacity } from 'react-native';
 
 // Import Image from Assets
 const flagCur = require('../../assets/images/flagCur.png');
