@@ -21,9 +21,13 @@ import { connect } from 'react-redux';
 
 // Import Image from Assets
 const skylineBG = require('../../assets/images/skylineBG.jpg');
+const hdBMW = require('../../assets/images/hdBMW.jpg');
 
 const AppBackground = (props) => (
-  <ImageBackground style={{ flex: 1 }} source={skylineBG} resizeMode="cover">
+  <ImageBackground
+    style={{ flex: 1 }}
+    source={props.skyline ? skylineBG : hdBMW}
+    resizeMode="cover">
     {/* Status Bar */}
     <StatusBar animated translucent barStyle={props.isDark ? 'light-content' : 'dark-content'} />
 

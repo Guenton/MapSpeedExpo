@@ -12,13 +12,11 @@ import { useBackHandler } from '@react-native-community/hooks';
 // Import Components
 import AppBackground from '../components/containers/AppBackground';
 import SlidingCircles from '../components/animations/SlidingCircles';
-import StartScreenFooterView from '../components/views/StartScreenFooterView';
-import StartScreenHeaderView from '../components/views/StartScreenHeaderView';
 
 // Import Utilities
 import asyncDelay from '../utils/asyncDelay';
 
-const StartScreen = (props) => {
+const TemplateScreen = (props) => {
   // Init Circle Animations
   const [topStart, setTopStart] = useState(-500);
   const [topEnd, setTopEnd] = useState(250);
@@ -31,16 +29,6 @@ const StartScreen = (props) => {
     return true;
   });
 
-  // Start Press Handler
-  const onStartPress = async () => {
-    setTopStart(250);
-    setTopEnd(-500);
-    setBottomStart(0);
-    setBottomEnd(500);
-    await asyncDelay();
-    props.setRoute('login');
-  };
-
   // Return Component
   return (
     <AppBackground skyline>
@@ -51,14 +39,8 @@ const StartScreen = (props) => {
         bottomStart={bottomStart}
         bottomEnd={bottomEnd}
       />
-
-      {/* Header Section */}
-      <StartScreenHeaderView onStartPress={onStartPress} />
-
-      {/* Footer Section */}
-      <StartScreenFooterView />
     </AppBackground>
   );
 };
 
-export default StartScreen;
+export default TemplateScreen;
