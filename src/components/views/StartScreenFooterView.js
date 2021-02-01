@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { Dimensions, View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
 import { Transition, Transitioning } from 'react-native-reanimated';
+import i18n from 'i18n-js';
 
 // Import Components
 import FadeInFooter from '../animations/FadeInFooter';
@@ -51,6 +52,13 @@ const StartScreenFooterView = (props) => {
   // Init Language Select form to false
   const [showLangs, setShowLangs] = useState(false);
 
+  const setLanguagePack = (language = 'en') => {
+    if (language === 'pap') i18n.locale = language;
+    else if (language === 'nld') i18n.locale = 'nl';
+    else if (language === 'spa') i18n.locale = 'es';
+    else i18n.locale = 'en';
+  };
+
   // Return StartScreen Footer
   return (
     <FadeInFooter>
@@ -82,6 +90,7 @@ const StartScreenFooterView = (props) => {
             <SelectAppLangForm
               onSelect={(selected) => {
                 props.setCurrentLang(selected);
+                setLanguagePack(selected);
                 animRef.current.animateNextTransition();
                 setShowLangs(false);
               }}
