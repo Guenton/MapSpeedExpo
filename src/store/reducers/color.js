@@ -28,7 +28,7 @@ const initialState = {
 };
 
 // Receive Actions and Update State Accordingly
-const loadReducer = (state = initialState, action) => {
+const colorReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_DARK:
       return { ...state, isDark: true };
@@ -41,4 +41,4 @@ const loadReducer = (state = initialState, action) => {
   }
 };
 
-export default loadReducer;
+export default colorReducer;

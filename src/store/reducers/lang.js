@@ -14,7 +14,7 @@ const initialState = {
 };
 
 // Receive Actions and Update State Accordingly
-const loadReducer = (state = initialState, action) => {
+const langReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_CURRENT_LANG:
       return { ...state, currentLang: action.language };
@@ -23,4 +23,4 @@ const loadReducer = (state = initialState, action) => {
   }
 };
 
-export default loadReducer;
+export default langReducer;
