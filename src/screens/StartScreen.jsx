@@ -10,7 +10,7 @@ import StartScreenHeaderView from '../components/views/StartScreenHeaderView';
 
 import asyncDelay from '../utils/asyncDelay';
 
-const StartScreen = (props) => {
+const StartScreen = ({ setRoute }) => {
   const [topStart, setTopStart] = useState(scale(-500));
   const [topEnd, setTopEnd] = useState(scale(250));
   const [bottomStart, setBottomStart] = useState(scale(500));
@@ -21,14 +21,14 @@ const StartScreen = (props) => {
     return true;
   });
 
-  const onStartPress = async () => {
+  const animateToLoginScreen = async () => {
     setTopStart(scale(250));
     setTopEnd(scale(-500));
     setBottomStart(scale(0));
     setBottomEnd(scale(500));
 
     await asyncDelay();
-    props.setRoute('login');
+    setRoute('login');
   };
 
   return (
@@ -40,8 +40,7 @@ const StartScreen = (props) => {
         bottomEnd={bottomEnd}
       />
 
-      <StartScreenHeaderView onStartPress={onStartPress} />
-
+      <StartScreenHeaderView onStartPress={animateToLoginScreen} />
       <StartScreenFooterView />
     </AppBackground>
   );

@@ -1,23 +1,12 @@
-/*
-
-
-
-*/
-
-// Import React native Dependencies
 import React from 'react';
 
-// Import Components
 import SlideInTopCircle from './SlideInTopCircle';
 import SlideInBottomCircle from './SlideInBottomCircle';
 
-const SlidingCircles = (props) => (
+const SlidingCircles = ({ topStart, topEnd, bottomStart, bottomEnd }) => (
   <>
-    {/* Top Circle Animation */}
-    <SlideInTopCircle start={props.topStart} end={props.topEnd} />
-
-    {/* Bottom Circle Animation */}
-    <SlideInBottomCircle start={props.bottomStart} end={props.bottomEnd} />
+    <SlideInTopCircle start={topStart} end={topEnd} />
+    <SlideInBottomCircle start={bottomStart} end={bottomEnd} />
   </>
 );
 
