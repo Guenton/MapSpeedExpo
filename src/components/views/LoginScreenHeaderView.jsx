@@ -47,18 +47,6 @@ const LoginScreenHeaderView = ({ setLoginType, setGoogleUser }) => {
   const facebookOAuthLogin = async () => {};
   const userAndPassLogin = () => {};
 
-  // Handle Login with Google oAuth
-  const handleGoogleLogin = async () => {
-    try {
-      const config = { clientId: googleOAuthclientId || '' };
-      const { type, accessToken, user } = await Google.logInAsync(config);
-
-      // if (type === 'success') loginUserGoogle(user);
-    } catch (e) {
-      console.log('Google Sign in error:', e);
-    }
-  };
-
   // Handle Login with Facebook SDK
   const handleFacebookLogin = async () => {
     try {
