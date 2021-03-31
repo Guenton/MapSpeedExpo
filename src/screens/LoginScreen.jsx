@@ -7,6 +7,7 @@
 // Import React Dependencies
 import React, { useState } from 'react';
 import { useBackHandler } from '@react-native-community/hooks';
+import { scale } from 'react-native-size-matters';
 
 // Import Components
 import AppBackground from '../components/containers/AppBackground';
@@ -15,10 +16,10 @@ import LoginScreenHeaderView from '../components/views/LoginScreenHeaderView';
 
 const LoginScreen = (props) => {
   // Init Circle Animations
-  const [topStart, setTopStart] = useState(-500);
-  const [topEnd, setTopEnd] = useState(450);
-  const [bottomStart, setBottomStart] = useState(500);
-  const [bottomEnd, setBottomEnd] = useState(200);
+  const [topStart, setTopStart] = useState(scale(-500));
+  const [topEnd, setTopEnd] = useState(scale(450));
+  const [bottomStart, setBottomStart] = useState(scale(500));
+  const [bottomEnd, setBottomEnd] = useState(scale(200));
 
   // Backhandler hook to exit app
   useBackHandler(() => {
@@ -29,7 +30,7 @@ const LoginScreen = (props) => {
   // Start Press Handler
   const onPressStart = () => {
     setStart(0);
-    setEnd(500);
+    setEnd(scale(500));
   };
 
   // Return Component
