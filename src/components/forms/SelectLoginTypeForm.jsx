@@ -21,9 +21,9 @@ const styles = ScaledSheet.create({
 const SelectLoginTypeForm = (props) => {
   return (
     <View style={[styles.container, props.style]}>
-      <SelectLoginTypeButton style={styles.selector} type="user" onSubmit={() => {}} />
-      <SelectLoginTypeButton style={styles.selector} type="google" onSubmit={() => {}} />
-      <SelectLoginTypeButton style={styles.selector} type="facebook" onSubmit={() => {}} />
+      <SelectLoginTypeButton style={styles.selector} type="user" onSubmit={() => props.onSubmit("user")}/>
+      <SelectLoginTypeButton style={styles.selector} type="google" onSubmit={() => props.onSubmit("google")}/>
+      <SelectLoginTypeButton style={styles.selector} type="facebook" onSubmit={() => props.onSubmit("facebook")}/>
     </View>
   );
 };
