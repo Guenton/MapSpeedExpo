@@ -40,7 +40,7 @@ const StartScreen = ({ setRoute }) => {
         bottomEnd={bottomEnd}
       />
 
-      <StartScreenHeaderView onStartPress={animateToLoginScreen} />
+      <StartScreenHeaderView onPressStart={animateToLoginScreen} />
       <StartScreenFooterView />
     </AppBackground>
   );

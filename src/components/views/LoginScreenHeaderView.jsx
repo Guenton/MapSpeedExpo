@@ -7,35 +7,45 @@ import FadeInAppContent from '../animations/FadeInAppContent';
 import SelectLoginTypeForm from '../forms/SelectLoginTypeForm';
 import MapLogo from '../images/MapLogo';
 
-import { setGoogleUser, setFacebookUser } from '../../store/actions/login';
+import { setLoginType, setGoogleUser, setFacebookUser } from '../../store/actions/login';
 
 import * as Google from 'expo-google-app-auth';
 import * as Facebook from 'expo-facebook';
-import { googleOAuthclientId } from '../../../env';
+import { googleOAuthAndroidId, googleOAuthIosId } from '../../../env';
 
-const styles = ScaledSheet.create({ logo: { marginTop: '50@vs' } });
+const styles = ScaledSheet.create({ logo: { marginTop: '50@s' } });
 
-const LoginScreenHeaderView = ({ loginType }) => {
-  useEffect(() => {
-    const googleOAuthLogin = async () => {};
-    const facebookOAuthLogin = async () => {};
-    const userAndPassLogin = () => {};
-
-    if (loginType === 'google') googleOAuthLogin();
-    else if (loginType === 'facebook') facebookOAuthLogin();
-    else userAndPassLogin();
-  }, [loginType]);
-
-  const handleLoginType = (loginType) => {
-    switch (loginType) {
+const LoginScreenHeaderView = ({ setLoginType, setGoogleUser }) => {
+  const handleLoginTypeSubmit = (type) => {
+    switch (type) {
       case 'google':
-        handleGoogleLogin();
+        setLoginType('google');
+        googleOAuthLogin();
       case 'facebook':
-        handleFacebookLogin();
+        setLoginType('facebook');
+        facebookOAuthLogin();
       default:
-      // default to regular login
+        setLoginType('user');
+        userAndPassLogin();
     }
   };
+
+  const googleOAuthLogin = async () => {
+    try {
+      const { type, accessToken, user } = await Google.logInAsync({
+        androidClientId: googleOAuthAndroidId || '',
+        iosClientId: googleOAuthIosId || '',
+        scopes: ['profile', 'email'],
+      });
+
+      if (type === 'success') setGoogleUser(user);
+      console.log(user);
+    } catch (err) {
+      console.log('failed - googleOAuthLogin: ' + err);
+    }
+  };
+  const facebookOAuthLogin = async () => {};
+  const userAndPassLogin = () => {};
 
   // Handle Login with Google oAuth
   const handleGoogleLogin = async () => {
@@ -81,13 +91,11 @@ const LoginScreenHeaderView = ({ loginType }) => {
     <FadeInAppContent>
       <MapLogo style={styles.logo} />
 
-      <SelectLoginTypeForm />
+      <SelectLoginTypeForm onSubmit={handleLoginTypeSubmit} />
     </FadeInAppContent>
   );
 };
 
-const mapStateToProps = (state) => ({ loginType: state.login.loginType });
-
-const mapDispatchToProps = { setGoogleUser, setFacebookUser };
+const mapDispatchToProps = { setLoginType, setGoogleUser, setFacebookUser };
 
 export default connect(null, mapDispatchToProps)(LoginScreenHeaderView);

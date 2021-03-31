@@ -9,17 +9,14 @@ import React from 'react';
 import { Image, Dimensions } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
 
-// Import Image from Assets
 const mapLogo = require('../../assets/images/mapSpeedLogo.png');
 
-// Get Width information from Dimensions API
 const width = Dimensions.get('window').width * 0.45;
 
-// Styles
-const styles = ScaledSheet.create({ logo: { width, alignSelf: 'center', padding: '25@s' } });
+const styles = ScaledSheet.create({ logo: { width, alignSelf: 'center' } });
 
-const MapLogo = (props) => (
-  <Image style={[styles.logo, props.style]} source={mapLogo} resizeMode="contain" />
+const MapLogo = ({ style }) => (
+  <Image style={[styles.logo, style]} source={mapLogo} resizeMode="contain" />
 );
 
 export default MapLogo;

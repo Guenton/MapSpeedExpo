@@ -5,9 +5,9 @@ import FadeInAppContent from '../animations/FadeInAppContent';
 import IconFab from '../buttons/IconFab';
 import MapLogo from '../images/MapLogo';
 
-const styles = ScaledSheet.create({ logo: { marginTop: '50@vs' }, start: { alignSelf: 'center' } });
+const styles = ScaledSheet.create({ logo: { marginTop: '50@s' }, start: { alignSelf: 'center' } });
 
-const StartScreenHeaderView = ({ onStartPress }) => (
+const StartScreenHeaderView = ({ onPressStart }) => (
   <FadeInAppContent>
     <MapLogo style={styles.logo} />
 
@@ -15,7 +15,7 @@ const StartScreenHeaderView = ({ onStartPress }) => (
       style={styles.start}
       name="power-off"
       size={scale(60)}
-      onPress={onStartPress}
+      onPress={onPressStart}
       reverse
     />
   </FadeInAppContent>

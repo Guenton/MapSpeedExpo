@@ -1,39 +1,30 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
 
 import SelectLoginTypeButton from '../buttons/SelectLoginTypeButton';
-
-import { setLoginType } from '../../store/actions/login';
 
 const styles = ScaledSheet.create({
   container: { alignSelf: 'center' },
   selector: { marginVertical: '8@s' },
 });
 
-const SelectLoginTypeForm = ({ setLoginType }) => {
-  return (
-    <View style={styles.container}>
-      <SelectLoginTypeButton
-        style={styles.selector}
-        type="user"
-        onSubmit={() => setLoginType('user')}
-      />
-      <SelectLoginTypeButton
-        style={styles.selector}
-        type="google"
-        onSubmit={() => setLoginType('google')}
-      />
-      <SelectLoginTypeButton
-        style={styles.selector}
-        type="facebook"
-        onSubmit={() => setLoginType('facebook')}
-      />
-    </View>
-  );
-};
+const SelectLoginTypeForm = ({ onSubmit }) => (
+  <View style={styles.container}>
+    <SelectLoginTypeButton style={styles.selector} type="user" onSubmit={() => onSubmit('user')} />
 
-const mapDispatchToProps = { setLoginType };
+    <SelectLoginTypeButton
+      style={styles.selector}
+      type="google"
+      onSubmit={() => onSubmit('google')}
+    />
 
-export default connect(null, mapDispatchToProps)(SelectLoginTypeForm);
+    <SelectLoginTypeButton
+      style={styles.selector}
+      type="facebook"
+      onSubmit={() => onSubmit('facebook')}
+    />
+  </View>
+);
+
+export default SelectLoginTypeForm;
