@@ -21,6 +21,7 @@
     ],
     "ios": {
       "supportsTablet": true,
+      "bundleIdentifier": "com.guenton.mapspeed",
       "config": {
         "googleSignIn": {
           "reservedClientId": "com.googleusercontent.apps.541211848793-lggdn4e9q4i4kdl3tnv156cn3fkdt3ps"
@@ -31,7 +32,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.guenton.mapspeed"
     },
     "web": {
       "favicon": "./assets/favicon.png"

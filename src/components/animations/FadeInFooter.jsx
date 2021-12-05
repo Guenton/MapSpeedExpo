@@ -1,10 +1,3 @@
-/*
-
----> TL;DR FadeIn Animation Inside of an Footer Container <---
-
-*/
-
-// Import React Native Dependencies
 import React from 'react';
 import Footer from '../containers/Footer';
 import FadeInView from './FadeInView';

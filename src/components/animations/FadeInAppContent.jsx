@@ -1,10 +1,3 @@
-/*
-
----> TL;DR FadeIn Animation Inside of an AppContent Container <---
-
-*/
-
-// Import React Native Dependencies
 import React from 'react';
 import AppContent from '../containers/AppContent';
 import FadeInView from './FadeInView';

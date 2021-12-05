@@ -1,33 +1,22 @@
-/*
-
----> TL;DR React Native Component Top Circle Animation <---
-
-*/
-
-// Import React Native Dependencies
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Dimensions } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
-import { connect } from 'react-redux';
-import Animated, { Easing } from 'react-native-reanimated';
+import { useSpring, animated } from 'react-spring';
 
-// Destructure Animation Properties
-const { Value, timing } = Animated;
+import { setTopCirclePosition } from '../../store/actions/animation';
 
-// Get circle width based on device width
 const width = Dimensions.get('window').width * 2.5;
-
-// Styles
 const styles = ScaledSheet.create({
   circle: {
-    // Circle Sizing
+    // Sizing
     height: width,
     width: width,
     borderRadius: width,
     marginTop: -width / 1.2,
     marginLeft: -width / 4,
     position: 'absolute',
-    // Circle Shadows IOS
+    // Shadows IOS
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -35,51 +24,26 @@ const styles = ScaledSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    // Circle Shadows Android
+    // Shadows Android
     elevation: 5,
   },
 });
 
-const SlideInTopCircle = (props) => {
-  // Set Circle Color for depending on Redux isDark State
-  const circleColor = props.color.isDark ? props.color.black : props.color.white;
+const AnimatedView = animated(View);
 
-  // Set Animation Start and End from props or default to 0
-  const start = props.start ? props.start : 0;
-  const end = props.end ? props.end : 0;
+const SlideInTopCircle = ({ position, children }) => {
+  const dispatch = useDispatch();
+  const topCirclePosition = useSelector(state => state.animation.topCirclePosition);
 
-  // Init Animation transY value to 0
-  const transY = new Value(start);
+  const transitionMarginTop = useSpring({
+    to: { ...styles.circle, marginTop: position },
+    from: { ...styles.circle, marginTop: topCirclePosition || -width / 1.2, },
+    onRest: () => dispatch(setTopCirclePosition(position)),
+  });
 
-  // Configure Animation Properties
-  const animConfig = {
-    duration: 300,
-    toValue: end,
-    easing: Easing.inOut(Easing.ease),
-  };
-
-  // Move Animation
-  const anim = timing(transY, animConfig);
-
-  // Style Transform Object
-  const styleAnim = { transform: [{ translateY: transY }] };
-
-  // Style Background Object
-  const styleBackground = { backgroundColor: circleColor };
-
-  // Run Animation whenever start or end props are modified
-  useEffect(() => anim.start(), [props.start, props.end, props.color.isDark]);
-
-  // Return Circle View
   return (
-    <Animated.View style={[styles.circle, styleBackground, styleAnim]}>
-      {props.children}
-    </Animated.View>
+    <AnimatedView style={transitionMarginTop}>{children}</AnimatedView>
   );
 };
 
-// Map Redux states to "props" passed to functional component
-const mapStateToProps = (state) => ({ color: state.color });
-
-// Connect Functional Component to Redux and Export
-export default connect(mapStateToProps)(SlideInTopCircle);
+export default SlideInTopCircle;

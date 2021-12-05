@@ -1,23 +1,13 @@
-/*
 
----> TL;DR React Native Component Bottom Circle Animation <---
-
-*/
-
-// Import React Native Dependencies
 import React, { useEffect } from 'react';
 import { Dimensions } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
-import { connect } from 'react-redux';
-import Animated, { Easing } from 'react-native-reanimated';
+import { useSpring, animated } from 'react-spring';
 
-// Destructure Animation Properties
-const { Value, timing } = Animated;
+import { setBottomCirclePosition } from '../../../redux/animation/animation.actions';
 
-// Get circle width based on device width
 const width = Dimensions.get('window').width * 3;
-
-// Styles
 const styles = ScaledSheet.create({
   circle: {
     // Circle Sizing
@@ -40,42 +30,19 @@ const styles = ScaledSheet.create({
   },
 });
 
-const SlideInBottomCircle = (props) => {
-  // Set Circle Color for depending on Redux isDark State
-  const circleColor = props.color.isDark ? props.color.black : props.color.white;
+const AnimatedView = animated(View);
 
-  // Style Background Object
-  const styleBackground = { backgroundColor: circleColor };
+const SlideInBottomCircle = ({ position }) => {
+  const dispatch = useDispatch();
+  const bottomCirclePosition = useSelector(state => state.animation.bottomCirclePosition);
 
-  // Set Animation Start and End from props or default to 0
-  const start = props.start ? props.start : 0;
-  const end = props.end ? props.end : 0;
+  const transitionMarginBottom = useSpring({
+    to: { ...styles.circle, marginBottom: position },
+    from: { ...styles.circle, marginBottom: bottomCirclePosition || marginTop: width / 2.7, },
+    onRest: () => dispatch(setBottomCirclePosition(position)),
+  });
 
-  // Init Animation transY value to 0
-  const transY = new Value(start);
-
-  // Configure Animation Properties
-  const animConfig = {
-    duration: 300,
-    toValue: end,
-    easing: Easing.inOut(Easing.ease),
-  };
-
-  // Move Animation
-  const anim = timing(transY, animConfig);
-
-  // Style Transform Object
-  const styleAnim = { transform: [{ translateY: transY }] };
-
-  // Run Animation whenever start or end props are modified
-  useEffect(() => anim.start(), [props.start, props.end, props.color.isDark]);
-
-  // Return Circle View
-  return <Animated.View style={[styles.circle, styleBackground, styleAnim]}></Animated.View>;
+  return <AnimatedView style={transitionMarginBottom}></AnimatedView>;
 };
 
-// Map Redux states to "props" passed to functional component
-const mapStateToProps = (state) => ({ color: state.color });
-
-// Connect Functional Component to Redux and Export
-export default connect(mapStateToProps)(SlideInBottomCircle);
+export default SlideInBottomCircle;
