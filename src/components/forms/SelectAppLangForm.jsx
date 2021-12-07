@@ -8,7 +8,6 @@
 import React, { useEffect, useState } from 'react';
 import { ScaledSheet } from 'react-native-size-matters';
 import { connect } from 'react-redux';
-import Animated, { Easing } from 'react-native-reanimated';
 
 import i18n from 'i18n-js';
 
@@ -17,9 +16,6 @@ i18n.locale = 'pap';
 // Import Components
 import LanguageSelectFab from '../buttons/LanguageSelectFab';
 import { View } from 'react-native';
-
-// Destructure Animation Properties
-const { Value, timing } = Animated;
 
 // Styles
 const styles = ScaledSheet.create({

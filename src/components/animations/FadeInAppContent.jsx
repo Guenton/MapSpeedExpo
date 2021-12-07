@@ -1,10 +1,11 @@
 import React from 'react';
+
 import AppContent from '../containers/AppContent';
 import FadeInView from './FadeInView';
 
-const FadeInAppContent = (props) => (
+const FadeInAppContent = ({ children }) => (
   <AppContent>
-    <FadeInView style={{ flex: 1 }}>{props.children}</FadeInView>
+    <FadeInView style={{ flex: 1 }}>{children}</FadeInView>
   </AppContent>
 );
 

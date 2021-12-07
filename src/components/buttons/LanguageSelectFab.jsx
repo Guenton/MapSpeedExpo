@@ -1,28 +1,17 @@
-/*
-
----> TL;DR Change Language Floating Action Button <---
-
-*/
-
-// Import React Native Dependencies
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-// Import Components
 import FabContainer from '../containers/FabContainer';
 import LangFlag from '../images/LangFlag';
 
-const LanguageSelectFab = (props) => {
-  // Return Customized Elements Button Component
+const LanguageSelectFab = ({ style, flag , onPress }) => {
+  const currentLang = useSelector((state) => state.lang.currentLang);
+  
   return (
-    <FabContainer style={[props.style]} onPress={() => (props.onPress ? props.onPress() : {})}>
-      <LangFlag flag={props.flag ? props.flag : props.lang} />
+    <FabContainer style={style} onPress={() => (onPress ? onPress() : {})}>
+      <LangFlag flag={flag ? flag : currentLang} />
     </FabContainer>
   );
 };
 
-// Map Redux states to "props" passed to functional component
-const mapStateToProps = (state) => ({ lang: state.lang.currentLang });
-
-// Connect Functional Component to Redux and Export
-export default connect(mapStateToProps)(LanguageSelectFab);
+export default LanguageSelectFab;

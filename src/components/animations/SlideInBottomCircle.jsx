@@ -1,15 +1,17 @@
-
-import React, { useEffect } from 'react';
-import { Dimensions } from 'react-native';
+import React from 'react';
+import { View, Dimensions } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
 import { useSpring, animated } from 'react-spring';
 
-import { setBottomCirclePosition } from '../../../redux/animation/animation.actions';
+import { setBottomCirclePosition } from '../../store/actions/animation';
+
+import { black, white } from '../../config/colors';
 
 const width = Dimensions.get('window').width * 3;
 const styles = ScaledSheet.create({
   circle: {
+    backgroundColor: white,
     // Circle Sizing
     height: width,
     width: width,
@@ -34,15 +36,17 @@ const AnimatedView = animated(View);
 
 const SlideInBottomCircle = ({ position }) => {
   const dispatch = useDispatch();
-  const bottomCirclePosition = useSelector(state => state.animation.bottomCirclePosition);
 
-  const transitionMarginBottom = useSpring({
-    to: { ...styles.circle, marginBottom: position },
-    from: { ...styles.circle, marginBottom: bottomCirclePosition || marginTop: width / 2.7, },
+  const bottomCirclePosition = useSelector((state) => state.animation.bottomCirclePosition);
+  const isDark = useSelector((state) => state.core.isDark);
+
+  const transitionMarginTop = useSpring({
+    to: { ...styles.circle, marginTop: position, backgroundColor: isDark ? black : white },
+    from: { ...styles.circle, marginTop: bottomCirclePosition || width / 2.7 },
     onRest: () => dispatch(setBottomCirclePosition(position)),
   });
 
-  return <AnimatedView style={transitionMarginBottom}></AnimatedView>;
+  return <AnimatedView style={transitionMarginTop}></AnimatedView>;
 };
 
 export default SlideInBottomCircle;

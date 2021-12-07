@@ -15,7 +15,7 @@ const StartScreenHeaderView = ({ onPressStart }) => (
       style={styles.start}
       name="power-off"
       size={scale(60)}
-      onPress={onPressStart}
+      onPress={() => (onPressStart ? onPressStart() : null)}
       reverse
     />
   </FadeInAppContent>

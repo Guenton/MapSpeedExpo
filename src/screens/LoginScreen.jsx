@@ -7,10 +7,8 @@ import SlidingCircles from '../components/animations/SlidingCircles';
 import LoginScreenHeaderView from '../components/views/LoginScreenHeaderView';
 
 const LoginScreen = (props) => {
-  const [topStart, setTopStart] = useState(scale(-500));
-  const [topEnd, setTopEnd] = useState(scale(350));
-  const [bottomStart, setBottomStart] = useState(scale(500));
-  const [bottomEnd, setBottomEnd] = useState(scale(100));
+  const [topCirclePosition, setTopCirclePosition] = useState(scale(250));
+  const [bottomCirclePosition, setBottomCirclePosition] = useState(scale(500));
 
   useBackHandler(() => {
     props.setRoute('start');
@@ -24,12 +22,7 @@ const LoginScreen = (props) => {
 
   return (
     <AppBackground>
-      <SlidingCircles
-        topStart={topStart}
-        topEnd={topEnd}
-        bottomStart={bottomStart}
-        bottomEnd={bottomEnd}
-      />
+      <SlidingCircles topCirclePosition={topCirclePosition} bottomCirclePosition={bottomCirclePosition} />
 
       <LoginScreenHeaderView />
     </AppBackground>

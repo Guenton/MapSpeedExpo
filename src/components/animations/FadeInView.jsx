@@ -1,10 +1,3 @@
-/*
-
----> TL;DR FadeIn Animation Container <---
-
-*/
-
-// Import React Native Dependencies
 import React, { useRef, useEffect } from 'react';
 import { Animated } from 'react-native';
 

@@ -1,22 +1,13 @@
-/*
-
----> TL;DR Facebook Floating Action Button <---
-
-*/
-
-// Import React Native Dependencies
 import React from 'react';
 import { connect } from 'react-redux';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
 import i18n from 'i18n-js';
 
-// Import Components
 import FacebookFab from './FacebookFab';
 import GoogleFab from './GoogleFab';
 import IconFab from './IconFab';
 
-// Styles
 const styles = ScaledSheet.create({
   container: { flexDirection: 'row', alignItems: 'center' },
   textBox: {

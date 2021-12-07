@@ -5,16 +5,14 @@ import { scale } from 'react-native-size-matters';
 
 import AppBackground from '../components/containers/AppBackground';
 import SlidingCircles from '../components/animations/SlidingCircles';
-import StartScreenFooterView from '../components/views/StartScreenFooterView';
 import StartScreenHeaderView from '../components/views/StartScreenHeaderView';
+// import StartScreenFooterView from '../components/views/StartScreenFooterView';
 
 import asyncDelay from '../utils/asyncDelay';
 
 const StartScreen = ({ setRoute }) => {
-  const [topStart, setTopStart] = useState(scale(-500));
-  const [topEnd, setTopEnd] = useState(scale(250));
-  const [bottomStart, setBottomStart] = useState(scale(500));
-  const [bottomEnd, setBottomEnd] = useState(scale(0));
+  const [topCirclePosition, setTopCirclePosition] = useState(scale(-500));
+  const [bottomCirclePosition, setBottomCirclePosition] = useState(scale(400));
 
   useBackHandler(() => {
     BackHandler.exitApp();
@@ -22,26 +20,25 @@ const StartScreen = ({ setRoute }) => {
   });
 
   const animateToLoginScreen = async () => {
-    setTopStart(scale(250));
-    setTopEnd(scale(-500));
-    setBottomStart(scale(0));
-    setBottomEnd(scale(500));
+    setTopCirclePosition(scale(-1000));
+    setBottomCirclePosition(scale(1000));
 
     await asyncDelay();
-    setRoute('login');
+    // setRoute('login');
+
+    setTopCirclePosition(scale(-500));
+    setBottomCirclePosition(scale(400));
   };
 
   return (
     <AppBackground skyline>
       <SlidingCircles
-        topStart={topStart}
-        topEnd={topEnd}
-        bottomStart={bottomStart}
-        bottomEnd={bottomEnd}
+        topCirclePosition={topCirclePosition}
+        bottomCirclePosition={bottomCirclePosition}
       />
 
-      <StartScreenHeaderView onPressStart={animateToLoginScreen} />
-      <StartScreenFooterView />
+      <StartScreenHeaderView onPressStart={() => animateToLoginScreen()} />
+      {/* <StartScreenFooterView /> */}
     </AppBackground>
   );
 };
