@@ -1,4 +1,4 @@
-import { TOGGLE_DARK, SET_LOADING, SET_KEYBOARD_OPEN, SET_ALERT, SET_ROUTE } from '../actions/core';
+import { TOGGLE_DARK, SET_ROUTE, SET_LOADING, SET_KEYBOARD_OPEN, SET_ALERT } from '../actions/core';
 
 const initialState = {
   isDark: false,

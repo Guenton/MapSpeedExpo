@@ -10,6 +10,7 @@ import { setKeyboardOpen } from './store/actions/core';
 // import LoginSignupScreen from './screens/LoginSignupScreen';
 
 import StartScreen from './screens/StartScreen';
+import LoginSelectScreen from './screens/LoginSelectScreen';
 
 const Router = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,8 @@ const Router = () => {
       {/* {route === 'login-reset' && <LoginResetScreen />} */}
 
       {route === 'start' && <StartScreen />}
+
+      {route === 'login-select' && <LoginSelectScreen />}
     </SafeAreaView>
   );
 };

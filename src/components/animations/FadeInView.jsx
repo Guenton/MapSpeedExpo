@@ -1,22 +1,13 @@
-import React, { useRef, useEffect } from 'react';
-import { Animated } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
+import { useSpring, animated } from 'react-spring';
 
-const FadeInView = (props) => {
-  // Init fade Opacity to 0;
-  const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+const AnimatedView = animated(View);
 
-  // Set Duration to props.duration or default to 1 seconds
-  const duration = props.duration ? props.duration : 1000;
+const FadeInView = ({ children, style }) => {
+  const fadeIn = useSpring({ to: { ...style, opacity: 1 }, from: { ...style, opacity: 0 } });
 
-  // Set Anumation Timing Properties
-  const timing = { toValue: 1, duration, useNativeDriver: true };
-
-  // Animation effect
-  useEffect(() => Animated.timing(fadeAnim, timing).start(), [fadeAnim]);
-
-  return (
-    <Animated.View style={[props.style, { opacity: fadeAnim }]}>{props.children}</Animated.View>
-  );
+  return <AnimatedView style={fadeIn}>{children}</AnimatedView>;
 };
 
 export default FadeInView;
