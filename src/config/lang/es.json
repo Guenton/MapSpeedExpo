@@ -2,7 +2,14 @@
   "loginWith": "Iniciar con",
   "and": "y",
   "username": "Usuario",
-  "password": "Contraseña",
   "google": "Google",
-  "facebook": "Facebook"
+  "facebook": "Facebook",
+  "hiHowAreYou": "¿Hola, Cómo estás?",
+  "pleaseLogin": "Por favor inicia la sesión",
+  "email": "Correo Electrónico",
+  "password": "Contraseña",
+  "forgotPassword": "¿Olvidaste tu contraseña?",
+  "reset": "Restablecer",
+  "noAccount": "¿No tienes una cuenta?",
+  "signUp": "Regístrate"
 }

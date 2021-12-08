@@ -3,19 +3,18 @@ import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBackHandler } from '@react-native-community/hooks';
 import { ScaledSheet, scale } from 'react-native-size-matters';
-import firebase from 'firebase';
 
 import AppBackground from '../components/containers/AppBackground';
 import SlidingCircles from '../components/animations/SlidingCircles';
 import FadeInAppContent from '../components/animations/FadeInAppContent';
 import MapSpeedLogo from '../components/images/MapLogo';
 import GuentonBotomRight from '../components/images/GuentonBottomRight';
-import SelectLoginTypeForm from '../components/forms/SelectLoginTypeForm';
 import SelectAppLangForm from '../components/forms/SelectAppLangForm';
 import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
 
 import { setRoute } from '../store/actions/core';
 import { setCurrentLang } from '../store/actions/lang';
+import LoginForm from '../components/forms/LoginForm';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '25@s' },
@@ -29,53 +28,19 @@ const styles = ScaledSheet.create({
   },
 });
 
-const LoginSelectScreen = () => {
+const LoginPasswordScreen = () => {
   const dispatch = useDispatch();
   const transitioning = useSelector((state) => state.animation.transitioning);
-  const currentLang = useSelector((state) => state.lang.currentLang);
 
   const [topCirclePosition, setTopCirclePosition] = useState(scale(-400));
   const [bottomCirclePosition, setBottomCirclePosition] = useState(scale(500));
 
   const [showLanguageSelectForm, setShowLanguageSelectForm] = useState(false);
 
-  const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
-
   useBackHandler(() => {
     dispatch(setRoute('start'));
     return true;
   });
-
-  useEffect(() => {
-    firebase.auth().languageCode = currentLang === 'pap' ? 'en' : currentLang;
-  }, [currentLang]);
-
-  const handleLoginTypeSelect = (loginType) => {
-    switch (loginType) {
-      case 'user':
-        return null;
-      case 'google':
-        return null;
-      case 'facebook':
-        return loginWithFacebook();
-      default:
-        break;
-    }
-  };
-
-  const loginWithFacebook = () => {
-    firebase
-      .auth()
-      .signInWithRedirect(facebookAuthProvider)
-      .then((result) => {
-        const { user } = result;
-        console.log(user);
-        console.log(result.credential);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const setLanguageAndCloseForm = (lang) => {
     dispatch(setCurrentLang(lang));
@@ -93,7 +58,11 @@ const LoginSelectScreen = () => {
         <FadeInAppContent>
           <MapSpeedLogo style={styles.mapSpeedlogo} />
 
-          <SelectLoginTypeForm onSubmit={(loginType) => handleLoginTypeSelect(loginType)} />
+          <LoginForm
+            onGoSignup={() => dispatch(setRoute('login-signup'))}
+            onGoReset={() => dispatch(setRoute('login-reset'))}
+            onGoMain={() => dispatch(setRoute('main'))}
+          />
 
           <View style={styles.bottom}>
             {showLanguageSelectForm && (
@@ -113,4 +82,4 @@ const LoginSelectScreen = () => {
   );
 };
 
-export default LoginSelectScreen;
+export default LoginPasswordScreen;

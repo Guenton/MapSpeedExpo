@@ -35,7 +35,7 @@ const StartScreen = () => {
     setBottomCirclePosition(scale(1000));
 
     await delay(500);
-    dispatch(setRoute('login-select'));
+    dispatch(setRoute('login-password'));
 
     setTopCirclePosition(scale(-500));
     setBottomCirclePosition(scale(400));

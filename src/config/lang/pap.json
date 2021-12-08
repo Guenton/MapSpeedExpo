@@ -2,7 +2,14 @@
   "loginWith": "Lògin ku",
   "and": "i",
   "username": "Usuario",
-  "password": "Klave",
   "google": "Google",
-  "facebook": "Facebook"
+  "facebook": "Facebook",
+  "hiHowAreYou": "Halo, konta k'ubo?",
+  "pleaseLogin": "Por fabor lògin pa sigi",
+  "email": "E-mail",
+  "password": "Klave",
+  "forgotPassword": "Bo a lubida bo klave?",
+  "reset": "Rekupera",
+  "noAccount": "No tin miembresia ahinda?",
+  "signUp": "Registra"
 }

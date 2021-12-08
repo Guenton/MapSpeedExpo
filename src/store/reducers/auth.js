@@ -1,4 +1,5 @@
 import {
+  SET_USER_ID,
   SET_EMAIL,
   SET_PASSWORD,
   SET_PASSWORD_CONFIRM,
@@ -10,6 +11,7 @@ import {
 } from '../actions/auth';
 
 const initialState = {
+  userId: '',
   email: '',
   password: '',
   passwordConfirm: '',
@@ -22,6 +24,8 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_USER_ID:
+      return { ...state, userId: action.input };
     case SET_EMAIL:
       return { ...state, email: action.input };
     case SET_PASSWORD:

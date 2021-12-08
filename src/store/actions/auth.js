@@ -1,3 +1,4 @@
+export const SET_USER_ID = 'SET_USER_ID';
 export const SET_EMAIL = 'SET_EMAIL';
 export const SET_PASSWORD = 'SET_PASSWORD';
 export const SET_PASSWORD_CONFIRM = 'SET_PASSWORD_CONFIRM';
@@ -8,6 +9,7 @@ export const SET_ERR_PASSWORD = 'SET_ERR_PASSWORD';
 export const SET_ERR_PASSWORD_CONFIRM = 'SET_ERR_PASSWORD_CONFIRM';
 export const SET_ERR_RESET_CODE = 'SET_ERR_RESET_CODE';
 
+export const setUserId = (input = '') => ({ type: SET_USER_ID, input });
 export const setEmail = (input = '') => ({ type: SET_EMAIL, input });
 export const setPassword = (input = '') => ({ type: SET_PASSWORD, input });
 export const setPasswordConfirm = (input = '') => ({ type: SET_PASSWORD_CONFIRM, input });

@@ -2,7 +2,14 @@
   "loginWith": "Login with",
   "and": "and",
   "username": "Username",
-  "password": "Password",
   "google": "Google",
-  "facebook": "Facebook"
+  "facebook": "Facebook",
+  "hiHowAreYou": "Hi, how are you?",
+  "pleaseLogin": "Please login to Continue",
+  "email": "Email",
+  "password": "Password",
+  "forgotPassword": "Forgot Password?",
+  "reset": "Reset",
+  "noAccount": "Don't have an account?",
+  "signUp": "Sign Up"
 }

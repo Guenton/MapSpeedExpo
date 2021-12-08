@@ -2,7 +2,14 @@
   "loginWith": "Inloggen met",
   "and": "en",
   "username": "Gebruikersnaam",
-  "password": "Wachtwoord",
   "google": "Google",
-  "facebook": "Facebook"
+  "facebook": "Facebook",
+  "hiHowAreYou": "Hallo, hoe gaat het?",
+  "pleaseLogin": "Log in om verder te gaan",
+  "email": "E-mail",
+  "password": "Wachtwoord",
+  "forgotPassword": "Wachtwoord vergeten?",
+  "reset": "Reset",
+  "noAccount": "Nog geen account?",
+  "signUp": "Registreer"
 }
