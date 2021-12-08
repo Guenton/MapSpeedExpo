@@ -6,7 +6,7 @@ import SelectLoginTypeButton from '../buttons/SelectLoginTypeButton';
 
 const styles = ScaledSheet.create({
   container: { alignSelf: 'center' },
-  selector: { marginVertical: '8@s' },
+  selector: { marginVertical: '9@s' },
 });
 
 const SelectLoginTypeForm = ({ onSubmit }) => (

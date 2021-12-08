@@ -5,7 +5,9 @@ import { ScaledSheet } from 'react-native-size-matters';
 const mapSpeedLogo = require('../../assets/images/mapSpeedLogo.png');
 
 const width = Dimensions.get('window').width * 0.45;
-const styles = ScaledSheet.create({ logo: { width, alignSelf: 'center' } });
+const styles = ScaledSheet.create({
+  logo: { width, alignSelf: 'center' },
+});
 
 const MapSpeedLogo = ({ style }) => (
   <Image style={{ ...styles.logo, ...style }} source={mapSpeedLogo} resizeMode="contain" />

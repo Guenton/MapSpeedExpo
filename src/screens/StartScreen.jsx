@@ -60,7 +60,7 @@ const StartScreen = () => {
             reverse
           />
 
-          <GuentonBotomRight />
+          <GuentonBotomRight style={{ flex: 1 }} />
         </FadeInAppContent>
       )}
     </AppBackground>

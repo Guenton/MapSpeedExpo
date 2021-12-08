@@ -1,16 +1,9 @@
-/*
-
----> TL;DR Redux Reducer for Language State <---
-
-*/
-
-// import Actions
 import { SET_CURRENT_LANG } from '../actions/lang';
 
 // Set Initial State
 const initialState = {
-  currentLang: 'eng',
-  availableLang: ['pap', 'nld', 'spa', 'eng'],
+  currentLang: 'en',
+  availableLang: ['pap', 'nl', 'es', 'en'],
 };
 
 // Receive Actions and Update State Accordingly

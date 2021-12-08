@@ -1,6 +1,7 @@
 import { LogBox } from 'react-native';
 import * as Localization from 'expo-localization';
 import i18n from 'i18n-js';
+
 import en from './lang/en';
 import es from './lang/es';
 import nl from './lang/nl';

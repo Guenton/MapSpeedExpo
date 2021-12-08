@@ -5,7 +5,6 @@ import GuentonLogo from './GuentonLogo';
 
 const styles = ScaledSheet.create({
   container: {
-    flex: 1,
     alignSelf: 'flex-end',
     justifyContent: 'flex-end',
     marginBottom: '5@s',
@@ -13,9 +12,9 @@ const styles = ScaledSheet.create({
   },
 });
 
-const GuentonBotomRight = () => {
+const GuentonBotomRight = ({ style }) => {
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, ...style }}>
       <GuentonLogo />
     </View>
   );

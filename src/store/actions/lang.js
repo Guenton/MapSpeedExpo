@@ -1,11 +1,8 @@
-/*
+import i18n from 'i18n-js';
 
----> TL;DR Redux Actions for lang Reducer <---
-
-*/
-
-// Export Action String for easy import in Reducer
 export const SET_CURRENT_LANG = 'SET_CURRENT_LANG';
 
-// Export Action Dispatchers
-export const setCurrentLang = (language = 'eng') => ({ type: SET_CURRENT_LANG, language });
+export const setCurrentLang = (language = 'en') => {
+  i18n.locale = language;
+  return { type: SET_CURRENT_LANG, language };
+};
