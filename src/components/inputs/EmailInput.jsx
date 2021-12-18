@@ -3,17 +3,11 @@ import { Icon, Input } from 'react-native-elements';
 import { ScaledSheet } from 'react-native-size-matters';
 import i18n from 'i18n-js';
 
-import { primary, grey } from '../../config/colors';
+import { primary } from '../../config/colors';
 
 const styles = ScaledSheet.create({
   container: {
     height: '50@s',
-  },
-  border: {
-    borderColor: grey,
-    borderWidth: '1@s',
-    borderRadius: '10@s',
-    paddingHorizontal: '10@s',
   },
   error: {
     marginTop: 0,
@@ -39,7 +33,6 @@ const EmailInput = ({
     value={value}
     errorMessage={errorMessage}
     containerStyle={{ ...styles.container, ...containerStyle }}
-    inputContainerStyle={styles.border}
     errorStyle={styles.error}
     inputStyle={styles.text}
     autoCapitalize="none"

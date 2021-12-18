@@ -18,6 +18,9 @@ import LoginForm from '../components/forms/LoginForm';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '25@s' },
+  form: {
+    flex: 1,
+  },
   bottom: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -59,6 +62,7 @@ const LoginPasswordScreen = () => {
           <MapSpeedLogo style={styles.mapSpeedlogo} />
 
           <LoginForm
+            style={styles.form}
             onGoSignup={() => dispatch(setRoute('login-signup'))}
             onGoReset={() => dispatch(setRoute('login-reset'))}
             onGoMain={() => dispatch(setRoute('main'))}

@@ -9,12 +9,6 @@ const styles = ScaledSheet.create({
   container: {
     height: '50@s',
   },
-  border: {
-    borderColor: grey,
-    borderWidth: '1@s',
-    borderRadius: '10@s',
-    paddingHorizontal: '10@s',
-  },
   error: {
     marginTop: 0,
     marginLeft: '10@s',
@@ -48,7 +42,6 @@ const PasswordInput = ({
       value={value}
       errorMessage={errorMessage}
       containerStyle={{ ...styles.container, ...containerStyle }}
-      inputContainerStyle={styles.border}
       errorStyle={styles.error}
       inputStyle={styles.text}
       autoCapitalize="none"

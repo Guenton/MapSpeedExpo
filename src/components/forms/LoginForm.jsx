@@ -25,13 +25,13 @@ import {
 import SubHeader from '../labels/SubHeader';
 
 const styles = ScaledSheet.create({
-  container: { flex: 1, justifyContent: 'space-evenly' },
-  inputContainer: { width: '290@s', alignSelf: 'center' },
+  container: { justifyContent: 'space-evenly' },
+  inputContainer: { width: '290@s', alignSelf: 'center', marginBottom: '15@s' },
   input: { marginBottom: '18@s' },
   center: { alignSelf: 'center' },
 });
 
-const LoginForm = ({ onGoSignup, onGoReset, onGoMain }) => {
+const LoginForm = ({ style, onGoSignup, onGoReset, onGoMain }) => {
   const { t } = i18n;
   const dispatch = useDispatch();
 
@@ -102,8 +102,9 @@ const LoginForm = ({ onGoSignup, onGoReset, onGoMain }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <SubHeader label={t('pleaseLogin')} style={styles.center} />
+    <View style={{ ...styles.container, ...style }}>
+      {!isKeyboardOpen && <SubHeader label={t('pleaseLogin')} style={styles.center} />}
+
       <View style={styles.inputContainer}>
         <EmailInput
           inputRef={emailRef}
@@ -122,10 +123,10 @@ const LoginForm = ({ onGoSignup, onGoReset, onGoMain }) => {
         />
       </View>
 
-      {!isKeyboardOpen && (
+      {!isKeyboardOpen && !email && !emailErr && (
         <>
-          <ForgotPasswordButton onPress={() => onGoReset()} />
           <FormFooter label={t('noAccount')} boldLabel={t('signUp')} onPress={() => onGoSignup()} />
+          <ForgotPasswordButton onPress={() => onGoReset()} />
         </>
       )}
     </View>
