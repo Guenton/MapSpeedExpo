@@ -19,11 +19,12 @@ import LoginForm from '../components/forms/LoginForm';
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '25@s' },
   form: {
-    flex: 1,
+    // flex: 2,
+    height: '300@s',
+    // justifyContent: 'flex-end',
   },
   bottom: {
     flex: 1,
-    justifyContent: 'flex-end',
   },
   languageSelectFab: {
     marginLeft: '15@s',
@@ -35,8 +36,8 @@ const LoginPasswordScreen = () => {
   const dispatch = useDispatch();
   const transitioning = useSelector((state) => state.animation.transitioning);
 
-  const [topCirclePosition, setTopCirclePosition] = useState(scale(-400));
-  const [bottomCirclePosition, setBottomCirclePosition] = useState(scale(500));
+  const [topCirclePosition, setTopCirclePosition] = useState(scale(-600));
+  const [bottomCirclePosition, setBottomCirclePosition] = useState(scale(300));
 
   const [showLanguageSelectForm, setShowLanguageSelectForm] = useState(false);
 
@@ -61,13 +62,6 @@ const LoginPasswordScreen = () => {
         <FadeInAppContent>
           <MapSpeedLogo style={styles.mapSpeedlogo} />
 
-          <LoginForm
-            style={styles.form}
-            onGoSignup={() => dispatch(setRoute('login-signup'))}
-            onGoReset={() => dispatch(setRoute('login-reset'))}
-            onGoMain={() => dispatch(setRoute('main'))}
-          />
-
           <View style={styles.bottom}>
             {showLanguageSelectForm && (
               <SelectAppLangForm onSelect={(lang) => setLanguageAndCloseForm(lang)} />
@@ -78,6 +72,12 @@ const LoginPasswordScreen = () => {
               onPress={() => setShowLanguageSelectForm(!showLanguageSelectForm)}
             />
           </View>
+          <LoginForm
+            style={styles.form}
+            onGoSignup={() => dispatch(setRoute('login-signup'))}
+            onGoReset={() => dispatch(setRoute('login-reset'))}
+            onGoMain={() => dispatch(setRoute('main'))}
+          />
 
           <GuentonBotomRight />
         </FadeInAppContent>

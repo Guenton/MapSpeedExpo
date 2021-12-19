@@ -123,7 +123,7 @@ const LoginForm = ({ style, onGoSignup, onGoReset, onGoMain }) => {
         />
       </View>
 
-      {!isKeyboardOpen && !email && !emailErr && (
+      {!isKeyboardOpen && !email && !errEmail && (
         <>
           <FormFooter label={t('noAccount')} boldLabel={t('signUp')} onPress={() => onGoSignup()} />
           <ForgotPasswordButton onPress={() => onGoReset()} />
