@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BackHandler } from 'react-native';
+import { BackHandler, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBackHandler } from '@react-native-community/hooks';
 import { ScaledSheet, scale } from 'react-native-size-matters';
@@ -11,11 +11,32 @@ import FadeInAppContent from '../components/animations/FadeInAppContent';
 import MapSpeedLogo from '../components/images/MapLogo';
 import IconFab from '../components/buttons/IconFab';
 import GuentonBotomRight from '../components/images/GuentonBottomRight';
-import { setRoute } from '../store/actions/core';
+import SelectAppLangForm from '../components/forms/SelectAppLangForm';
+import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
+
+import { setRoute, toggleDarkMode } from '../store/actions/core';
+import { setCurrentLang } from '../store/actions/lang';
 
 const styles = ScaledSheet.create({
-  mapSpeedlogo: { marginTop: '50@s' },
-  start: { alignSelf: 'center' },
+  mapSpeedlogo: {
+    marginTop: '50@s',
+  },
+  start: {
+    alignSelf: 'center',
+  },
+  options: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+  languageSelectFab: {
+    marginLeft: '15@s',
+    marginBottom: '-10@s',
+  },
+  darkSelectFab: {
+    marginLeft: '15@s',
+    marginBottom: '-10@s',
+  },
 });
 
 const StartScreen = () => {
@@ -24,6 +45,8 @@ const StartScreen = () => {
 
   const [topCirclePosition, setTopCirclePosition] = useState(scale(-500));
   const [bottomCirclePosition, setBottomCirclePosition] = useState(scale(400));
+
+  const [showLanguageSelectForm, setShowLanguageSelectForm] = useState(false);
 
   useBackHandler(() => {
     BackHandler.exitApp();
@@ -39,6 +62,11 @@ const StartScreen = () => {
 
     setTopCirclePosition(scale(-500));
     setBottomCirclePosition(scale(400));
+  };
+
+  const setLanguageAndCloseForm = (lang) => {
+    dispatch(setCurrentLang(lang));
+    setShowLanguageSelectForm(false);
   };
 
   return (
@@ -60,7 +88,25 @@ const StartScreen = () => {
             reverse
           />
 
-          <GuentonBotomRight style={{ flex: 1 }} />
+          <View style={styles.options}>
+            <View>
+              {showLanguageSelectForm && (
+                <SelectAppLangForm onSelect={(lang) => setLanguageAndCloseForm(lang)} />
+              )}
+              <LanguageSelectFab
+                style={styles.languageSelectFab}
+                onPress={() => setShowLanguageSelectForm(!showLanguageSelectForm)}
+              />
+            </View>
+
+            <IconFab
+              style={styles.darkSelectFab}
+              name="adjust"
+              onPress={() => dispatch(toggleDarkMode())}
+            />
+          </View>
+
+          <GuentonBotomRight />
         </FadeInAppContent>
       )}
     </AppBackground>

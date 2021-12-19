@@ -37,12 +37,13 @@ const styles = ScaledSheet.create({
 const SelectAppLangForm = ({ style, onSelect }) => {
   const availableLang = useSelector((state) => state.lang.availableLang);
   const currentLang = useSelector((state) => state.lang.currentLang);
-  const isDark = useSelector((state) => state.core.isDark);
 
-  // Init Language Array to empty Array
+  const isDark = useSelector((state) => state.core.isDark);
+  const white = useSelector((state) => state.color.white);
+  const grey = useSelector((state) => state.color.grey);
+
   const [langArray, setLangArray] = useState([]);
 
-  // React to changes in current Language and update language Array
   useEffect(() => {
     // Filter out the currently active language from the available languages and set the rest to state
     setLangArray(availableLang.filter((item) => item !== currentLang));

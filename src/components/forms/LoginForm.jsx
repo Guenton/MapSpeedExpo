@@ -7,12 +7,9 @@ import * as SecureStore from 'expo-secure-store';
 import firebase from 'firebase';
 import i18n from 'i18n-js';
 
-import FormHeader from '../labels/FormHeader';
 import EmailInput from '../inputs/EmailInput';
 import PasswordInput from '../inputs/PasswordInput';
 import ForgotPasswordButton from '../buttons/ForgotPasswordButton';
-import FormFooter from '../labels/FormFooter';
-import IconFab from '../buttons/IconFab';
 
 import { setLoading } from '../../store/actions/core';
 import {
@@ -22,20 +19,17 @@ import {
   setErrEmail,
   setErrPassword,
 } from '../../store/actions/auth';
-import SubHeader from '../labels/SubHeader';
 
 const styles = ScaledSheet.create({
   container: { justifyContent: 'space-evenly' },
-  inputContainer: { width: '290@s', alignSelf: 'center', marginBottom: '15@s' },
+  inputContainer: { width: '290@s', alignSelf: 'center' },
   input: { marginBottom: '18@s' },
   center: { alignSelf: 'center' },
 });
 
-const LoginForm = ({ style, onGoSignup, onGoReset, onGoMain }) => {
+const LoginForm = ({ style, onGoReset, onGoMain }) => {
   const { t } = i18n;
   const dispatch = useDispatch();
-
-  const isKeyboardOpen = useSelector((state) => state.core.isKeyboardOpen);
 
   const emailRef = createRef();
   const passwordRef = createRef();
@@ -103,8 +97,6 @@ const LoginForm = ({ style, onGoSignup, onGoReset, onGoMain }) => {
 
   return (
     <View style={{ ...styles.container, ...style }}>
-      {!isKeyboardOpen && <SubHeader label={t('pleaseLogin')} style={styles.center} />}
-
       <View style={styles.inputContainer}>
         <EmailInput
           inputRef={emailRef}
@@ -121,14 +113,8 @@ const LoginForm = ({ style, onGoSignup, onGoReset, onGoMain }) => {
           onBlur={() => loginWithFirebase()}
           onChange={(val) => validateAndSetPassword(val)}
         />
+        <ForgotPasswordButton onPress={() => onGoReset()} />
       </View>
-
-      {!isKeyboardOpen && !email && !errEmail && (
-        <>
-          <FormFooter label={t('noAccount')} boldLabel={t('signUp')} onPress={() => onGoSignup()} />
-          <ForgotPasswordButton onPress={() => onGoReset()} />
-        </>
-      )}
     </View>
   );
 };

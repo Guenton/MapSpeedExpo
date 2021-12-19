@@ -1,4 +1,10 @@
-import { TOGGLE_DARK, SET_ROUTE, SET_LOADING, SET_KEYBOARD_OPEN, SET_ALERT } from '../actions/core';
+import {
+  TOGGLE_DARK_MODE,
+  SET_ROUTE,
+  SET_LOADING,
+  SET_KEYBOARD_OPEN,
+  SET_ALERT,
+} from '../actions/core';
 
 const initialState = {
   isDark: false,
@@ -13,7 +19,7 @@ const initialState = {
 
 const coreReducer = (state = initialState, action) => {
   switch (action.type) {
-    case TOGGLE_DARK:
+    case TOGGLE_DARK_MODE:
       return { ...state, isDark: !state.isDark };
     case SET_ROUTE:
       return { ...state, route: action.route };

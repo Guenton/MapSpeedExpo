@@ -9,7 +9,7 @@ import BoldText from '../labels/BoldText';
 const styles = ScaledSheet.create({
   container: {
     flexDirection: 'row',
-    alignSelf: 'center',
+    alignSelf: 'flex-end',
     paddingHorizontal: '10@s',
   },
   spacing: {

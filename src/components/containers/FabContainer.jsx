@@ -1,29 +1,16 @@
-/*
-
----> TL;DR Floating Action Button Template <---
-
-*/
-
-// Import React Native Dependencies
 import React from 'react';
 import { Dimensions, View } from 'react-native';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
 import { TouchableOpacity } from 'react-native';
 
-// Get button width based on device width
 const width = Dimensions.get('window').width * 0.15;
-
-// Styles
 const styles = ScaledSheet.create({
   container: {
-    // Circle Dimensions
     width: width,
     height: width,
     borderRadius: width,
-    // Circle Content
     justifyContent: 'center',
-    // Circle Shadows IOS
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -31,36 +18,31 @@ const styles = ScaledSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    // Circle Shadows Android
     elevation: 5,
   },
 });
 
-const FabContainer = (props) => {
+const FabContainer = ({ style, children, size, reverse, onPress }) => {
+  const isDark = useSelector((state) => state.core.isDark);
+  const primary = useSelector((state) => state.color.primary);
+  const white = useSelector((state) => state.color.white);
+  const grey = useSelector((state) => state.color.grey);
+
   // Set backgroundColor depending on Redux isDark state
-  let backgroundColor = props.color.isDark ? props.color.grey : props.color.white;
-  backgroundColor = props.reverse ? props.color.primary : backgroundColor;
+  let backgroundColor = isDark ? grey : white;
+  backgroundColor = reverse ? primary : backgroundColor;
 
-  // Set Size if given by parent ense use default
-  const size = props.size
-    ? { width: props.size, height: props.size, borderRadius: props.size }
-    : {};
+  // Set Size if given by parent else use default
+  const customSize = size ? { width: size, height: size, borderRadius: size } : {};
+  const styleContainer = { backgroundColor, ...customSize };
 
-  // Set Style for Container
-  const styleContainer = { backgroundColor, ...size };
-
-  // Return Customized Elements Button Component
   return (
-    <View style={[styles.container, styleContainer, props.style]}>
-      <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => props.onPress()}>
-        {props.children}
+    <View style={[styles.container, styleContainer, style]}>
+      <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => onPress()}>
+        {children}
       </TouchableOpacity>
     </View>
   );
 };
 
-// Map Redux states to "props" passed to functional component
-const mapStateToProps = (state) => ({ color: state.color });
-
-// Connect Functional Component to Redux and Export
-export default connect(mapStateToProps)(FabContainer);
+export default FabContainer;
