@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { SafeAreaView, Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import * as NavigationBar from 'expo-navigation-bar';
 
 import { setKeyboardOpen } from './store/actions/core';
 
@@ -16,6 +17,9 @@ const Router = () => {
   const dispatch = useDispatch();
 
   const route = useSelector((state) => state.core.route);
+  const isDark = useSelector((state) => state.core.isDark);
+  const white = useSelector((state) => state.color.white);
+  const black = useSelector((state) => state.color.black);
 
   useEffect(() => {
     const kbShow = Keyboard.addListener('keyboardDidShow', () => dispatch(setKeyboardOpen(true)));
@@ -25,6 +29,16 @@ const Router = () => {
       kbHide.remove();
     };
   }, []);
+
+  useEffect(() => {
+    if (isDark) {
+      NavigationBar.setBackgroundColorAsync(black);
+      NavigationBar.setButtonStyleAsync('light');
+    } else {
+      NavigationBar.setBackgroundColorAsync(white);
+      NavigationBar.setButtonStyleAsync('dark');
+    }
+  }, [isDark]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

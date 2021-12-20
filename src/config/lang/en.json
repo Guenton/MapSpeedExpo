@@ -11,5 +11,7 @@
   "forgotPassword": "Forgot Password?",
   "reset": "Reset",
   "noAccount": "Don't have an account?",
-  "signUp": "Sign Up"
+  "signUp": "Sign Up",
+  "signup": "Signup",
+  "login": "Login"
 }

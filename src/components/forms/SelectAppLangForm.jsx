@@ -30,8 +30,8 @@ const styles = ScaledSheet.create({
     // Shadows Android
     elevation: 4,
   },
-  topButton: { marginTop: '-25@s', marginLeft: '-12.5@s' },
-  button: { marginTop: '9@s', marginLeft: '-12.5@s' },
+  topButton: { marginTop: '-25@s', marginLeft: '-13.5@s' },
+  button: { marginTop: '9@s', marginLeft: '-13.5@s' },
 });
 
 const SelectAppLangForm = ({ style, onSelect }) => {

@@ -11,5 +11,7 @@
   "forgotPassword": "Wachtwoord vergeten?",
   "reset": "Reset",
   "noAccount": "Nog geen account?",
-  "signUp": "Registreer"
+  "signUp": "Registreer",
+  "signup": "Registreer",
+  "login": "Inloggen"
 }

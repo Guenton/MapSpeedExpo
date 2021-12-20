@@ -31,11 +31,11 @@ const styles = ScaledSheet.create({
   },
   languageSelectFab: {
     marginLeft: '15@s',
-    marginBottom: '-10@s',
+    marginBottom: '-15@s',
   },
   darkSelectFab: {
     marginLeft: '15@s',
-    marginBottom: '-10@s',
+    marginBottom: '-15@s',
   },
 });
 

@@ -11,5 +11,7 @@
   "forgotPassword": "Bo a lubida bo klave?",
   "reset": "Rekupera",
   "noAccount": "No tin miembresia ahinda?",
-  "signUp": "Registra"
+  "signUp": "Registra",
+  "signup": "Registra",
+  "login": "Lògin"
 }

@@ -27,7 +27,7 @@ const styles = ScaledSheet.create({
   center: { alignSelf: 'center' },
 });
 
-const LoginForm = ({ style, onGoReset, onGoMain }) => {
+const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
   const { t } = i18n;
   const dispatch = useDispatch();
 
@@ -119,4 +119,4 @@ const LoginForm = ({ style, onGoReset, onGoMain }) => {
   );
 };
 
-export default LoginForm;
+export default LoginPasswordForm;

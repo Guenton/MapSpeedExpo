@@ -10,17 +10,19 @@ import SlidingCircles from '../components/animations/SlidingCircles';
 import FadeInAppContent from '../components/animations/FadeInAppContent';
 import MapSpeedLogo from '../components/images/MapLogo';
 import GuentonBotomRight from '../components/images/GuentonBottomRight';
+import LoginPasswordForm from '../components/forms/LoginPasswordForm';
+import SubHeader from '../components/labels/SubHeader';
 
 import { setRoute } from '../store/actions/core';
-import LoginForm from '../components/forms/LoginForm';
-import SubHeader from '../components/labels/SubHeader';
+import SelectLoginPasswordOptionForm from '../components/forms/SelectLoginPasswordOptionForm';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '25@s' },
   topMessage: { alignSelf: 'center' },
   form: {
-    marginLeft: '-50@s',
-    height: '250@s',
+    height: '225@s',
+    marginTop: '25@s',
+    marginLeft: '-25@s',
   },
 });
 
@@ -31,8 +33,8 @@ const LoginPasswordScreen = () => {
   const isKeyboardOpen = useSelector((state) => state.core.isKeyboardOpen);
   const transitioning = useSelector((state) => state.animation.transitioning);
 
-  const [topCirclePosition, setTopCirclePosition] = useState(scale(-650));
-  const [bottomCirclePosition, setBottomCirclePosition] = useState(scale(300));
+  const [topCirclePosition, setTopCirclePosition] = useState(scale(-625));
+  const [bottomCirclePosition, setBottomCirclePosition] = useState(scale(325));
 
   useBackHandler(() => {
     dispatch(setRoute('start'));
@@ -51,17 +53,24 @@ const LoginPasswordScreen = () => {
           <MapSpeedLogo style={styles.mapSpeedlogo} />
 
           <View style={{ flex: 1 }}>
-            {!isKeyboardOpen && <SubHeader label={t('pleaseLogin')} style={styles.topMessage} />}
+            <SubHeader label={t('pleaseLogin')} style={styles.topMessage} />
           </View>
 
-          <LoginForm
-            style={styles.form}
+          {!isKeyboardOpen && (
+            <SelectLoginPasswordOptionForm
+              onPressLogin={() => console.log('Login')}
+              onPressSignup={() => null}
+            />
+          )}
+
+          <LoginPasswordForm
+            style={{ ...styles.form, justifyContent: isKeyboardOpen ? 'flex-end' : 'flex-start' }}
             onGoSignup={() => dispatch(setRoute('login-signup'))}
             onGoReset={() => dispatch(setRoute('login-reset'))}
-            onGoMain={() => dispatch(setRoute('main'))}
+            onGoMain={() => dispatch(setRoute('main}'))}
           />
 
-          <GuentonBotomRight />
+          {!isKeyboardOpen && <GuentonBotomRight />}
         </FadeInAppContent>
       )}
     </AppBackground>

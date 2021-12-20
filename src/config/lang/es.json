@@ -11,5 +11,7 @@
   "forgotPassword": "¿Olvidaste tu contraseña?",
   "reset": "Restablecer",
   "noAccount": "¿No tienes una cuenta?",
-  "signUp": "Regístrate"
+  "signUp": "Regístrate",
+  "signup": "Regístrate",
+  "login": "Iniciar"
 }
