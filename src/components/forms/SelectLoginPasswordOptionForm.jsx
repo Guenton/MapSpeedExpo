@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pressable, Text } from 'react-native';
 import { View } from 'react-native';
-import { ScaledSheet } from 'react-native-size-matters';
+import { scale, ScaledSheet } from 'react-native-size-matters';
+import { animated, useSpring } from 'react-spring';
 import I18n from 'i18n-js';
+
+import { primaryOpacity } from '../../config/colors';
 
 const styles = ScaledSheet.create({
   container: {
@@ -18,13 +21,46 @@ const styles = ScaledSheet.create({
     fontSize: '14@s',
     fontWeight: 'bold',
   },
+  bar: {
+    position: 'absolute',
+    width: '40@s',
+    top: '40@s',
+    marginLeft: '55@s',
+    borderWidth: '1@s',
+    opacity: 0,
+    borderColor: primaryOpacity,
+    shadowColor: primaryOpacity,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+
+    elevation: 4,
+  },
 });
+
+const AnimatedView = animated(View);
 
 const SelectLoginPasswordOptionForm = ({ onPressLogin, onPressSignup, isLogin, isSignup }) => {
   const { t } = I18n;
 
+  const [barPosition, setBarPosition] = useState(0);
+
+  useEffect(() => {
+    if (isLogin) setBarPosition(scale(-38));
+    else if (isSignup) setBarPosition(scale(42));
+    else setBarPosition(0);
+  });
+
+  const slideTransition = useSpring({
+    to: { ...styles.bar, left: barPosition, opacity: isLogin || isSignup ? 1 : 0 },
+  });
+
   return (
     <View style={styles.container}>
+      <AnimatedView style={slideTransition} />
       <Pressable style={styles.link} onPress={() => onPressLogin()}>
         <Text style={styles.text}>{t('login').toLocaleUpperCase()}</Text>
       </Pressable>

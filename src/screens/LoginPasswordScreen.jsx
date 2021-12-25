@@ -36,6 +36,8 @@ const LoginPasswordScreen = () => {
   const [topCirclePosition, setTopCirclePosition] = useState(scale(-625));
   const [bottomCirclePosition, setBottomCirclePosition] = useState(scale(325));
 
+  const [subScreen, setSubScreen] = useState('login');
+
   useBackHandler(() => {
     dispatch(setRoute('start'));
     return true;
@@ -58,14 +60,16 @@ const LoginPasswordScreen = () => {
 
           {!isKeyboardOpen && (
             <SelectLoginPasswordOptionForm
-              onPressLogin={() => console.log('Login')}
-              onPressSignup={() => null}
+              isLogin={subScreen === 'login'}
+              isSignup={subScreen === 'signup'}
+              onPressLogin={() => setSubScreen('login')}
+              onPressSignup={() => setSubScreen('signup')}
             />
           )}
 
           <LoginPasswordForm
             style={{ ...styles.form, justifyContent: isKeyboardOpen ? 'flex-end' : 'flex-start' }}
-            onGoSignup={() => dispatch(setRoute('login-signup'))}
+            onGoSignup={() => setSubScreen('signup')}
             onGoReset={() => dispatch(setRoute('login-reset'))}
             onGoMain={() => dispatch(setRoute('main}'))}
           />

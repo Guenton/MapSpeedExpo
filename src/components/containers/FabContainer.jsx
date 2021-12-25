@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dimensions, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
@@ -28,16 +28,17 @@ const FabContainer = ({ style, children, size, reverse, onPress }) => {
   const white = useSelector((state) => state.color.white);
   const grey = useSelector((state) => state.color.grey);
 
-  // Set backgroundColor depending on Redux isDark state
-  let backgroundColor = isDark ? grey : white;
-  backgroundColor = reverse ? primary : backgroundColor;
+  const [backgroundColor, setBackgroundColor] = useState(white);
 
-  // Set Size if given by parent else use default
+  useEffect(() => {
+    if (reverse) setBackgroundColor(primary);
+    else setBackgroundColor(isDark ? grey : white);
+  }, [isDark, primary, reverse]);
+
   const customSize = size ? { width: size, height: size, borderRadius: size } : {};
-  const styleContainer = { backgroundColor, ...customSize };
 
   return (
-    <View style={[styles.container, styleContainer, style]}>
+    <View style={{ ...styles.container, backgroundColor, ...customSize, ...style }}>
       <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => onPress()}>
         {children}
       </TouchableOpacity>
