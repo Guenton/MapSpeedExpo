@@ -4,10 +4,6 @@ import { useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import skylineBG from '../../assets/images/SkylineBG.jpg';
-<<<<<<< HEAD
-// const skylineBG = require('../../assets/images/skylineBG.jpg');
-=======
->>>>>>> 1f318961750b6afb6126542b908312a7127aebf7
 import hdBMW from '../../assets/images/hdBMW.jpg';
 
 const AppBackground = ({ children, skyline }) => {
