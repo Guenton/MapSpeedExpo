@@ -1,6 +1,8 @@
 import { LogBox } from 'react-native';
 import * as Localization from 'expo-localization';
-import i18n from 'i18n-js';
+// import i18n from 'i18n-js';
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
 import en from './lang/en';
 import es from './lang/es';
@@ -11,10 +13,27 @@ import firebase from 'firebase';
 
 export const initFirebaseTimeoutErrorBypass = () => LogBox.ignoreLogs(['Setting a timer']);
 
+// export const initLanguages = () => {
+//   i18n.translations = { en, es, nl, pap };
+//   i18n.locale = Localization.locale;
+//   i18n.fallbacks = true;
+// };
+
+const i18nextLangConfig = {
+  en: { translation: en },
+  es: { translation: es },
+  nl: { translation: nl },
+  pap: { translation: pap },
+};
+
 export const initLanguages = () => {
-  i18n.translations = { en, es, nl, pap };
-  i18n.locale = Localization.locale;
-  i18n.fallbacks = true;
+  i18n.use(initReactI18next).init({
+    lng: 'en',
+    fallBackLng: 'en',
+    resources: i18nextLangConfig,
+    interpolation: { excapeValue: false },
+    compatibilityJSON: 'v3',
+  });
 };
 
 export const initFirebase = async () => {

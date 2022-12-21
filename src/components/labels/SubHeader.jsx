@@ -11,10 +11,12 @@ const styles = ScaledSheet.create({
   },
 });
 
-const SubHeader = ({ label, style }) => (
-  <View style={style}>
-    <Text style={styles.text}>{label}</Text>
-  </View>
-);
+const SubHeader = ({ label, style }) => {
+  return (
+    <View style={style}>
+      <Text style={styles.text}>{label}</Text>
+    </View>
+  );
+};
 
 export default SubHeader;

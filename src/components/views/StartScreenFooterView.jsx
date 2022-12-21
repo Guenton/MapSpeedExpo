@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Dimensions, View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
 import { Transition, Transitioning } from 'react-native-reanimated';
-import i18n from 'i18n-js';
+import i18n from 'i18next';
 
 import FadeInFooter from '../animations/FadeInFooter';
 import IconFab from '../buttons/IconFab';
@@ -38,16 +38,21 @@ const StartScreenFooterView = ({ isDark, toggleDark, setCurrentLang }) => {
 
   const [showLangs, setShowLangs] = useState(false);
 
-  const setLanguagePack = (language = 'en') => {
-    switch (language) {
-      case 'pap':
-        i18n.locale = 'pap';
-      case 'nld':
-        i18n.locale = 'nl';
-      case 'spa':
-        i18n.locale = 'es';
-      default:
-        i18n.locale = 'en';
+  const setLanguagePack = async (language = 'en') => {
+    try {
+      switch (language) {
+        case 'pap':
+          await i18n.changeLanguage('pap');
+          console.log('Changed ot Papiamentu');
+        case 'nld':
+          await i18n.changeLanguage('nl');
+        case 'spa':
+          await i18n.changeLanguage('es');
+        default:
+          await i18n.changeLanguage('en');
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

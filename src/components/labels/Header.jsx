@@ -14,10 +14,12 @@ const styles = ScaledSheet.create({
   },
 });
 
-const Header = ({ label, isBlack, style }) => (
-  <View style={{ ...styles.container, ...style }}>
-    <Text style={{ ...styles.text, color: isBlack ? black : white }}>{label}</Text>
-  </View>
-);
+const Header = ({ label, isBlack, style }) => {
+  return (
+    <View style={{ ...styles.container, ...style }}>
+      <Text style={{ ...styles.text, color: isBlack ? black : white }}>{label}</Text>
+    </View>
+  );
+};
 
 export default Header;

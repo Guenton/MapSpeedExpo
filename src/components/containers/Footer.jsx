@@ -8,6 +8,8 @@ const styles = ScaledSheet.create({
   container: { flex: 1, width, zIndex: 6, elevation: 6 },
 });
 
-const Footer = ({ children }) => <View style={styles.container}>{children}</View>;
+const Footer = ({ children }) => {
+  return <View style={styles.container}>{children}</View>;
+};
 
 export default Footer;

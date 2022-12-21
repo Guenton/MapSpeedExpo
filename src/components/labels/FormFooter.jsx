@@ -17,14 +17,16 @@ const styles = ScaledSheet.create({
   },
 });
 
-const FormFooter = ({ label, boldLabel, onPress }) => (
-  <View style={styles.container}>
-    <SubHeader label={label} style={styles.spacing} />
+const FormFooter = ({ label, boldLabel, onPress }) => {
+  return (
+    <View style={styles.container}>
+      <SubHeader label={label} style={styles.spacing} />
 
-    <Pressable onPress={() => onPress()}>
-      <BoldText label={boldLabel} />
-    </Pressable>
-  </View>
-);
+      <Pressable onPress={() => onPress()}>
+        <BoldText label={boldLabel} />
+      </Pressable>
+    </View>
+  );
+};
 
 export default FormFooter;

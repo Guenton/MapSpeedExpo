@@ -6,6 +6,7 @@ import { isEmpty, isEmail } from 'validator';
 import * as SecureStore from 'expo-secure-store';
 import firebase from 'firebase';
 import i18n from 'i18n-js';
+import { useTranslation } from "react-i18next";
 
 import EmailInput from '../inputs/EmailInput';
 import PasswordInput from '../inputs/PasswordInput';
@@ -28,7 +29,7 @@ const styles = ScaledSheet.create({
 });
 
 const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
-  const { t } = i18n;
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const emailRef = createRef();

@@ -17,11 +17,13 @@ const styles = ScaledSheet.create({
   },
 });
 
-const ForgotPasswordButton = ({ style, onPress }) => (
-  <Pressable style={[styles.container, style]} onPress={() => onPress()}>
-    <SubHeader label={i18n.t('forgotPassword')} style={styles.spacing} />
-    <BoldText label={i18n.t('reset')} />
-  </Pressable>
-);
+const ForgotPasswordButton = ({ style, onPress }) => {
+  return (
+    <Pressable style={[styles.container, style]} onPress={() => onPress()}>
+      <SubHeader label={i18n.t('forgotPassword')} style={styles.spacing} />
+      <BoldText label={i18n.t('reset')} />
+    </Pressable>
+  );
+};
 
 export default ForgotPasswordButton;

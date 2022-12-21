@@ -21,6 +21,12 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
   },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+  },
   "[dart]": {
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,

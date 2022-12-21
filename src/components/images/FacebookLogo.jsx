@@ -8,8 +8,8 @@ const styles = ScaledSheet.create({
   logo: { width: '25@s', height: '25@s' },
 });
 
-const FacebookLogo = ({ style }) => (
-  <Image style={{ ...styles.logo, ...style }} source={facebook} resizeMode="contain" />
-);
+const FacebookLogo = ({ style }) => {
+  return <Image style={{ ...styles.logo, ...style }} source={facebook} resizeMode="contain" />;
+};
 
 export default FacebookLogo;

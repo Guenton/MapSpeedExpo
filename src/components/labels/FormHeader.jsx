@@ -12,11 +12,13 @@ const styles = ScaledSheet.create({
   },
 });
 
-const FormHeader = ({ label, subLabel }) => (
-  <View style={styles.container}>
-    <Header label={label} isBlack />
-    {subLabel && <SubHeader label={subLabel} />}
-  </View>
-);
+const FormHeader = ({ label, subLabel }) => {
+  return (
+    <View style={styles.container}>
+      <Header label={label} isBlack />
+      {subLabel && <SubHeader label={subLabel} />}
+    </View>
+  );
+};
 
 export default FormHeader;

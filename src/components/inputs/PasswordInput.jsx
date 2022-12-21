@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon, Input } from 'react-native-elements';
 import { ScaledSheet } from 'react-native-size-matters';
-import i18n from 'i18n-js';
+import { useTranslation } from "react-i18next";
 
 import { primary, grey } from '../../config/colors';
 
@@ -30,6 +30,8 @@ const PasswordInput = ({
   onBlur,
   onChange,
 }) => {
+  const { t } = useTranslation();
+  
   const variant = () => {
     if (isConfirm) return 'confirmPassword';
     else if (isNew) return 'newPassword';
@@ -48,7 +50,7 @@ const PasswordInput = ({
       autoCompleteType="password"
       textContentType={isNew ? 'newPassword' : 'password'}
       secureTextEntry
-      placeholder={i18n.t(variant())}
+      placeholder={t(variant())}
       leftIcon={<Icon type="font-awesome-5" name="key" color={primary} />}
       onFocus={() => (onFocus ? onFocus() : {})}
       onBlur={() => (onBlur ? onBlur() : {})}
