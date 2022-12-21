@@ -4,9 +4,15 @@ import { Provider } from 'react-redux';
 import Router from './src/Router';
 import store from './src/store';
 
-import { initFirebaseTimeoutErrorBypass, initLanguages, initFirebase } from './src/config';
+import {
+  // initFirebaseTimeoutErrorBypass,
+  // initAsyncStorageErrorBypass,
+  initLanguages,
+  initFirebase,
+} from './src/config';
 
-initFirebaseTimeoutErrorBypass();
+// initFirebaseTimeoutErrorBypass();
+// initAsyncStorageErrorBypass();
 initLanguages();
 initFirebase();
 

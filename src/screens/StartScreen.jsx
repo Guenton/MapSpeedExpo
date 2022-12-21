@@ -17,13 +17,11 @@ import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
 import { setRoute, toggleDarkMode } from '../store/actions/core';
 import { setCurrentLang } from '../store/actions/lang';
 import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
+import StartFab from '../components/buttons/StartFab';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: {
     marginTop: '50@s',
-  },
-  start: {
-    alignSelf: 'center',
   },
   options: {
     flex: 1,
@@ -82,14 +80,7 @@ const StartScreen = () => {
       {!transitioning && (
         <FadeInAppContent>
           <MapSpeedLogo style={styles.mapSpeedlogo} />
-
-          <IconFab
-            style={styles.start}
-            name="power-off"
-            size={scale(60)}
-            onPress={() => animateToLoginScreen()}
-            reverse
-          />
+          <StartFab onPress={() => animateToLoginScreen()} />
 
           <View style={styles.options}>
             <View>
