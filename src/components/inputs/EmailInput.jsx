@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon, Input } from 'react-native-elements';
 import { ScaledSheet } from 'react-native-size-matters';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 import { primary } from '../../config/colors';
 
