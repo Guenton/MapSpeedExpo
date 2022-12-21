@@ -3,7 +3,7 @@ import { Pressable, Text } from 'react-native';
 import { View } from 'react-native';
 import { scale, ScaledSheet } from 'react-native-size-matters';
 import { animated, useSpring } from 'react-spring';
-import I18n from 'i18n-js';
+import { useTranslation } from 'react-i18next';
 
 import { primaryOpacity } from '../../config/colors';
 
@@ -44,7 +44,7 @@ const styles = ScaledSheet.create({
 const AnimatedView = animated(View);
 
 const SelectLoginPasswordOptionForm = ({ onPressLogin, onPressSignup, isLogin, isSignup }) => {
-  const { t } = I18n;
+  const { t } = useTranslation();
 
   const [barPosition, setBarPosition] = useState(0);
 

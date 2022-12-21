@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBackHandler } from '@react-native-community/hooks';
 import { ScaledSheet, scale } from 'react-native-size-matters';
-import I18n from 'i18n-js';
+import { useTranslation } from 'react-i18next';
 
 import AppBackground from '../components/containers/AppBackground';
 import SlidingCircles from '../components/animations/SlidingCircles';
@@ -27,7 +27,7 @@ const styles = ScaledSheet.create({
 });
 
 const LoginPasswordScreen = () => {
-  const { t } = I18n;
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const isKeyboardOpen = useSelector((state) => state.core.isKeyboardOpen);

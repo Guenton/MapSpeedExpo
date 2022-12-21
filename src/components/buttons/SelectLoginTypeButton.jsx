@@ -2,8 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
-// import i18n from 'i18n-js';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 import FacebookFab from './FacebookFab';
 import GoogleFab from './GoogleFab';

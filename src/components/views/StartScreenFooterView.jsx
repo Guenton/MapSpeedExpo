@@ -43,7 +43,6 @@ const StartScreenFooterView = ({ isDark, toggleDark, setCurrentLang }) => {
       switch (language) {
         case 'pap':
           await i18n.changeLanguage('pap');
-          console.log('Changed ot Papiamentu');
         case 'nld':
           await i18n.changeLanguage('nl');
         case 'spa':
