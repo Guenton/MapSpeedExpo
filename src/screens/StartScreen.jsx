@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BackHandler, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBackHandler } from '@react-native-community/hooks';
@@ -16,6 +16,7 @@ import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
 
 import { setRoute, toggleDarkMode } from '../store/actions/core';
 import { setCurrentLang } from '../store/actions/lang';
+import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: {
@@ -43,9 +44,6 @@ const StartScreen = () => {
   const dispatch = useDispatch();
   const transitioning = useSelector((state) => state.animation.transitioning);
 
-  const [topCirclePosition, setTopCirclePosition] = useState(scale(-500));
-  const [bottomCirclePosition, setBottomCirclePosition] = useState(scale(400));
-
   const [showLanguageSelectForm, setShowLanguageSelectForm] = useState(false);
 
   useBackHandler(() => {
@@ -53,15 +51,23 @@ const StartScreen = () => {
     return true;
   });
 
-  const animateToLoginScreen = async () => {
-    setTopCirclePosition(scale(-1000));
-    setBottomCirclePosition(scale(1000));
+  useEffect(() => {
+    dispatch(setNextTopCirclePosition(scale(-500)));
+    dispatch(setNextBottomCirclePosition(scale(400)));
+  }, []);
 
+  const animateToLoginScreen = async () => {
+    // Mobe the Bubbles off Screen
+    dispatch(setNextTopCirclePosition(scale(-1000)));
+    dispatch(setNextBottomCirclePosition(scale(1000)));
+
+    // Wait Half a Sec then transition
     await delay(500);
     dispatch(setRoute('login-password'));
 
-    setTopCirclePosition(scale(-500));
-    setBottomCirclePosition(scale(400));
+    // Bring the Bubbles back
+    dispatch(setNextTopCirclePosition(scale(-500)));
+    dispatch(setNextBottomCirclePosition(scale(400)));
   };
 
   const setLanguageAndCloseForm = (lang) => {
@@ -71,10 +77,7 @@ const StartScreen = () => {
 
   return (
     <AppBackground skyline>
-      <SlidingCircles
-        topCirclePosition={topCirclePosition}
-        bottomCirclePosition={bottomCirclePosition}
-      />
+      <SlidingCircles />
 
       {!transitioning && (
         <FadeInAppContent>

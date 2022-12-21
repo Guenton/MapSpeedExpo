@@ -34,18 +34,26 @@ const styles = ScaledSheet.create({
 
 const AnimatedView = animated(View);
 
-const SlideInBottomCircle = ({ position }) => {
+const SlideInBottomCircle = () => {
   const dispatch = useDispatch();
 
-  const bottomCirclePosition = useSelector((state) => state.animation.bottomCirclePosition);
   const isDark = useSelector((state) => state.core.isDark);
+  const bottomCirclePosition = useSelector((state) => state.animation.bottomCirclePosition);
+  const nextBottomCirclePosition = useSelector((state) => state.animation.nextBottomCirclePosition);
 
   const transitionMarginTop = useSpring({
-    to: { ...styles.circle, marginTop: position, backgroundColor: isDark ? black : white },
-    from: { ...styles.circle, marginTop: bottomCirclePosition || width / 2.7 },
+    to: {
+      ...styles.circle,
+      marginTop: nextBottomCirclePosition,
+      backgroundColor: isDark ? black : white,
+    },
+    from: {
+      ...styles.circle,
+      marginTop: bottomCirclePosition || width / 2.7,
+    },
     onStart: () => dispatch(setTransitioning(true)),
     onRest: () => {
-      dispatch(setBottomCirclePosition(position));
+      dispatch(setBottomCirclePosition(nextBottomCirclePosition));
       dispatch(setTransitioning(false));
     },
   });
