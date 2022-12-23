@@ -3,21 +3,18 @@ import { BackHandler, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBackHandler } from '@react-native-community/hooks';
 import { ScaledSheet, scale } from 'react-native-size-matters';
-import delay from 'delay';
 
 import AppBackground from '../components/containers/AppBackground';
 import SlidingCircles from '../components/animations/SlidingCircles';
 import FadeInAppContent from '../components/animations/FadeInAppContent';
 import MapSpeedLogo from '../components/images/MapLogo';
-import IconFab from '../components/buttons/IconFab';
 import GuentonBotomRight from '../components/images/GuentonBottomRight';
 import SelectAppLangForm from '../components/forms/SelectAppLangForm';
 import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
-
-import { setRoute, toggleDarkMode } from '../store/actions/core';
-import { setCurrentLang } from '../store/actions/lang';
-import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
 import StartFab from '../components/buttons/StartFab';
+import DarkModeFab from '../components/buttons/DarkModeFab';
+
+import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: {
@@ -40,7 +37,9 @@ const styles = ScaledSheet.create({
 
 const StartScreen = () => {
   const dispatch = useDispatch();
+
   const transitioning = useSelector((state) => state.animation.transitioning);
+  const currentLang = useSelector((state) => state.lang.currentLang);
 
   const [showLanguageSelectForm, setShowLanguageSelectForm] = useState(false);
 
@@ -54,24 +53,11 @@ const StartScreen = () => {
     dispatch(setNextBottomCirclePosition(scale(400)));
   }, []);
 
-  const animateToLoginScreen = async () => {
-    // Mobe the Bubbles off Screen
-    dispatch(setNextTopCirclePosition(scale(-1000)));
-    dispatch(setNextBottomCirclePosition(scale(1000)));
-
-    // Wait Half a Sec then transition
-    await delay(500);
-    dispatch(setRoute('login-password'));
-
-    // Bring the Bubbles back
-    dispatch(setNextTopCirclePosition(scale(-500)));
-    dispatch(setNextBottomCirclePosition(scale(400)));
-  };
-
-  const setLanguageAndCloseForm = (lang) => {
-    dispatch(setCurrentLang(lang));
+  useEffect(() => {
     setShowLanguageSelectForm(false);
-  };
+  }, [currentLang]);
+
+  const toggleLanguageSelectForm = () => setShowLanguageSelectForm(!showLanguageSelectForm);
 
   return (
     <AppBackground skyline>
@@ -80,24 +66,18 @@ const StartScreen = () => {
       {!transitioning && (
         <FadeInAppContent>
           <MapSpeedLogo style={styles.mapSpeedlogo} />
-          <StartFab onPress={() => animateToLoginScreen()} />
+          <StartFab />
 
           <View style={styles.options}>
             <View>
-              {showLanguageSelectForm && (
-                <SelectAppLangForm onSelect={(lang) => setLanguageAndCloseForm(lang)} />
-              )}
+              {showLanguageSelectForm && <SelectAppLangForm />}
               <LanguageSelectFab
                 style={styles.languageSelectFab}
-                onPress={() => setShowLanguageSelectForm(!showLanguageSelectForm)}
+                onPress={() => toggleLanguageSelectForm()}
               />
             </View>
 
-            <IconFab
-              style={styles.darkSelectFab}
-              name="adjust"
-              onPress={() => dispatch(toggleDarkMode())}
-            />
+            <DarkModeFab style={styles.darkSelectFab} />
           </View>
 
           <GuentonBotomRight />

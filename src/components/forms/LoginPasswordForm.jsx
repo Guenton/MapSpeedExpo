@@ -20,7 +20,7 @@ import {
 } from '../../store/actions/auth';
 
 const styles = ScaledSheet.create({
-  container: { justifyContent: 'space-evenly' },
+  container: {},
   inputContainer: { width: '290@s', alignSelf: 'center' },
   input: { marginBottom: '18@s' },
   center: { alignSelf: 'center' },
