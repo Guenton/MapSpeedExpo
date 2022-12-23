@@ -14,8 +14,9 @@ import SelectAppLangForm from '../components/forms/SelectAppLangForm';
 import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
 
 import { setRoute } from '../store/actions/core';
-import { setCurrentLang } from '../store/actions/lang';
 import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
+
+import { facebookSignIn, googleSignIn } from '../firebase/auth';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '25@s' },
@@ -51,9 +52,9 @@ const LoginSelectScreen = () => {
   const handleLoginTypeSelect = (loginType) => {
     switch (loginType) {
       case 'user':
-        return null;
+        return dispatch(setRoute('login-password'));
       case 'google':
-        return null;
+        return loginWithGoogle();
       case 'facebook':
         return loginWithFacebook();
       default:
@@ -61,13 +62,14 @@ const LoginSelectScreen = () => {
     }
   };
 
-  const loginWithFacebook = () => {
-    console.log('feestboek');
+  const loginWithGoogle = () => {
+    googleSignIn()
+      .then(console.log(getCurrentUserInfo()))
+      .catch((err) => console.error(err));
   };
 
-  const setLanguageAndCloseForm = (lang) => {
-    dispatch(setCurrentLang(lang));
-    setShowLanguageSelectForm(false);
+  const loginWithFacebook = () => {
+    facebookSignIn();
   };
 
   return (

@@ -15,6 +15,7 @@ import SubHeader from '../components/labels/SubHeader';
 
 import { setRoute } from '../store/actions/core';
 import SelectLoginPasswordOptionForm from '../components/forms/SelectLoginPasswordOptionForm';
+import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '25@s' },
@@ -31,24 +32,26 @@ const LoginPasswordScreen = () => {
   const dispatch = useDispatch();
 
   const isKeyboardOpen = useSelector((state) => state.core.isKeyboardOpen);
-  const transitioning = useSelector((state) => state.animation.transitioning);
 
-  const [topCirclePosition, setTopCirclePosition] = useState(scale(-625));
-  const [bottomCirclePosition, setBottomCirclePosition] = useState(scale(325));
+  const transitioning = useSelector((state) => state.animation.transitioning);
+  const topCirclePosition = useSelector((state) => state.animation.topCirclePosition);
+  const bottomCirclePosition = useSelector((state) => state.animation.bottomCirclePosition);
 
   const [subScreen, setSubScreen] = useState('login');
 
+  useEffect(() => {
+    dispatch(setNextTopCirclePosition(scale(-625)));
+    dispatch(setNextBottomCirclePosition(scale(325)));
+  }, [topCirclePosition, bottomCirclePosition]);
+
   useBackHandler(() => {
-    dispatch(setRoute('start'));
+    dispatch(setRoute('login-select'));
     return true;
   });
 
   return (
     <AppBackground>
-      <SlidingCircles
-        topCirclePosition={topCirclePosition}
-        bottomCirclePosition={bottomCirclePosition}
-      />
+      <SlidingCircles />
 
       {!transitioning && (
         <FadeInAppContent>
