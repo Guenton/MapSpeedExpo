@@ -24,11 +24,11 @@ const StartFab = () => {
 
     // Wait Half a Sec then transition
     await delay(500);
-    dispatch(setRoute('login-password'));
+    dispatch(setRoute('login-select'));
 
     // Bring the Bubbles back
-    dispatch(setNextTopCirclePosition(scale(-500)));
-    dispatch(setNextBottomCirclePosition(scale(400)));
+    dispatch(setNextTopCirclePosition(scale(-400)));
+    dispatch(setNextBottomCirclePosition(scale(500)));
   };
 
   return (

@@ -39,6 +39,8 @@ const StartScreen = () => {
   const dispatch = useDispatch();
 
   const transitioning = useSelector((state) => state.animation.transitioning);
+  const topCirclePosition = useSelector((state) => state.animation.topCirclePosition);
+  const bottomCirclePosition = useSelector((state) => state.animation.bottomCirclePosition);
   const currentLang = useSelector((state) => state.lang.currentLang);
 
   const [showLanguageSelectForm, setShowLanguageSelectForm] = useState(false);
@@ -51,7 +53,7 @@ const StartScreen = () => {
   useEffect(() => {
     dispatch(setNextTopCirclePosition(scale(-500)));
     dispatch(setNextBottomCirclePosition(scale(400)));
-  }, []);
+  }, [topCirclePosition, bottomCirclePosition]);
 
   useEffect(() => {
     setShowLanguageSelectForm(false);
@@ -71,6 +73,7 @@ const StartScreen = () => {
           <View style={styles.options}>
             <View>
               {showLanguageSelectForm && <SelectAppLangForm />}
+
               <LanguageSelectFab
                 style={styles.languageSelectFab}
                 onPress={() => toggleLanguageSelectForm()}

@@ -15,6 +15,7 @@ import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
 
 import { setRoute } from '../store/actions/core';
 import { setCurrentLang } from '../store/actions/lang';
+import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '25@s' },
@@ -31,10 +32,9 @@ const styles = ScaledSheet.create({
 const LoginSelectScreen = () => {
   const dispatch = useDispatch();
   const transitioning = useSelector((state) => state.animation.transitioning);
-  const currentLang = useSelector((state) => state.lang.currentLang);
 
-  const [topCirclePosition, setTopCirclePosition] = useState(scale(-400));
-  const [bottomCirclePosition, setBottomCirclePosition] = useState(scale(500));
+  const topCirclePosition = useSelector((state) => state.animation.topCirclePosition);
+  const bottomCirclePosition = useSelector((state) => state.animation.bottomCirclePosition);
 
   const [showLanguageSelectForm, setShowLanguageSelectForm] = useState(false);
 
@@ -43,9 +43,10 @@ const LoginSelectScreen = () => {
     return true;
   });
 
-  // useEffect(() => {
-  //   firebase.auth().languageCode = currentLang === 'pap' ? 'en' : currentLang;
-  // }, [currentLang]);
+  useEffect(() => {
+    dispatch(setNextTopCirclePosition(scale(-400)));
+    dispatch(setNextBottomCirclePosition(scale(500)));
+  }, [topCirclePosition, bottomCirclePosition]);
 
   const handleLoginTypeSelect = (loginType) => {
     switch (loginType) {
@@ -71,10 +72,7 @@ const LoginSelectScreen = () => {
 
   return (
     <AppBackground skyline>
-      <SlidingCircles
-        topCirclePosition={topCirclePosition}
-        bottomCirclePosition={bottomCirclePosition}
-      />
+      <SlidingCircles />
 
       {!transitioning && (
         <FadeInAppContent>
@@ -83,9 +81,7 @@ const LoginSelectScreen = () => {
           <SelectLoginTypeForm onSubmit={(loginType) => handleLoginTypeSelect(loginType)} />
 
           <View style={styles.bottom}>
-            {showLanguageSelectForm && (
-              <SelectAppLangForm onSelect={(lang) => setLanguageAndCloseForm(lang)} />
-            )}
+            {showLanguageSelectForm && <SelectAppLangForm />}
 
             <LanguageSelectFab
               style={styles.languageSelectFab}
