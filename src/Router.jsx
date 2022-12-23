@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as NavigationBar from 'expo-navigation-bar';
 
 import { setKeyboardOpen } from './store/actions/core';
+import { setFirebaseLanguage } from './firebase/auth';
 
 // import LoginBiometricScreen from './screens/LoginBiometricScreen';
 import LoginPasswordScreen from './screens/LoginPasswordScreen';
@@ -20,6 +21,7 @@ const Router = () => {
   const isDark = useSelector((state) => state.core.isDark);
   const white = useSelector((state) => state.color.white);
   const black = useSelector((state) => state.color.black);
+  const currentLang = useSelector((state) => state.lang.currentLang);
 
   useEffect(() => {
     const kbShow = Keyboard.addListener('keyboardDidShow', () => dispatch(setKeyboardOpen(true)));
@@ -39,6 +41,10 @@ const Router = () => {
       NavigationBar.setButtonStyleAsync('dark');
     }
   }, [isDark]);
+
+  useEffect(() => {
+    setFirebaseLanguage(currentLang);
+  }, [currentLang]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

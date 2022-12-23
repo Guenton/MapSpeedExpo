@@ -4,17 +4,9 @@ import { Provider } from 'react-redux';
 import Router from './src/Router';
 import store from './src/store';
 
-import {
-  // initFirebaseTimeoutErrorBypass,
-  // initAsyncStorageErrorBypass,
-  initLanguages,
-  initFirebase,
-} from './src/config';
+import { initLanguages } from './src/config/lang';
 
-// initFirebaseTimeoutErrorBypass();
-// initAsyncStorageErrorBypass();
 initLanguages();
-initFirebase();
 
 const App = () => (
   <SafeAreaProvider>

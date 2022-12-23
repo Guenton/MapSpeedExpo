@@ -4,7 +4,6 @@ import { View } from 'react-native';
 import { ScaledSheet, scale } from 'react-native-size-matters';
 import { isEmpty, isEmail } from 'validator';
 import * as SecureStore from 'expo-secure-store';
-import firebase from 'firebase';
 import { useTranslation } from 'react-i18next';
 
 import EmailInput from '../inputs/EmailInput';
@@ -66,32 +65,27 @@ const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
 
     if (errEmail || errPassword) return shakeOnError();
     if (email && password) {
-      try {
-        dispatch(setLoading());
-        await firebase.auth().signInWithEmailAndPassword(email, password);
-
-        const canStore = await SecureStore.isAvailableAsync();
-        if (canStore) await SecureStore.setItemAsync('email', email);
-        if (canStore) await SecureStore.setItemAsync('password', password);
-
-        const userId = firebase.auth().currentUser.uid;
-
-        await firebase.database().ref(`users/${userId}`).set({
-          userId,
-          email,
-        });
-
-        dispatch(setUserId(userId));
-        dispatch(setPassword());
-
-        dispatch(setLoading(false));
-        onGoMain();
-      } catch (err) {
-        dispatch(setLoading(false));
-        console.error(err);
-        console.log(err.code);
-        console.log(err.message);
-      }
+      // try {
+      //   dispatch(setLoading());
+      //   await firebase.auth().signInWithEmailAndPassword(email, password);
+      //   const canStore = await SecureStore.isAvailableAsync();
+      //   if (canStore) await SecureStore.setItemAsync('email', email);
+      //   if (canStore) await SecureStore.setItemAsync('password', password);
+      //   const userId = firebase.auth().currentUser.uid;
+      //   await firebase.database().ref(`users/${userId}`).set({
+      //     userId,
+      //     email,
+      //   });
+      //   dispatch(setUserId(userId));
+      //   dispatch(setPassword());
+      //   dispatch(setLoading(false));
+      //   onGoMain();
+      // } catch (err) {
+      //   dispatch(setLoading(false));
+      //   console.error(err);
+      //   console.log(err.code);
+      //   console.log(err.message);
+      // }
     }
   };
 

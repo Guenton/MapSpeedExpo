@@ -21,12 +21,7 @@
     "ios": {
       "jsEngine": "hermes",
       "supportsTablet": true,
-      "bundleIdentifier": "com.guenton.mapspeed",
-      "config": {
-        "googleSignIn": {
-          "reservedClientId": "com.googleusercontent.apps.541211848793-lggdn4e9q4i4kdl3tnv156cn3fkdt3ps"
-        }
-      }
+      "bundleIdentifier": "com.guenton.mapspeed"
     },
     "android": {
       "jsEngine": "hermes",

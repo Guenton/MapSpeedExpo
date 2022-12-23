@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBackHandler } from '@react-native-community/hooks';
 import { ScaledSheet, scale } from 'react-native-size-matters';
-import firebase from 'firebase';
 
 import AppBackground from '../components/containers/AppBackground';
 import SlidingCircles from '../components/animations/SlidingCircles';
@@ -39,16 +38,14 @@ const LoginSelectScreen = () => {
 
   const [showLanguageSelectForm, setShowLanguageSelectForm] = useState(false);
 
-  const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
-
   useBackHandler(() => {
     dispatch(setRoute('start'));
     return true;
   });
 
-  useEffect(() => {
-    firebase.auth().languageCode = currentLang === 'pap' ? 'en' : currentLang;
-  }, [currentLang]);
+  // useEffect(() => {
+  //   firebase.auth().languageCode = currentLang === 'pap' ? 'en' : currentLang;
+  // }, [currentLang]);
 
   const handleLoginTypeSelect = (loginType) => {
     switch (loginType) {
@@ -64,17 +61,7 @@ const LoginSelectScreen = () => {
   };
 
   const loginWithFacebook = () => {
-    firebase
-      .auth()
-      .signInWithRedirect(facebookAuthProvider)
-      .then((result) => {
-        const { user } = result;
-        console.log(user);
-        console.log(result.credential);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    console.log('feestboek');
   };
 
   const setLanguageAndCloseForm = (lang) => {
