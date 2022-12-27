@@ -1,6 +1,9 @@
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
 import Constants from 'expo-constants';
+import * as WebBrowser from 'expo-web-browser';
+
+WebBrowser.maybeCompleteAuthSession();
 
 const firebaseConfig = {
   apiKey: Constants.expoConfig.extra.API_KEY,

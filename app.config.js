@@ -11,6 +11,7 @@ export default {
     orientation: 'portrait',
     primaryColor: '#A60A0A',
     icon: './assets/icon.png',
+    scheme: 'com.guenton.mapspeed',
     extra: {
       API_KEY: process.env.API_KEY,
       AUTH_DOMAIN: process.env.AUTH_DOMAIN,
@@ -20,6 +21,8 @@ export default {
       MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
       APP_ID: process.env.APP_ID,
       MEASUREMENT_ID: process.env.MEASUREMENT_ID,
+      GOOGLE_WEB_CLIENT_ID: process.env.GOOGLE_WEB_CLIENT_ID,
+      FACEBOOK_ID: process.env.FACEBOOK_ID,
     },
     splash: {
       image: './assets/splash.png',

@@ -3,6 +3,10 @@ import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBackHandler } from '@react-native-community/hooks';
 import { ScaledSheet, scale } from 'react-native-size-matters';
+import Constants from 'expo-constants';
+import * as Google from 'expo-auth-session/providers/google';
+import * as Facebook from 'expo-auth-session/providers/facebook';
+import { ResponseType } from 'expo-auth-session';
 
 import AppBackground from '../components/containers/AppBackground';
 import SlidingCircles from '../components/animations/SlidingCircles';
@@ -16,7 +20,13 @@ import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
 import { setRoute } from '../store/actions/core';
 import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
 
-import { facebookSignIn, googleSignIn } from '../firebase/auth';
+import {
+  facebookSignIn,
+  getCurrentUserInfo,
+  googleSignIn,
+  signInWithFacebookAccessTokenAsync,
+  signInWithGoogleIdTokenAsync,
+} from '../firebase/auth';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '25@s' },
@@ -39,6 +49,14 @@ const LoginSelectScreen = () => {
 
   const [showLanguageSelectForm, setShowLanguageSelectForm] = useState(false);
 
+  const [googleReq, googleRes, googlePromptAsync] = Google.useIdTokenAuthRequest({
+    clientId: Constants.expoConfig.extra.GOOGLE_WEB_CLIENT_ID,
+  });
+  const [facebookReq, facebookRes, facebookPromptAsync] = Facebook.useAuthRequest({
+    responseType: ResponseType.Token,
+    clientId: Constants.expoConfig.extra.FACEBOOK_ID,
+  });
+
   useBackHandler(() => {
     dispatch(setRoute('start'));
     return true;
@@ -49,14 +67,32 @@ const LoginSelectScreen = () => {
     dispatch(setNextBottomCirclePosition(scale(500)));
   }, [topCirclePosition, bottomCirclePosition]);
 
+  useEffect(() => {
+    if (googleRes?.type === 'success') {
+      const { id_token } = googleRes.params;
+      signInWithGoogleIdTokenAsync(id_token)
+        .then((user) => console.log(user))
+        .catch((err) => console.error(err));
+    }
+  }, [googleRes]);
+
+  useEffect(() => {
+    if (facebookRes?.type === 'success') {
+      const { access_token } = facebookRes.params;
+      signInWithFacebookAccessTokenAsync(access_token)
+        .then((user) => console.log(user))
+        .catch((err) => console.error(err));
+    }
+  });
+
   const handleLoginTypeSelect = (loginType) => {
     switch (loginType) {
       case 'user':
         return dispatch(setRoute('login-password'));
       case 'google':
-        return loginWithGoogle();
+        return googlePromptAsync();
       case 'facebook':
-        return loginWithFacebook();
+        return facebookPromptAsync();
       default:
         break;
     }

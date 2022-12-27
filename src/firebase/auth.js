@@ -6,6 +6,7 @@ import {
   signInWithRedirect,
   signOut,
   signInWithEmailAndPassword,
+  signInWithCredential,
 } from 'firebase/auth';
 import { app } from './app';
 
@@ -26,8 +27,8 @@ export const googleSignIn = () => signInWithRedirect(auth, googleProvider);
 const facebookProvider = new FacebookAuthProvider();
 export const facebookSignIn = () => signInWithRedirect(auth, facebookProvider);
 
-// Credential Auth Functions
-export const createSignInWithCredentialsAsync = (email = '', password = '') =>
+// Email and Password Auth Functions
+export const createSignInWithPasswordAsync = (email = '', password = '') =>
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       return userCredential.user;
@@ -35,7 +36,7 @@ export const createSignInWithCredentialsAsync = (email = '', password = '') =>
     .catch((err) => {
       throw err;
     });
-export const signInWithCredentialsAsync = (email = '', password = '') =>
+export const signInWithPasswordAsync = (email = '', password = '') =>
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       return userCredential.user;
@@ -43,6 +44,28 @@ export const signInWithCredentialsAsync = (email = '', password = '') =>
     .catch((err) => {
       throw err;
     });
+
+// Credential Auth Functions
+export const signInWithGoogleIdTokenAsync = (idToken = '') => {
+  const credential = GoogleAuthProvider.credential(idToken);
+  return signInWithCredential(auth, credential)
+    .then((userCredential) => {
+      return userCredential.user;
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+export const signInWithFacebookAccessTokenAsync = (accessToken = '') => {
+  const credential = facebookProvider.credential(accessToken);
+  return signInWithCredential(auth, credential)
+    .then((userCredential) => {
+      return userCredential.user;
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
 
 // SignOut Function
 export const firebaseSignOut = () =>
