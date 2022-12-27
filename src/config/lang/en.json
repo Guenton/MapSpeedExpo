@@ -8,6 +8,8 @@
   "pleaseLogin": "Please login to Continue",
   "email": "Email",
   "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "confirm": "Confirm",
   "forgotPassword": "Forgot Password?",
   "reset": "Reset",
   "noAccount": "Don't have an account?",

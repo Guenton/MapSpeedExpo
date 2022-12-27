@@ -23,6 +23,7 @@ import {
 import { getCurrentUserId } from '../../firebase/auth';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import authService from '../../services/auth';
+import SignupButton from '../buttons/SignupButton';
 
 const styles = ScaledSheet.create({
   container: {},
@@ -117,6 +118,7 @@ const LoginSignupForm = ({ style, onGoLogin, onGoMain }) => {
         />
         <PasswordInput
           inputRef={passwordRef}
+          containerStyle={styles.input}
           value={password}
           errorMessage={errPassword}
           onBlur={() => loginWithFirebase()}
@@ -124,13 +126,14 @@ const LoginSignupForm = ({ style, onGoLogin, onGoMain }) => {
         />
         <PasswordInput
           isConfirm
+          containerStyle={styles.input}
           inputRef={passwordConfirmRef}
           value={passwordConfirm}
           errorMessage={errPasswordConfirm}
           onBlur={() => signupWithFirebase()}
           onChange={(val) => validateAndSetPasswordConfirm(val)}
         />
-        <ForgotPasswordButton onPress={() => onGoLogin()} />
+        <SignupButton onPress={() => onGoLogin()} />
       </View>
     </View>
   );

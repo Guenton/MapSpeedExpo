@@ -1,20 +1,20 @@
 import React from 'react';
 import { Icon, Input } from 'react-native-elements';
-import { ScaledSheet } from 'react-native-size-matters';
-import { useTranslation } from "react-i18next";
+import { ScaledSheet, scale } from 'react-native-size-matters';
+import { useTranslation } from 'react-i18next';
 
 import { primary, grey } from '../../config/colors';
 
 const styles = ScaledSheet.create({
   container: {
-    height: '50@s',
+    height: '40@s',
   },
   error: {
     marginTop: 0,
     marginLeft: '10@s',
   },
   text: {
-    fontSize: '14@s',
+    fontSize: '12@s',
     marginLeft: '5@s',
   },
 });
@@ -31,7 +31,7 @@ const PasswordInput = ({
   onChange,
 }) => {
   const { t } = useTranslation();
-  
+
   const variant = () => {
     if (isConfirm) return 'confirmPassword';
     else if (isNew) return 'newPassword';
@@ -51,7 +51,7 @@ const PasswordInput = ({
       textContentType={isNew ? 'newPassword' : 'password'}
       secureTextEntry
       placeholder={t(variant())}
-      leftIcon={<Icon type="font-awesome-5" name="key" color={primary} />}
+      leftIcon={<Icon type="font-awesome-5" name="key" size={scale(16)} color={primary} />}
       onFocus={() => (onFocus ? onFocus() : {})}
       onBlur={() => (onBlur ? onBlur() : {})}
       onChangeText={(val) => (onChange ? onChange(val) : {})}

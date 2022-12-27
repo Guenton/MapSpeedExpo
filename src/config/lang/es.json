@@ -8,6 +8,8 @@
   "pleaseLogin": "Por favor inicia la sesión",
   "email": "Correo Electrónico",
   "password": "Contraseña",
+  "confirmPassword": "Confirmar Contraseña",
+  "confirm": "Confirmar",
   "forgotPassword": "¿Olvidaste tu contraseña?",
   "reset": "Restablecer",
   "noAccount": "¿No tienes una cuenta?",

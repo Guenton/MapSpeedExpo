@@ -8,6 +8,8 @@
   "pleaseLogin": "Por fabor lògin pa sigi",
   "email": "E-mail",
   "password": "Klave",
+  "confirmPassword": "Konfirma Klave",
+  "confirm": "Konfirma",
   "forgotPassword": "Bo a lubida bo klave?",
   "reset": "Rekupera",
   "noAccount": "No tin miembresia ahinda?",

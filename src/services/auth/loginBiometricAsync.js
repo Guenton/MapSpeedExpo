@@ -1,6 +1,6 @@
 import * as LocalAuthentication from 'expo-local-authentication';
 import * as SecureStore from 'expo-secure-store';
-import firebase from 'firebase';
+import { signInWithPasswordAsync } from '../../firebase/auth';
 
 const loginBiometricAsync = async (email = '') => {
   try {
@@ -8,7 +8,7 @@ const loginBiometricAsync = async (email = '') => {
 
     if (success) {
       const storedPassword = await SecureStore.getItemAsync('password');
-      await firebase.auth().signInWithEmailAndPassword(email, storedPassword);
+      await signInWithPasswordAsync(email, storedPassword);
     }
   } catch (err) {
     if (err.message) throw err.message;
