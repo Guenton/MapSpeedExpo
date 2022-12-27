@@ -30,7 +30,7 @@ export default {
       backgroundColor: '#ffffff',
     },
     androidNavigationBar: {
-      visible: 'leanback',
+      visible: 'sticky-immersive',
     },
     updates: {
       fallbackToCacheTimeout: 0,

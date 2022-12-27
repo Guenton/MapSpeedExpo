@@ -20,13 +20,7 @@ import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
 import { setRoute } from '../store/actions/core';
 import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
 
-import {
-  facebookSignIn,
-  getCurrentUserInfo,
-  googleSignIn,
-  signInWithFacebookAccessTokenAsync,
-  signInWithGoogleIdTokenAsync,
-} from '../firebase/auth';
+import { signInWithFacebookAccessTokenAsync, signInWithGoogleIdTokenAsync } from '../firebase/auth';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '25@s' },
@@ -63,8 +57,8 @@ const LoginSelectScreen = () => {
   });
 
   useEffect(() => {
-    dispatch(setNextTopCirclePosition(scale(-400)));
-    dispatch(setNextBottomCirclePosition(scale(500)));
+    dispatch(setNextTopCirclePosition(scale(-460)));
+    dispatch(setNextBottomCirclePosition(scale(430)));
   }, [topCirclePosition, bottomCirclePosition]);
 
   useEffect(() => {
@@ -83,7 +77,7 @@ const LoginSelectScreen = () => {
         .then((user) => console.log(user))
         .catch((err) => console.error(err));
     }
-  });
+  }, [facebookRes]);
 
   const handleLoginTypeSelect = (loginType) => {
     switch (loginType) {
@@ -96,16 +90,6 @@ const LoginSelectScreen = () => {
       default:
         break;
     }
-  };
-
-  const loginWithGoogle = () => {
-    googleSignIn()
-      .then(console.log(getCurrentUserInfo()))
-      .catch((err) => console.error(err));
-  };
-
-  const loginWithFacebook = () => {
-    facebookSignIn();
   };
 
   return (

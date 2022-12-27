@@ -46,16 +46,16 @@ const AnimatedView = animated(View);
 const SelectLoginPasswordOptionForm = ({ onPressLogin, onPressSignup, isLogin, isSignup }) => {
   const { t } = useTranslation();
 
-  const [barPosition, setBarPosition] = useState(0);
+  const [highlightBarPosition, setHighlightBarPosition] = useState(0);
 
   useEffect(() => {
-    if (isLogin) setBarPosition(scale(-38));
-    else if (isSignup) setBarPosition(scale(42));
-    else setBarPosition(0);
+    if (isLogin) setHighlightBarPosition(scale(-38));
+    else if (isSignup) setHighlightBarPosition(scale(42));
+    else setHighlightBarPosition(0);
   });
 
   const slideTransition = useSpring({
-    to: { ...styles.bar, left: barPosition, opacity: isLogin || isSignup ? 1 : 0 },
+    to: { ...styles.bar, left: highlightBarPosition, opacity: isLogin || isSignup ? 1 : 0 },
   });
 
   return (

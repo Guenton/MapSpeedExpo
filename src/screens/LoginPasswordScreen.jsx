@@ -16,6 +16,7 @@ import SubHeader from '../components/labels/SubHeader';
 import { setRoute } from '../store/actions/core';
 import SelectLoginPasswordOptionForm from '../components/forms/SelectLoginPasswordOptionForm';
 import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
+import LoginSignupForm from '../components/forms/LoginSignupForm';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '25@s' },
@@ -40,8 +41,8 @@ const LoginPasswordScreen = () => {
   const [subScreen, setSubScreen] = useState('login');
 
   useEffect(() => {
-    dispatch(setNextTopCirclePosition(scale(-625)));
-    dispatch(setNextBottomCirclePosition(scale(325)));
+    dispatch(setNextTopCirclePosition(scale(-675)));
+    dispatch(setNextBottomCirclePosition(scale(225)));
   }, [topCirclePosition, bottomCirclePosition]);
 
   useBackHandler(() => {
@@ -70,12 +71,23 @@ const LoginPasswordScreen = () => {
             />
           )}
 
-          <LoginPasswordForm
-            style={{ ...styles.form, justifyContent: isKeyboardOpen ? 'flex-end' : 'flex-start' }}
-            onGoSignup={() => setSubScreen('signup')}
-            onGoReset={() => dispatch(setRoute('login-reset'))}
-            onGoMain={() => dispatch(setRoute('main}'))}
-          />
+          {subScreen === 'login' && (
+            <LoginPasswordForm
+              style={{ ...styles.form, justifyContent: isKeyboardOpen ? 'flex-end' : 'flex-start' }}
+              onGoSignup={() => setSubScreen('signup')}
+              onGoReset={() => dispatch(setRoute('login-reset'))}
+              onGoMain={() => dispatch(setRoute('main'))}
+            />
+          )}
+
+          {subScreen === 'signup' && (
+            <LoginSignupForm
+              style={{ ...styles.form, justifyContent: isKeyboardOpen ? 'flex-end' : 'flex-start' }}
+              onGoLogin={() => setSubScreen('login')}
+              onGoReset={() => dispatch(setRoute('login-reset'))}
+              onGoMain={() => dispatch(setRoute('main'))}
+            />
+          )}
 
           {!isKeyboardOpen && <GuentonBotomRight />}
         </FadeInAppContent>
