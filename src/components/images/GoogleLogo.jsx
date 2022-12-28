@@ -8,8 +8,8 @@ const styles = ScaledSheet.create({
   logo: { width: '25@s', height: '25@s' },
 });
 
-const GoogleLogo = ({ style }) => (
-  <Image style={{ ...styles.logo, ...style }} source={google} resizeMode="contain" />
-);
+const GoogleLogo = ({ style }) => {
+  return <Image style={{ ...styles.logo, ...style }} source={google} resizeMode="contain" />;
+};
 
 export default GoogleLogo;

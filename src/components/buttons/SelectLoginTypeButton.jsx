@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
-import i18n from 'i18n-js';
+import { useTranslation } from 'react-i18next';
 
 import FacebookFab from './FacebookFab';
 import GoogleFab from './GoogleFab';
@@ -33,6 +33,8 @@ const styles = ScaledSheet.create({
 });
 
 const SelectLoginTypeButton = ({ style, type, onSubmit }) => {
+  const { t } = useTranslation();
+
   const isDark = useSelector((state) => state.core.isDark);
 
   return (
@@ -45,7 +47,7 @@ const SelectLoginTypeButton = ({ style, type, onSubmit }) => {
             style={{ ...styles.textBox, backgroundColor: isDark ? grey : white }}
             onPress={() => onSubmit('user')}>
             <Text style={{ ...styles.text, color: isDark ? white : black }}>
-              {i18n.t('loginWith')} {i18n.t('username')} {i18n.t('and')} {i18n.t('password')}
+              {t('loginWith')} {t('username')} {t('and')} {t('password')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -59,7 +61,7 @@ const SelectLoginTypeButton = ({ style, type, onSubmit }) => {
             style={{ ...styles.textBox, backgroundColor: isDark ? grey : white }}
             onPress={() => onSubmit('facebook')}>
             <Text style={{ ...styles.text, color: isDark ? white : black }}>
-              {i18n.t('loginWith')} {i18n.t('facebook')}
+              {t('loginWith')} {t('facebook')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -73,7 +75,7 @@ const SelectLoginTypeButton = ({ style, type, onSubmit }) => {
             style={{ ...styles.textBox, backgroundColor: isDark ? grey : white }}
             onPress={() => onSubmit('google')}>
             <Text style={{ ...styles.text, color: isDark ? white : black }}>
-              {i18n.t('loginWith')} {i18n.t('google')}
+              {t('loginWith')} {t('google')}
             </Text>
           </TouchableOpacity>
         </View>

@@ -4,7 +4,7 @@ export const grey = '#9A9A9A';
 export const greyShade = '#9A9A9A33';
 export const transparent = '#00000000';
 export const info = '#FFCC01';
-export const success = '#AACF39';
+export const success = '#278A39';
 export const error = '#EE161F';
 export const warning = '#F58319';
 

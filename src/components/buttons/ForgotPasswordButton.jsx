@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
-import i18n from 'i18n-js';
+import { useTranslation } from 'react-i18next';
 
 import SubHeader from '../labels/SubHeader';
 import BoldText from '../labels/BoldText';
@@ -17,11 +17,15 @@ const styles = ScaledSheet.create({
   },
 });
 
-const ForgotPasswordButton = ({ style, onPress }) => (
-  <Pressable style={[styles.container, style]} onPress={() => onPress()}>
-    <SubHeader label={i18n.t('forgotPassword')} style={styles.spacing} />
-    <BoldText label={i18n.t('reset')} />
-  </Pressable>
-);
+const ForgotPasswordButton = ({ style, onPress }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Pressable style={[styles.container, style]} onPress={() => onPress()}>
+      <SubHeader label={t('forgotPassword')} style={styles.spacing} />
+      <BoldText label={t('reset')} />
+    </Pressable>
+  );
+};
 
 export default ForgotPasswordButton;

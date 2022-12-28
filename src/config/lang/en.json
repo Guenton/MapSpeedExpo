@@ -8,10 +8,20 @@
   "pleaseLogin": "Please login to Continue",
   "email": "Email",
   "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "confirm": "Confirm",
   "forgotPassword": "Forgot Password?",
   "reset": "Reset",
   "noAccount": "Don't have an account?",
   "signUp": "Sign Up",
   "signup": "Signup",
-  "login": "Login"
+  "login": "Login",
+  "myVehicles": "My Vehicles",
+  "err": {
+    "notFilled": "Must be filled in",
+    "notEmail": "Must be a valid Email Address",
+    "notLongPassword": "Password is too short",
+    "notStrongPassword": "Password is not Strong Enough",
+    "notMatchingPassword": "Passwords do not match"
+  }
 }

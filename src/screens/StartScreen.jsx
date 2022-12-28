@@ -1,28 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BackHandler, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBackHandler } from '@react-native-community/hooks';
 import { ScaledSheet, scale } from 'react-native-size-matters';
-import delay from 'delay';
 
 import AppBackground from '../components/containers/AppBackground';
 import SlidingCircles from '../components/animations/SlidingCircles';
 import FadeInAppContent from '../components/animations/FadeInAppContent';
 import MapSpeedLogo from '../components/images/MapLogo';
-import IconFab from '../components/buttons/IconFab';
 import GuentonBotomRight from '../components/images/GuentonBottomRight';
 import SelectAppLangForm from '../components/forms/SelectAppLangForm';
 import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
+import StartFab from '../components/buttons/StartFab';
+import DarkModeFab from '../components/buttons/DarkModeFab';
 
-import { setRoute, toggleDarkMode } from '../store/actions/core';
-import { setCurrentLang } from '../store/actions/lang';
+import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: {
-    marginTop: '50@s',
-  },
-  start: {
-    alignSelf: 'center',
+    marginTop: '15@s',
   },
   options: {
     flex: 1,
@@ -41,10 +37,11 @@ const styles = ScaledSheet.create({
 
 const StartScreen = () => {
   const dispatch = useDispatch();
-  const transitioning = useSelector((state) => state.animation.transitioning);
 
-  const [topCirclePosition, setTopCirclePosition] = useState(scale(-500));
-  const [bottomCirclePosition, setBottomCirclePosition] = useState(scale(400));
+  const transitioning = useSelector((state) => state.animation.transitioning);
+  const topCirclePosition = useSelector((state) => state.animation.topCirclePosition);
+  const bottomCirclePosition = useSelector((state) => state.animation.bottomCirclePosition);
+  const currentLang = useSelector((state) => state.lang.currentLang);
 
   const [showLanguageSelectForm, setShowLanguageSelectForm] = useState(false);
 
@@ -53,57 +50,37 @@ const StartScreen = () => {
     return true;
   });
 
-  const animateToLoginScreen = async () => {
-    setTopCirclePosition(scale(-1000));
-    setBottomCirclePosition(scale(1000));
+  useEffect(() => {
+    dispatch(setNextTopCirclePosition(scale(-550)));
+    dispatch(setNextBottomCirclePosition(scale(400)));
+  }, [topCirclePosition, bottomCirclePosition]);
 
-    await delay(500);
-    dispatch(setRoute('login-password'));
-
-    setTopCirclePosition(scale(-500));
-    setBottomCirclePosition(scale(400));
-  };
-
-  const setLanguageAndCloseForm = (lang) => {
-    dispatch(setCurrentLang(lang));
+  useEffect(() => {
     setShowLanguageSelectForm(false);
-  };
+  }, [currentLang]);
+
+  const toggleLanguageSelectForm = () => setShowLanguageSelectForm(!showLanguageSelectForm);
 
   return (
     <AppBackground skyline>
-      <SlidingCircles
-        topCirclePosition={topCirclePosition}
-        bottomCirclePosition={bottomCirclePosition}
-      />
+      <SlidingCircles />
 
       {!transitioning && (
         <FadeInAppContent>
           <MapSpeedLogo style={styles.mapSpeedlogo} />
-
-          <IconFab
-            style={styles.start}
-            name="power-off"
-            size={scale(60)}
-            onPress={() => animateToLoginScreen()}
-            reverse
-          />
+          <StartFab />
 
           <View style={styles.options}>
             <View>
-              {showLanguageSelectForm && (
-                <SelectAppLangForm onSelect={(lang) => setLanguageAndCloseForm(lang)} />
-              )}
+              {showLanguageSelectForm && <SelectAppLangForm />}
+
               <LanguageSelectFab
                 style={styles.languageSelectFab}
-                onPress={() => setShowLanguageSelectForm(!showLanguageSelectForm)}
+                onPress={() => toggleLanguageSelectForm()}
               />
             </View>
 
-            <IconFab
-              style={styles.darkSelectFab}
-              name="adjust"
-              onPress={() => dispatch(toggleDarkMode())}
-            />
+            <DarkModeFab style={styles.darkSelectFab} />
           </View>
 
           <GuentonBotomRight />

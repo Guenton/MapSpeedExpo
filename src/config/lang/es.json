@@ -8,10 +8,20 @@
   "pleaseLogin": "Por favor inicia la sesión",
   "email": "Correo Electrónico",
   "password": "Contraseña",
+  "confirmPassword": "Confirmar Contraseña",
+  "confirm": "Confirmar",
   "forgotPassword": "¿Olvidaste tu contraseña?",
   "reset": "Restablecer",
   "noAccount": "¿No tienes una cuenta?",
   "signUp": "Regístrate",
   "signup": "Regístrate",
-  "login": "Iniciar"
+  "login": "Iniciar",
+  "myVehicles": "My Vehícles",
+  "err": {
+    "notFilled": "Debe ser provisto",
+    "notEmail": "Debe ser un correo clectrónico válido",
+    "notLongPassword": "La contraseña es demasiado corta",
+    "notStrongPassword": "La contraseña no es lo suficientemente fuerte",
+    "notMatchingPassword": "Las contraseñas no coinciden"
+  }
 }

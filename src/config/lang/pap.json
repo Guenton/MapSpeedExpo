@@ -8,10 +8,20 @@
   "pleaseLogin": "Por fabor lògin pa sigi",
   "email": "E-mail",
   "password": "Klave",
-  "forgotPassword": "Bo a lubida bo klave?",
+  "confirmPassword": "Konfirma Klave",
+  "confirm": "Konfirma",
+  "forgotPassword": "Bo a lubidá bo klave?",
   "reset": "Rekupera",
   "noAccount": "No tin miembresia ahinda?",
   "signUp": "Registra",
   "signup": "Registra",
-  "login": "Lògin"
+  "login": "Lògin",
+  "myVehicles": "My Vehículonan",
+  "err": {
+    "notFilled": "Mester wòrdu yená",
+    "notEmail": "Mester ta un E-Mail valido",
+    "notLongPassword": "Klave ta muchu kòrtiku",
+    "notStrongPassword": "Klave no ta sufisientemente fuerte",
+    "notMatchingPassword": "E klavenan no ta kuadra ku otro"
+  }
 }

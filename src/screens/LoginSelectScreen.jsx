@@ -3,7 +3,10 @@ import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBackHandler } from '@react-native-community/hooks';
 import { ScaledSheet, scale } from 'react-native-size-matters';
-import firebase from 'firebase';
+import Constants from 'expo-constants';
+import * as Google from 'expo-auth-session/providers/google';
+import * as Facebook from 'expo-auth-session/providers/facebook';
+import { ResponseType } from 'expo-auth-session';
 
 import AppBackground from '../components/containers/AppBackground';
 import SlidingCircles from '../components/animations/SlidingCircles';
@@ -15,10 +18,12 @@ import SelectAppLangForm from '../components/forms/SelectAppLangForm';
 import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
 
 import { setRoute } from '../store/actions/core';
-import { setCurrentLang } from '../store/actions/lang';
+import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
+
+import { signInWithFacebookAccessTokenAsync, signInWithGoogleIdTokenAsync } from '../firebase/auth';
 
 const styles = ScaledSheet.create({
-  mapSpeedlogo: { marginTop: '25@s' },
+  mapSpeedlogo: { marginTop: '15@s' },
   bottom: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -32,14 +37,19 @@ const styles = ScaledSheet.create({
 const LoginSelectScreen = () => {
   const dispatch = useDispatch();
   const transitioning = useSelector((state) => state.animation.transitioning);
-  const currentLang = useSelector((state) => state.lang.currentLang);
 
-  const [topCirclePosition, setTopCirclePosition] = useState(scale(-400));
-  const [bottomCirclePosition, setBottomCirclePosition] = useState(scale(500));
+  const topCirclePosition = useSelector((state) => state.animation.topCirclePosition);
+  const bottomCirclePosition = useSelector((state) => state.animation.bottomCirclePosition);
 
   const [showLanguageSelectForm, setShowLanguageSelectForm] = useState(false);
 
-  const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
+  const [googleReq, googleRes, googlePromptAsync] = Google.useIdTokenAuthRequest({
+    clientId: Constants.expoConfig.extra.GOOGLE_WEB_CLIENT_ID,
+  });
+  const [facebookReq, facebookRes, facebookPromptAsync] = Facebook.useAuthRequest({
+    responseType: ResponseType.Token,
+    clientId: Constants.expoConfig.extra.FACEBOOK_ID,
+  });
 
   useBackHandler(() => {
     dispatch(setRoute('start'));
@@ -47,47 +57,44 @@ const LoginSelectScreen = () => {
   });
 
   useEffect(() => {
-    firebase.auth().languageCode = currentLang === 'pap' ? 'en' : currentLang;
-  }, [currentLang]);
+    dispatch(setNextTopCirclePosition(scale(-460)));
+    dispatch(setNextBottomCirclePosition(scale(430)));
+  }, [topCirclePosition, bottomCirclePosition]);
+
+  useEffect(() => {
+    if (googleRes?.type === 'success') {
+      const { id_token } = googleRes.params;
+      signInWithGoogleIdTokenAsync(id_token)
+        .then((user) => console.log(user))
+        .catch((err) => console.error(err));
+    }
+  }, [googleRes]);
+
+  useEffect(() => {
+    if (facebookRes?.type === 'success') {
+      const { access_token } = facebookRes.params;
+      signInWithFacebookAccessTokenAsync(access_token)
+        .then((user) => console.log(user))
+        .catch((err) => console.error(err));
+    }
+  }, [facebookRes]);
 
   const handleLoginTypeSelect = (loginType) => {
     switch (loginType) {
       case 'user':
-        return null;
+        return dispatch(setRoute('login-password'));
       case 'google':
-        return null;
+        return googlePromptAsync();
       case 'facebook':
-        return loginWithFacebook();
+        return facebookPromptAsync();
       default:
         break;
     }
   };
 
-  const loginWithFacebook = () => {
-    firebase
-      .auth()
-      .signInWithRedirect(facebookAuthProvider)
-      .then((result) => {
-        const { user } = result;
-        console.log(user);
-        console.log(result.credential);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const setLanguageAndCloseForm = (lang) => {
-    dispatch(setCurrentLang(lang));
-    setShowLanguageSelectForm(false);
-  };
-
   return (
     <AppBackground skyline>
-      <SlidingCircles
-        topCirclePosition={topCirclePosition}
-        bottomCirclePosition={bottomCirclePosition}
-      />
+      <SlidingCircles />
 
       {!transitioning && (
         <FadeInAppContent>
@@ -96,9 +103,7 @@ const LoginSelectScreen = () => {
           <SelectLoginTypeForm onSubmit={(loginType) => handleLoginTypeSelect(loginType)} />
 
           <View style={styles.bottom}>
-            {showLanguageSelectForm && (
-              <SelectAppLangForm onSelect={(lang) => setLanguageAndCloseForm(lang)} />
-            )}
+            {showLanguageSelectForm && <SelectAppLangForm />}
 
             <LanguageSelectFab
               style={styles.languageSelectFab}

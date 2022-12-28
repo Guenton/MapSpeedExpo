@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Pressable, Text } from 'react-native';
 import { View } from 'react-native';
 import { scale, ScaledSheet } from 'react-native-size-matters';
-import { animated, useSpring } from 'react-spring';
-import I18n from 'i18n-js';
+import { animated, useSpring } from '@react-spring/native';
+import { useTranslation } from 'react-i18next';
 
-import { primaryOpacity } from '../../config/colors';
+import { primaryOpacity, white, black } from '../../config/colors';
+import { useSelector } from 'react-redux';
 
 const styles = ScaledSheet.create({
   container: {
@@ -28,6 +29,7 @@ const styles = ScaledSheet.create({
     marginLeft: '55@s',
     borderWidth: '1@s',
     opacity: 0,
+    backgroundColor: primaryOpacity,
     borderColor: primaryOpacity,
     shadowColor: primaryOpacity,
     shadowOffset: {
@@ -44,28 +46,34 @@ const styles = ScaledSheet.create({
 const AnimatedView = animated(View);
 
 const SelectLoginPasswordOptionForm = ({ onPressLogin, onPressSignup, isLogin, isSignup }) => {
-  const { t } = I18n;
+  const { t } = useTranslation();
 
-  const [barPosition, setBarPosition] = useState(0);
+  const isDark = useSelector((state) => state.core.isDark);
+
+  const [highlightBarPosition, setHighlightBarPosition] = useState(0);
 
   useEffect(() => {
-    if (isLogin) setBarPosition(scale(-38));
-    else if (isSignup) setBarPosition(scale(42));
-    else setBarPosition(0);
+    if (isLogin) setHighlightBarPosition(scale(-39));
+    else if (isSignup) setHighlightBarPosition(scale(37));
+    else setHighlightBarPosition(0);
   });
 
   const slideTransition = useSpring({
-    to: { ...styles.bar, left: barPosition, opacity: isLogin || isSignup ? 1 : 0 },
+    to: { ...styles.bar, left: highlightBarPosition, opacity: isLogin || isSignup ? 1 : 0 },
   });
 
   return (
     <View style={styles.container}>
       <AnimatedView style={slideTransition} />
       <Pressable style={styles.link} onPress={() => onPressLogin()}>
-        <Text style={styles.text}>{t('login').toLocaleUpperCase()}</Text>
+        <Text style={{ ...styles.text, color: isDark ? white : black }}>
+          {t('login').toLocaleUpperCase()}
+        </Text>
       </Pressable>
       <Pressable style={styles.link} onPress={() => onPressSignup()}>
-        <Text style={styles.text}>{t('signup').toLocaleUpperCase()}</Text>
+        <Text style={{ ...styles.text, color: isDark ? white : black }}>
+          {t('signup').toLocaleUpperCase()}
+        </Text>
       </Pressable>
     </View>
   );

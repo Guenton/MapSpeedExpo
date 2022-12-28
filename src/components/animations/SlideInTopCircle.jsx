@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated } from '@react-spring/native';
 
 import { setTopCirclePosition, setTransitioning } from '../../store/actions/animation';
 
@@ -34,18 +34,26 @@ const styles = ScaledSheet.create({
 
 const AnimatedView = animated(View);
 
-const SlideInTopCircle = ({ position, children }) => {
+const SlideInTopCircle = ({ children }) => {
   const dispatch = useDispatch();
 
-  const topCirclePosition = useSelector((state) => state.animation.topCirclePosition);
   const isDark = useSelector((state) => state.core.isDark);
+  const topCirclePosition = useSelector((state) => state.animation.topCirclePosition);
+  const nextTopCirclePosition = useSelector((state) => state.animation.nextTopCirclePosition);
 
   const transitionMarginTop = useSpring({
-    to: { ...styles.circle, marginTop: position, backgroundColor: isDark ? black : white },
-    from: { ...styles.circle, marginTop: topCirclePosition || -width / 1.2 },
+    to: {
+      ...styles.circle,
+      marginTop: nextTopCirclePosition,
+      backgroundColor: isDark ? black : white,
+    },
+    from: {
+      ...styles.circle,
+      marginTop: topCirclePosition || -width / 1.2,
+    },
     onStart: () => dispatch(setTransitioning(true)),
     onRest: () => {
-      dispatch(setTopCirclePosition(position));
+      dispatch(setTopCirclePosition(nextTopCirclePosition));
       dispatch(setTransitioning(false));
     },
   });

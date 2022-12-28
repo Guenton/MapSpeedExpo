@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
 import { TouchableOpacity } from 'react-native';
 
+import { primary, white, grey } from '../../config/colors';
+
 const width = Dimensions.get('window').width * 0.15;
 const styles = ScaledSheet.create({
   container: {
@@ -24,9 +26,6 @@ const styles = ScaledSheet.create({
 
 const FabContainer = ({ style, children, size, reverse, onPress }) => {
   const isDark = useSelector((state) => state.core.isDark);
-  const primary = useSelector((state) => state.color.primary);
-  const white = useSelector((state) => state.color.white);
-  const grey = useSelector((state) => state.color.grey);
 
   const [backgroundColor, setBackgroundColor] = useState(white);
 

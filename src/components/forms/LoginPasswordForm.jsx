@@ -1,17 +1,15 @@
 import React, { createRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View } from 'react-native';
-import { ScaledSheet, scale } from 'react-native-size-matters';
+import { ScaledSheet } from 'react-native-size-matters';
 import { isEmpty, isEmail } from 'validator';
-import * as SecureStore from 'expo-secure-store';
-import firebase from 'firebase';
-import i18n from 'i18n-js';
+import { useTranslation } from 'react-i18next';
 
 import EmailInput from '../inputs/EmailInput';
 import PasswordInput from '../inputs/PasswordInput';
 import ForgotPasswordButton from '../buttons/ForgotPasswordButton';
 
-import { setLoading } from '../../store/actions/core';
+import { setAlert, setLoading } from '../../store/actions/core';
 import {
   setUserId,
   setEmail,
@@ -19,16 +17,20 @@ import {
   setErrEmail,
   setErrPassword,
 } from '../../store/actions/auth';
+import LoginButton from '../buttons/LoginButton';
+import { getCurrentUserId, parseFirebaseError, signInWithPasswordAsync } from '../../firebase/auth';
+import storeEmailAndPasswordAsync from '../../services/auth/storeEmailAndPasswordAsync';
 
 const styles = ScaledSheet.create({
-  container: { justifyContent: 'space-evenly' },
+  container: {},
   inputContainer: { width: '290@s', alignSelf: 'center' },
   input: { marginBottom: '18@s' },
   center: { alignSelf: 'center' },
+  loginButton: { marginTop: '30@s' },
 });
 
 const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
-  const { t } = i18n;
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const emailRef = createRef();
@@ -43,18 +45,20 @@ const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
   const shakeOnError = () => {
     if (errEmail) emailRef.current.shake();
     if (errPassword) passwordRef.current.shake();
+    if (!email) return emailRef.current.focus();
+    if (!password) return passwordRef.current.focus();
   };
 
   const validateAndSetEmail = (val) => {
-    if (isEmpty(val)) dispatch(setErrEmail(t('errNotFilled')));
-    else if (!isEmail(val)) dispatch(setErrEmail(t('errNotEmail')));
+    if (isEmpty(val)) dispatch(setErrEmail(t('err.notFilled')));
+    else if (!isEmail(val)) dispatch(setErrEmail(t('err.notEmail')));
     else dispatch(setErrEmail());
 
     dispatch(setEmail(val));
   };
 
   const validateAndSetPassword = (val) => {
-    if (isEmpty(val)) dispatch(setErrPassword(t('errNotFilled')));
+    if (isEmpty(val)) dispatch(setErrPassword(t('err.notFilled')));
     else dispatch(setErrPassword());
 
     dispatch(setPassword(val));
@@ -68,29 +72,17 @@ const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
     if (email && password) {
       try {
         dispatch(setLoading());
-        await firebase.auth().signInWithEmailAndPassword(email, password);
 
-        const canStore = await SecureStore.isAvailableAsync();
-        if (canStore) await SecureStore.setItemAsync('email', email);
-        if (canStore) await SecureStore.setItemAsync('password', password);
+        await signInWithPasswordAsync(email, password);
+        await storeEmailAndPasswordAsync(email, password);
 
-        const userId = firebase.auth().currentUser.uid;
-
-        await firebase.database().ref(`users/${userId}`).set({
-          userId,
-          email,
-        });
-
-        dispatch(setUserId(userId));
+        dispatch(setUserId(getCurrentUserId()));
         dispatch(setPassword());
-
         dispatch(setLoading(false));
         onGoMain();
       } catch (err) {
         dispatch(setLoading(false));
-        console.error(err);
-        console.log(err.code);
-        console.log(err.message);
+        dispatch(setAlert(parseFirebaseError(err)));
       }
     }
   };
@@ -114,6 +106,7 @@ const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
           onChange={(val) => validateAndSetPassword(val)}
         />
         <ForgotPasswordButton onPress={() => onGoReset()} />
+        <LoginButton style={styles.loginButton} onPress={() => loginWithFirebase()} />
       </View>
     </View>
   );

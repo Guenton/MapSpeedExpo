@@ -9,8 +9,8 @@ const styles = ScaledSheet.create({
   logo: { width, alignSelf: 'center' },
 });
 
-const MapSpeedLogo = ({ style }) => (
-  <Image style={{ ...styles.logo, ...style }} source={mapSpeedLogo} resizeMode="contain" />
-);
+const MapSpeedLogo = ({ style }) => {
+  return <Image style={{ ...styles.logo, ...style }} source={mapSpeedLogo} resizeMode="contain" />;
+};
 
 export default MapSpeedLogo;
