@@ -18,7 +18,7 @@ import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: {
-    marginTop: '50@s',
+    marginTop: '15@s',
   },
   options: {
     flex: 1,
@@ -51,7 +51,7 @@ const StartScreen = () => {
   });
 
   useEffect(() => {
-    dispatch(setNextTopCirclePosition(scale(-500)));
+    dispatch(setNextTopCirclePosition(scale(-550)));
     dispatch(setNextBottomCirclePosition(scale(400)));
   }, [topCirclePosition, bottomCirclePosition]);
 

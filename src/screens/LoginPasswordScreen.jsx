@@ -4,26 +4,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useBackHandler } from '@react-native-community/hooks';
 import { ScaledSheet, scale } from 'react-native-size-matters';
 import { useTranslation } from 'react-i18next';
+import delay from 'delay';
 
 import AppBackground from '../components/containers/AppBackground';
 import SlidingCircles from '../components/animations/SlidingCircles';
 import FadeInAppContent from '../components/animations/FadeInAppContent';
 import MapSpeedLogo from '../components/images/MapLogo';
+import SubHeader from '../components/labels/SubHeader';
 import GuentonBotomRight from '../components/images/GuentonBottomRight';
 import LoginPasswordForm from '../components/forms/LoginPasswordForm';
-import SubHeader from '../components/labels/SubHeader';
-
-import { setRoute } from '../store/actions/core';
 import SelectLoginPasswordOptionForm from '../components/forms/SelectLoginPasswordOptionForm';
-import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
 import LoginSignupForm from '../components/forms/LoginSignupForm';
 
+import { setRoute } from '../store/actions/core';
+import {
+  setMorphing,
+  setNextBottomCirclePosition,
+  setNextTopCirclePosition,
+} from '../store/actions/animation';
+import MorphInView from '../components/animations/MorphInView';
+
 const styles = ScaledSheet.create({
-  mapSpeedlogo: { marginTop: '25@s' },
-  topMessage: { alignSelf: 'center' },
+  mapSpeedlogo: { marginTop: '15@s' },
+  topMessage: { alignSelf: 'center', marginTop: '-10@s' },
   form: {
-    height: '225@s',
-    marginTop: '25@s',
+    height: '250@s',
+    marginTop: '15@s',
     marginLeft: '-25@s',
   },
 });
@@ -40,15 +46,22 @@ const LoginPasswordScreen = () => {
 
   const [subScreen, setSubScreen] = useState('login');
 
+  useBackHandler(() => {
+    dispatch(setRoute('login-select'));
+    return true;
+  });
+
   useEffect(() => {
     dispatch(setNextTopCirclePosition(scale(-675)));
     dispatch(setNextBottomCirclePosition(scale(225)));
   }, [topCirclePosition, bottomCirclePosition]);
 
-  useBackHandler(() => {
-    dispatch(setRoute('login-select'));
-    return true;
-  });
+  useEffect(() => {
+    dispatch(setMorphing());
+    delay(500)
+      .then(() => dispatch(setMorphing(false)))
+      .catch((err) => console.error(err));
+  }, [subScreen]);
 
   return (
     <AppBackground>
@@ -81,12 +94,17 @@ const LoginPasswordScreen = () => {
           )}
 
           {subScreen === 'signup' && (
-            <LoginSignupForm
-              style={{ ...styles.form, justifyContent: isKeyboardOpen ? 'flex-end' : 'flex-start' }}
-              onGoLogin={() => setSubScreen('login')}
-              onGoReset={() => dispatch(setRoute('login-reset'))}
-              onGoMain={() => dispatch(setRoute('main'))}
-            />
+            <MorphInView>
+              <LoginSignupForm
+                style={{
+                  ...styles.form,
+                  justifyContent: isKeyboardOpen ? 'flex-end' : 'flex-start',
+                }}
+                onGoLogin={() => setSubScreen('login')}
+                onGoReset={() => dispatch(setRoute('login-reset'))}
+                onGoMain={() => dispatch(setRoute('main'))}
+              />
+            </MorphInView>
           )}
 
           {!isKeyboardOpen && <GuentonBotomRight />}

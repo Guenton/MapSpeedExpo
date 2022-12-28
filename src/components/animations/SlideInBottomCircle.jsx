@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Dimensions } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated } from '@react-spring/native';
 
 import { setBottomCirclePosition, setTransitioning } from '../../store/actions/animation';
 

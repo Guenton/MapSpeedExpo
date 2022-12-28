@@ -30,6 +30,7 @@ const styles = ScaledSheet.create({
   inputContainer: { width: '290@s', alignSelf: 'center' },
   input: { marginBottom: '18@s' },
   center: { alignSelf: 'center' },
+  signupButton: { marginTop: '15@s' },
 });
 
 const LoginSignupForm = ({ style, onGoLogin, onGoMain }) => {
@@ -133,7 +134,7 @@ const LoginSignupForm = ({ style, onGoLogin, onGoMain }) => {
           onBlur={() => signupWithFirebase()}
           onChange={(val) => validateAndSetPasswordConfirm(val)}
         />
-        <SignupButton onPress={() => onGoLogin()} />
+        <SignupButton style={styles.signupButton} onPress={() => onGoLogin()} />
       </View>
     </View>
   );

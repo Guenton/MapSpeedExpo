@@ -29,13 +29,13 @@ const styles = ScaledSheet.create({
   },
 });
 
-const SignupButton = ({ disabled, reverse, loading, onPress }) => {
+const SignupButton = ({ style, disabled, reverse, loading, onPress }) => {
   const { t } = useTranslation();
   const primary = useSelector((state) => state.color.primary);
 
   return (
     <Button
-      containerStyle={{ ...styles.container }}
+      containerStyle={{ ...styles.container, ...style }}
       buttonStyle={{ ...styles.button, backgroundColor: primary }}
       title={t('signup')}
       disabled={disabled}

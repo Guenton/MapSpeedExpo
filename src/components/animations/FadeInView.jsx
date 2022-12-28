@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { useSelector } from 'react-redux';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated } from '@react-spring/native';
 
 const AnimatedView = animated(View);
 

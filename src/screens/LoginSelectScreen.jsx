@@ -23,7 +23,7 @@ import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/
 import { signInWithFacebookAccessTokenAsync, signInWithGoogleIdTokenAsync } from '../firebase/auth';
 
 const styles = ScaledSheet.create({
-  mapSpeedlogo: { marginTop: '25@s' },
+  mapSpeedlogo: { marginTop: '15@s' },
   bottom: {
     flex: 1,
     justifyContent: 'flex-end',

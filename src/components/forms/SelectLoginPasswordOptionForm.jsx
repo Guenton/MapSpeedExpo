@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Pressable, Text } from 'react-native';
 import { View } from 'react-native';
 import { scale, ScaledSheet } from 'react-native-size-matters';
-import { animated, useSpring } from 'react-spring';
+import { animated, useSpring } from '@react-spring/native';
 import { useTranslation } from 'react-i18next';
 
-import { primaryOpacity } from '../../config/colors';
+import { primaryOpacity, white, black } from '../../config/colors';
+import { useSelector } from 'react-redux';
 
 const styles = ScaledSheet.create({
   container: {
@@ -46,11 +47,13 @@ const AnimatedView = animated(View);
 const SelectLoginPasswordOptionForm = ({ onPressLogin, onPressSignup, isLogin, isSignup }) => {
   const { t } = useTranslation();
 
+  const isDark = useSelector((state) => state.core.isDark);
+
   const [highlightBarPosition, setHighlightBarPosition] = useState(0);
 
   useEffect(() => {
-    if (isLogin) setHighlightBarPosition(scale(-38));
-    else if (isSignup) setHighlightBarPosition(scale(42));
+    if (isLogin) setHighlightBarPosition(scale(-39));
+    else if (isSignup) setHighlightBarPosition(scale(37));
     else setHighlightBarPosition(0);
   });
 
@@ -62,10 +65,14 @@ const SelectLoginPasswordOptionForm = ({ onPressLogin, onPressSignup, isLogin, i
     <View style={styles.container}>
       <AnimatedView style={slideTransition} />
       <Pressable style={styles.link} onPress={() => onPressLogin()}>
-        <Text style={styles.text}>{t('login').toLocaleUpperCase()}</Text>
+        <Text style={{ ...styles.text, color: isDark ? white : black }}>
+          {t('login').toLocaleUpperCase()}
+        </Text>
       </Pressable>
       <Pressable style={styles.link} onPress={() => onPressSignup()}>
-        <Text style={styles.text}>{t('signup').toLocaleUpperCase()}</Text>
+        <Text style={{ ...styles.text, color: isDark ? white : black }}>
+          {t('signup').toLocaleUpperCase()}
+        </Text>
       </Pressable>
     </View>
   );
