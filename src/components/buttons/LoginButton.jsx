@@ -31,7 +31,7 @@ const styles = ScaledSheet.create({
   },
 });
 
-const SignupButton = ({ style, disabled, onPress }) => {
+const LoginButton = ({ style, disabled, onPress }) => {
   const { t } = useTranslation();
   const isLoading = useSelector((state) => state.core.isLoading);
 
@@ -39,7 +39,7 @@ const SignupButton = ({ style, disabled, onPress }) => {
     <Button
       containerStyle={{ ...styles.container, ...style }}
       buttonStyle={styles.button}
-      title={t('signup')}
+      title={t('login')}
       disabled={disabled}
       loading={isLoading}
       onPress={() => onPress()}
@@ -48,4 +48,4 @@ const SignupButton = ({ style, disabled, onPress }) => {
   );
 };
 
-export default SignupButton;
+export default LoginButton;

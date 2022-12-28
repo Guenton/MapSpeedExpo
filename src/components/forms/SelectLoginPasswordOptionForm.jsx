@@ -29,6 +29,7 @@ const styles = ScaledSheet.create({
     marginLeft: '55@s',
     borderWidth: '1@s',
     opacity: 0,
+    backgroundColor: primaryOpacity,
     borderColor: primaryOpacity,
     shadowColor: primaryOpacity,
     shadowOffset: {

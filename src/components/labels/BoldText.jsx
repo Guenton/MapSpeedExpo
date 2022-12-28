@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
+import { white, black } from '../../config/colors';
 
 const styles = ScaledSheet.create({
   text: {
@@ -12,8 +13,6 @@ const styles = ScaledSheet.create({
 
 const BoldText = ({ label, style }) => {
   const isDark = useSelector((state) => state.core.isDark);
-  const white = useSelector((state) => state.color.white);
-  const black = useSelector((state) => state.color.black);
 
   return (
     <View style={{ style }}>

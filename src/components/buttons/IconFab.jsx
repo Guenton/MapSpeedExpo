@@ -1,14 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { scale } from 'react-native-size-matters';
 import { Icon } from 'react-native-elements';
 
 import FabContainer from '../containers/FabContainer';
 
-const IconFab = ({ style, name, size, reverse, onPress }) => {
-  const primary = useSelector((state) => state.color.primary);
-  const isDark = useSelector((state) => state.color.isDark);
+import { primary } from '../../config/colors';
 
+const IconFab = ({ style, name, size, reverse, onPress }) => {
   return (
     <FabContainer
       style={style}

@@ -6,6 +6,8 @@ import { ScaledSheet } from 'react-native-size-matters';
 import LanguageSelectFab from '../buttons/LanguageSelectFab';
 import { setCurrentLang } from '../../store/actions/lang';
 
+import { white, grey } from '../../config/colors';
+
 const styles = ScaledSheet.create({
   container: {
     flexDirection: 'column',
@@ -36,8 +38,6 @@ const SelectAppLangForm = ({ style }) => {
   const currentLang = useSelector((state) => state.lang.currentLang);
 
   const isDark = useSelector((state) => state.core.isDark);
-  const white = useSelector((state) => state.color.white);
-  const grey = useSelector((state) => state.color.grey);
 
   const [langArray, setLangArray] = useState([]);
 

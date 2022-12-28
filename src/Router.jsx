@@ -14,13 +14,13 @@ import LoginPasswordScreen from './screens/LoginPasswordScreen';
 import StartScreen from './screens/StartScreen';
 import LoginSelectScreen from './screens/LoginSelectScreen';
 
+import { white, black } from './config/colors';
+
 const Router = () => {
   const dispatch = useDispatch();
 
   const route = useSelector((state) => state.core.route);
   const isDark = useSelector((state) => state.core.isDark);
-  const white = useSelector((state) => state.color.white);
-  const black = useSelector((state) => state.color.black);
   const currentLang = useSelector((state) => state.lang.currentLang);
 
   useEffect(() => {

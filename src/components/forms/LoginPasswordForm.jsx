@@ -18,12 +18,14 @@ import {
   setErrEmail,
   setErrPassword,
 } from '../../store/actions/auth';
+import LoginButton from '../buttons/LoginButton';
 
 const styles = ScaledSheet.create({
   container: {},
   inputContainer: { width: '290@s', alignSelf: 'center' },
   input: { marginBottom: '18@s' },
   center: { alignSelf: 'center' },
+  loginButton: { marginTop: '30@s' },
 });
 
 const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
@@ -108,6 +110,7 @@ const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
           onChange={(val) => validateAndSetPassword(val)}
         />
         <ForgotPasswordButton onPress={() => onGoReset()} />
+        <LoginButton style={styles.loginButton} />
       </View>
     </View>
   );

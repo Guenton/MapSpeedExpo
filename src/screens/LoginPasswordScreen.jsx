@@ -15,6 +15,7 @@ import GuentonBotomRight from '../components/images/GuentonBottomRight';
 import LoginPasswordForm from '../components/forms/LoginPasswordForm';
 import SelectLoginPasswordOptionForm from '../components/forms/SelectLoginPasswordOptionForm';
 import LoginSignupForm from '../components/forms/LoginSignupForm';
+import ScaleInView from '../components/animations/ScaleInView';
 
 import { setRoute } from '../store/actions/core';
 import {
@@ -22,7 +23,6 @@ import {
   setNextBottomCirclePosition,
   setNextTopCirclePosition,
 } from '../store/actions/animation';
-import MorphInView from '../components/animations/MorphInView';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '15@s' },
@@ -85,16 +85,21 @@ const LoginPasswordScreen = () => {
           )}
 
           {subScreen === 'login' && (
-            <LoginPasswordForm
-              style={{ ...styles.form, justifyContent: isKeyboardOpen ? 'flex-end' : 'flex-start' }}
-              onGoSignup={() => setSubScreen('signup')}
-              onGoReset={() => dispatch(setRoute('login-reset'))}
-              onGoMain={() => dispatch(setRoute('main'))}
-            />
+            <ScaleInView>
+              <LoginPasswordForm
+                style={{
+                  ...styles.form,
+                  justifyContent: isKeyboardOpen ? 'flex-end' : 'flex-start',
+                }}
+                onGoSignup={() => setSubScreen('signup')}
+                onGoReset={() => dispatch(setRoute('login-reset'))}
+                onGoMain={() => dispatch(setRoute('main'))}
+              />
+            </ScaleInView>
           )}
 
           {subScreen === 'signup' && (
-            <MorphInView>
+            <ScaleInView>
               <LoginSignupForm
                 style={{
                   ...styles.form,
@@ -104,7 +109,7 @@ const LoginPasswordScreen = () => {
                 onGoReset={() => dispatch(setRoute('login-reset'))}
                 onGoMain={() => dispatch(setRoute('main'))}
               />
-            </MorphInView>
+            </ScaleInView>
           )}
 
           {!isKeyboardOpen && <GuentonBotomRight />}
