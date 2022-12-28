@@ -16,6 +16,7 @@ import LoginSelectScreen from './screens/LoginSelectScreen';
 
 import { white, black } from './config/colors';
 import MainScreen from './screens/MainScreen';
+import isAndroid from './services/core/isAndroid';
 
 const Router = () => {
   const dispatch = useDispatch();
@@ -34,10 +35,10 @@ const Router = () => {
   }, []);
 
   useEffect(() => {
-    if (isDark) {
+    if (isDark && isAndroid) {
       NavigationBar.setBackgroundColorAsync(black);
       NavigationBar.setButtonStyleAsync('light');
-    } else {
+    } else if (isAndroid) {
       NavigationBar.setBackgroundColorAsync(white);
       NavigationBar.setButtonStyleAsync('dark');
     }
