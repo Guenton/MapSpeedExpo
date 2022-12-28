@@ -15,5 +15,12 @@
   "noAccount": "¿No tienes una cuenta?",
   "signUp": "Regístrate",
   "signup": "Regístrate",
-  "login": "Iniciar"
+  "login": "Iniciar",
+  "err": {
+    "notFilled": "Debe ser provisto",
+    "notEmail": "Debe ser un correo clectrónico válido",
+    "notLongPassword": "La contraseña es demasiado corta",
+    "notStrongPassword": "La contraseña no es lo suficientemente fuerte",
+    "notMatchingPassword": "Las contraseñas no coinciden"
+  }
 }

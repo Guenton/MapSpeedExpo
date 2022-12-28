@@ -1,15 +1,15 @@
 import React, { createRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View } from 'react-native';
-import { ScaledSheet, scale } from 'react-native-size-matters';
-import { isEmpty, isEmail } from 'validator';
+import { ScaledSheet } from 'react-native-size-matters';
+import { isEmpty, isEmail, isStrongPassword } from 'validator';
 import { useTranslation } from 'react-i18next';
 
 import EmailInput from '../inputs/EmailInput';
 import PasswordInput from '../inputs/PasswordInput';
-import ForgotPasswordButton from '../buttons/ForgotPasswordButton';
+import SignupButton from '../buttons/SignupButton';
 
-import { setLoading } from '../../store/actions/core';
+import { setAlert, setLoading } from '../../store/actions/core';
 import {
   setUserId,
   setEmail,
@@ -22,8 +22,7 @@ import {
 
 import { getCurrentUserId } from '../../firebase/auth';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import authService from '../../services/auth';
-import SignupButton from '../buttons/SignupButton';
+import storeEmailAndPasswordAsync from '../../services/auth/storeEmailAndPasswordAsync';
 
 const styles = ScaledSheet.create({
   container: {},
@@ -33,7 +32,7 @@ const styles = ScaledSheet.create({
   signupButton: { marginTop: '15@s' },
 });
 
-const LoginSignupForm = ({ style, onGoLogin, onGoMain }) => {
+const LoginSignupForm = ({ style, onGoMain }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -56,23 +55,25 @@ const LoginSignupForm = ({ style, onGoLogin, onGoMain }) => {
   };
 
   const validateAndSetEmail = (val) => {
-    if (isEmpty(val)) dispatch(setErrEmail(t('errNotFilled')));
-    else if (!isEmail(val)) dispatch(setErrEmail(t('errNotEmail')));
+    if (isEmpty(val)) dispatch(setErrEmail(t('err.notFilled')));
+    else if (!isEmail(val)) dispatch(setErrEmail(t('err.notEmail')));
     else dispatch(setErrEmail());
 
     dispatch(setEmail(val));
   };
 
   const validateAndSetPassword = (val) => {
-    if (isEmpty(val)) dispatch(setErrPassword(t('errNotFilled')));
+    if (isEmpty(val)) dispatch(setErrPassword(t('err.notFilled')));
+    else if (val.length < 8) dispatch(setErrPassword(t('err.notLongPassword')));
+    else if (!isStrongPassword(val)) dispatch(setErrPassword(t('err.notStrongPassword')));
     else dispatch(setErrPassword());
 
     dispatch(setPassword(val));
   };
 
   const validateAndSetPasswordConfirm = (val) => {
-    if (isEmpty(val)) dispatch(setErrPasswordConfirm(t('errNotFilled')));
-    else if (val !== password) dispatch(setErrPasswordConfirm(t('errNotMatchingPassword')));
+    if (isEmpty(val)) dispatch(setErrPasswordConfirm(t('err.notFilled')));
+    else if (val !== password) dispatch(setErrPasswordConfirm(t('err.notMatchingPassword')));
     else dispatch(setErrPasswordConfirm());
 
     dispatch(setPasswordConfirm(val));
@@ -84,16 +85,15 @@ const LoginSignupForm = ({ style, onGoLogin, onGoMain }) => {
     validateAndSetPasswordConfirm(passwordConfirm);
 
     if (errEmail || errPassword || errPasswordConfirm) return shakeOnError();
+
     if (email && password && passwordConfirm) {
       try {
         dispatch(setLoading());
         await createUserWithEmailAndPassword(email, password);
 
-        await authService.storeEmailAndPasswordAsync(email, password);
+        await storeEmailAndPasswordAsync(email, password);
 
-        const userId = getCurrentUserId();
-
-        dispatch(setUserId(userId));
+        dispatch(setUserId(getCurrentUserId()));
         dispatch(setPassword());
         dispatch(setPasswordConfirm());
 
@@ -134,7 +134,7 @@ const LoginSignupForm = ({ style, onGoLogin, onGoMain }) => {
           onBlur={() => signupWithFirebase()}
           onChange={(val) => validateAndSetPasswordConfirm(val)}
         />
-        <SignupButton style={styles.signupButton} onPress={() => onGoLogin()} />
+        <SignupButton style={styles.signupButton} onPress={() => signupWithFirebase()} />
       </View>
     </View>
   );

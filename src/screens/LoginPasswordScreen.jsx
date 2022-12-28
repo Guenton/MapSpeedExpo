@@ -23,6 +23,7 @@ import {
   setNextBottomCirclePosition,
   setNextTopCirclePosition,
 } from '../store/actions/animation';
+import AlertBox from '../components/containers/AlertBox';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '15@s' },
@@ -111,6 +112,8 @@ const LoginPasswordScreen = () => {
               />
             </ScaleInView>
           )}
+
+          <AlertBox />
 
           {!isKeyboardOpen && <GuentonBotomRight />}
         </FadeInAppContent>

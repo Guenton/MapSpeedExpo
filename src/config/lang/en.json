@@ -15,5 +15,12 @@
   "noAccount": "Don't have an account?",
   "signUp": "Sign Up",
   "signup": "Signup",
-  "login": "Login"
+  "login": "Login",
+  "err": {
+    "notFilled": "Must be filled in",
+    "notEmail": "Must be a valid Email Address",
+    "notLongPassword": "Password is too short",
+    "notStrongPassword": "Password is not Strong Enough",
+    "notMatchingPassword": "Passwords do not match"
+  }
 }

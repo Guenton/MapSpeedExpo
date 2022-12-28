@@ -1,16 +1,15 @@
 import React, { createRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View } from 'react-native';
-import { ScaledSheet, scale } from 'react-native-size-matters';
+import { ScaledSheet } from 'react-native-size-matters';
 import { isEmpty, isEmail } from 'validator';
-import * as SecureStore from 'expo-secure-store';
 import { useTranslation } from 'react-i18next';
 
 import EmailInput from '../inputs/EmailInput';
 import PasswordInput from '../inputs/PasswordInput';
 import ForgotPasswordButton from '../buttons/ForgotPasswordButton';
 
-import { setLoading } from '../../store/actions/core';
+import { setAlert, setLoading } from '../../store/actions/core';
 import {
   setUserId,
   setEmail,
@@ -19,6 +18,8 @@ import {
   setErrPassword,
 } from '../../store/actions/auth';
 import LoginButton from '../buttons/LoginButton';
+import { signInWithPasswordAsync } from '../../firebase/auth';
+import storeEmailAndPasswordAsync from '../../services/auth/storeEmailAndPasswordAsync';
 
 const styles = ScaledSheet.create({
   container: {},
@@ -62,32 +63,26 @@ const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
   };
 
   const loginWithFirebase = async () => {
+    return dispatch(setAlert('test'));
     validateAndSetEmail(email);
     validateAndSetPassword(password);
 
     if (errEmail || errPassword) return shakeOnError();
     if (email && password) {
-      // try {
-      //   dispatch(setLoading());
-      //   await firebase.auth().signInWithEmailAndPassword(email, password);
-      //   const canStore = await SecureStore.isAvailableAsync();
-      //   if (canStore) await SecureStore.setItemAsync('email', email);
-      //   if (canStore) await SecureStore.setItemAsync('password', password);
-      //   const userId = firebase.auth().currentUser.uid;
-      //   await firebase.database().ref(`users/${userId}`).set({
-      //     userId,
-      //     email,
-      //   });
-      //   dispatch(setUserId(userId));
-      //   dispatch(setPassword());
-      //   dispatch(setLoading(false));
-      //   onGoMain();
-      // } catch (err) {
-      //   dispatch(setLoading(false));
-      //   console.error(err);
-      //   console.log(err.code);
-      //   console.log(err.message);
-      // }
+      try {
+        dispatch(setLoading());
+
+        await signInWithPasswordAsync(email, password);
+        await storeEmailAndPasswordAsync(email, password);
+
+        dispatch(setUserId(getCurrentUserId()));
+        dispatch(setPassword());
+        dispatch(setLoading(false));
+        onGoMain();
+      } catch (err) {
+        dispatch(setLoading(false));
+        dispatch(setAlert(err));
+      }
     }
   };
 
@@ -110,7 +105,7 @@ const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
           onChange={(val) => validateAndSetPassword(val)}
         />
         <ForgotPasswordButton onPress={() => onGoReset()} />
-        <LoginButton style={styles.loginButton} />
+        <LoginButton style={styles.loginButton} onPress={() => loginWithFirebase()} />
       </View>
     </View>
   );

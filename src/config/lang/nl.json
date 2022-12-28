@@ -15,5 +15,12 @@
   "noAccount": "Nog geen account?",
   "signUp": "Registreer",
   "signup": "Registreer",
-  "login": "Inloggen"
+  "login": "Inloggen",
+  "err": {
+    "notFilled": "Moet worden ingevuld",
+    "notEmail": "Moet een geldig e-mailadres zijn",
+    "notLongPassword": "Wachtwoord is te kort",
+    "notStrongPassword": "Wachtwoord is niet sterk genoeg",
+    "notMatchingPassword": "Wachtwoorden komen niet overeen"
+  }
 }
