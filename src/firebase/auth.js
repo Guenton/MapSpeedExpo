@@ -81,3 +81,11 @@ export const getCurrentUserInfo = () => ({
   displayName: auth.currentUser && auth.currentUser.displayName,
   photoURL: auth.currentUser && auth.currentUser.photoURL,
 });
+
+// Error Interpreter
+export const parseFirebaseError = (err) => {
+  if (err.message) return err.message;
+  if (err.code) return err.code;
+  if (typeof err === 'string') return err;
+  else return JSON.stringify(err);
+};

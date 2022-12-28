@@ -16,6 +16,7 @@
   "signUp": "Sign Up",
   "signup": "Signup",
   "login": "Login",
+  "myVehicles": "My Vehicles",
   "err": {
     "notFilled": "Must be filled in",
     "notEmail": "Must be a valid Email Address",

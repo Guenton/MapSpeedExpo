@@ -15,6 +15,7 @@ import StartScreen from './screens/StartScreen';
 import LoginSelectScreen from './screens/LoginSelectScreen';
 
 import { white, black } from './config/colors';
+import MainScreen from './screens/MainScreen';
 
 const Router = () => {
   const dispatch = useDispatch();
@@ -48,14 +49,15 @@ const Router = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      {route === 'start' && <StartScreen />}
+
+      {route === 'login-select' && <LoginSelectScreen />}
       {/* {route === 'login-biometric' && <LoginBiometricScreen />} */}
       {route === 'login-password' && <LoginPasswordScreen />}
       {/* {route === 'login-signup' && <LoginSignupScreen />} */}
       {/* {route === 'login-reset' && <LoginResetScreen />} */}
 
-      {route === 'start' && <StartScreen />}
-
-      {route === 'login-select' && <LoginSelectScreen />}
+      {route === 'main' && <MainScreen />}
     </SafeAreaView>
   );
 };

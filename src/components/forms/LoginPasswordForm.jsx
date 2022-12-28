@@ -18,7 +18,7 @@ import {
   setErrPassword,
 } from '../../store/actions/auth';
 import LoginButton from '../buttons/LoginButton';
-import { signInWithPasswordAsync } from '../../firebase/auth';
+import { getCurrentUserId, parseFirebaseError, signInWithPasswordAsync } from '../../firebase/auth';
 import storeEmailAndPasswordAsync from '../../services/auth/storeEmailAndPasswordAsync';
 
 const styles = ScaledSheet.create({
@@ -45,25 +45,26 @@ const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
   const shakeOnError = () => {
     if (errEmail) emailRef.current.shake();
     if (errPassword) passwordRef.current.shake();
+    if (!email) return emailRef.current.focus();
+    if (!password) return passwordRef.current.focus();
   };
 
   const validateAndSetEmail = (val) => {
-    if (isEmpty(val)) dispatch(setErrEmail(t('errNotFilled')));
-    else if (!isEmail(val)) dispatch(setErrEmail(t('errNotEmail')));
+    if (isEmpty(val)) dispatch(setErrEmail(t('err.notFilled')));
+    else if (!isEmail(val)) dispatch(setErrEmail(t('err.notEmail')));
     else dispatch(setErrEmail());
 
     dispatch(setEmail(val));
   };
 
   const validateAndSetPassword = (val) => {
-    if (isEmpty(val)) dispatch(setErrPassword(t('errNotFilled')));
+    if (isEmpty(val)) dispatch(setErrPassword(t('err.notFilled')));
     else dispatch(setErrPassword());
 
     dispatch(setPassword(val));
   };
 
   const loginWithFirebase = async () => {
-    return dispatch(setAlert('test'));
     validateAndSetEmail(email);
     validateAndSetPassword(password);
 
@@ -81,7 +82,7 @@ const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
         onGoMain();
       } catch (err) {
         dispatch(setLoading(false));
-        dispatch(setAlert(err));
+        dispatch(setAlert(parseFirebaseError(err)));
       }
     }
   };

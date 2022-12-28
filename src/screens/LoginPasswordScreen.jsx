@@ -17,7 +17,7 @@ import SelectLoginPasswordOptionForm from '../components/forms/SelectLoginPasswo
 import LoginSignupForm from '../components/forms/LoginSignupForm';
 import ScaleInView from '../components/animations/ScaleInView';
 
-import { setRoute } from '../store/actions/core';
+import { setAlert, setRoute } from '../store/actions/core';
 import {
   setMorphing,
   setNextBottomCirclePosition,
@@ -61,7 +61,7 @@ const LoginPasswordScreen = () => {
     dispatch(setMorphing());
     delay(500)
       .then(() => dispatch(setMorphing(false)))
-      .catch((err) => console.error(err));
+      .catch((err) => dispatch(setAlert(err)));
   }, [subScreen]);
 
   return (

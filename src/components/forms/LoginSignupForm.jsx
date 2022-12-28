@@ -20,8 +20,11 @@ import {
   setErrPasswordConfirm,
 } from '../../store/actions/auth';
 
-import { getCurrentUserId } from '../../firebase/auth';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  createSignInWithPasswordAsync,
+  getCurrentUserId,
+  parseFirebaseError,
+} from '../../firebase/auth';
 import storeEmailAndPasswordAsync from '../../services/auth/storeEmailAndPasswordAsync';
 
 const styles = ScaledSheet.create({
@@ -52,6 +55,9 @@ const LoginSignupForm = ({ style, onGoMain }) => {
     if (errEmail) emailRef.current.shake();
     if (errPassword) passwordRef.current.shake();
     if (errPasswordConfirm) passwordConfirmRef.current.shake();
+    if (!email) return emailRef.current.focus();
+    if (!password) return passwordRef.current.focus();
+    if (!passwordConfirm) return passwordConfirmRef.current.focus();
   };
 
   const validateAndSetEmail = (val) => {
@@ -89,7 +95,7 @@ const LoginSignupForm = ({ style, onGoMain }) => {
     if (email && password && passwordConfirm) {
       try {
         dispatch(setLoading());
-        await createUserWithEmailAndPassword(email, password);
+        await createSignInWithPasswordAsync(email, password);
 
         await storeEmailAndPasswordAsync(email, password);
 
@@ -101,7 +107,7 @@ const LoginSignupForm = ({ style, onGoMain }) => {
         onGoMain();
       } catch (err) {
         dispatch(setLoading(false));
-        dispatch(setAlert(err));
+        dispatch(setAlert(parseFirebaseError(err)));
       }
     }
   };
@@ -122,7 +128,7 @@ const LoginSignupForm = ({ style, onGoMain }) => {
           containerStyle={styles.input}
           value={password}
           errorMessage={errPassword}
-          onBlur={() => loginWithFirebase()}
+          onBlur={() => shakeOnError()}
           onChange={(val) => validateAndSetPassword(val)}
         />
         <PasswordInput
