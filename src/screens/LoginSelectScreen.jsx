@@ -17,10 +17,17 @@ import SelectLoginTypeForm from '../components/forms/SelectLoginTypeForm';
 import SelectAppLangForm from '../components/forms/SelectAppLangForm';
 import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
 
-import { setRoute } from '../store/actions/core';
+import { setAlert, setLoading, setRoute } from '../store/actions/core';
 import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
 
-import { signInWithFacebookAccessTokenAsync, signInWithGoogleIdTokenAsync } from '../firebase/auth';
+import {
+  getCurrentUserId,
+  parseFirebaseError,
+  signInWithFacebookAccessTokenAsync,
+  signInWithGoogleIdTokenAsync,
+} from '../firebase/auth';
+import AlertBox from '../components/containers/AlertBox';
+import { setUserId } from '../store/actions/auth';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '15@s' },
@@ -64,18 +71,34 @@ const LoginSelectScreen = () => {
   useEffect(() => {
     if (googleRes?.type === 'success') {
       const { id_token } = googleRes.params;
+      dispatch(setLoading());
       signInWithGoogleIdTokenAsync(id_token)
-        .then((user) => console.log(user))
-        .catch((err) => console.error(err));
+        .then(() => {
+          dispatch(setUserId(getCurrentUserId()));
+          dispatch(setLoading(false));
+          dispatch(setRoute('main'));
+        })
+        .catch((err) => {
+          dispatch(setLoading(false));
+          dispatch(setAlert(parseFirebaseError(err)));
+        });
     }
   }, [googleRes]);
 
   useEffect(() => {
     if (facebookRes?.type === 'success') {
       const { access_token } = facebookRes.params;
+      dispatch(setLoading());
       signInWithFacebookAccessTokenAsync(access_token)
-        .then((user) => console.log(user))
-        .catch((err) => console.error(err));
+        .then(() => {
+          dispatch(setUserId(getCurrentUserId()));
+          dispatch(setLoading(false));
+          dispatch(setRoute('main'));
+        })
+        .catch((err) => {
+          dispatch(setLoading(false));
+          dispatch(setAlert(parseFirebaseError(err)));
+        });
     }
   }, [facebookRes]);
 
@@ -103,6 +126,7 @@ const LoginSelectScreen = () => {
           <SelectLoginTypeForm onSubmit={(loginType) => handleLoginTypeSelect(loginType)} />
 
           <View style={styles.bottom}>
+            <AlertBox />
             {showLanguageSelectForm && <SelectAppLangForm />}
 
             <LanguageSelectFab

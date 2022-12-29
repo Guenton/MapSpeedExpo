@@ -16,6 +16,7 @@ import LoginPasswordForm from '../components/forms/LoginPasswordForm';
 import SelectLoginPasswordOptionForm from '../components/forms/SelectLoginPasswordOptionForm';
 import LoginSignupForm from '../components/forms/LoginSignupForm';
 import ScaleInView from '../components/animations/ScaleInView';
+import AlertBox from '../components/containers/AlertBox';
 
 import { setAlert, setRoute } from '../store/actions/core';
 import {
@@ -23,7 +24,6 @@ import {
   setNextBottomCirclePosition,
   setNextTopCirclePosition,
 } from '../store/actions/animation';
-import AlertBox from '../components/containers/AlertBox';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '15@s' },

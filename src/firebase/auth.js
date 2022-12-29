@@ -57,7 +57,7 @@ export const signInWithGoogleIdTokenAsync = (idToken = '') => {
     });
 };
 export const signInWithFacebookAccessTokenAsync = (accessToken = '') => {
-  const credential = facebookProvider.credential(accessToken);
+  const credential = FacebookAuthProvider.credential(accessToken);
   return signInWithCredential(auth, credential)
     .then((userCredential) => {
       return userCredential.user;
