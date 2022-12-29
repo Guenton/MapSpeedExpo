@@ -31,6 +31,7 @@ export const facebookSignIn = () => signInWithRedirect(auth, facebookProvider);
 export const createSignInWithPasswordAsync = (email = '', password = '') =>
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
+      console.log('Firebase - Created new Email and Password SignIn');
       return userCredential.user;
     })
     .catch((err) => {
@@ -39,6 +40,7 @@ export const createSignInWithPasswordAsync = (email = '', password = '') =>
 export const signInWithPasswordAsync = (email = '', password = '') =>
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
+      console.log('Firebase - Signed in with Email and Password');
       return userCredential.user;
     })
     .catch((err) => {
@@ -50,6 +52,7 @@ export const signInWithGoogleIdTokenAsync = (idToken = '') => {
   const credential = GoogleAuthProvider.credential(idToken);
   return signInWithCredential(auth, credential)
     .then((userCredential) => {
+      console.log('Firebase - Signed in with Google');
       return userCredential.user;
     })
     .catch((err) => {
@@ -60,6 +63,7 @@ export const signInWithFacebookAccessTokenAsync = (accessToken = '') => {
   const credential = FacebookAuthProvider.credential(accessToken);
   return signInWithCredential(auth, credential)
     .then((userCredential) => {
+      console.log('Firebase - Signed in with Facebook');
       return userCredential.user;
     })
     .catch((err) => {
@@ -69,9 +73,11 @@ export const signInWithFacebookAccessTokenAsync = (accessToken = '') => {
 
 // SignOut Function
 export const firebaseSignOut = () =>
-  signOut(auth).catch((err) => {
-    throw err;
-  });
+  signOut(auth)
+    .then(() => console.log('Firebase - Signed out'))
+    .catch((err) => {
+      throw err;
+    });
 
 // Current User Information Functions
 export const getCurrentUserId = () => auth.currentUser && auth.currentUser.uid;

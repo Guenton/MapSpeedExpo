@@ -16,20 +16,19 @@ import GuentonBotomRight from '../components/images/GuentonBottomRight';
 import SelectLoginTypeForm from '../components/forms/SelectLoginTypeForm';
 import SelectAppLangForm from '../components/forms/SelectAppLangForm';
 import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
+import AlertBox from '../components/containers/AlertBox';
 
-import { setAlert, setLoading, setRoute } from '../store/actions/core';
+import storeGoogleIdTokenAsync from '../services/auth/storeGoogleIdTokenAsync';
+import storeFacebookAccessTokenAsync from '../services/auth/storeFacebookAccessTokenAsync';
 import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
+import { setAlert, setLoading, setRoute } from '../store/actions/core';
 
+import { setUserId } from '../store/actions/auth';
 import {
   getCurrentUserId,
-  parseFirebaseError,
   signInWithFacebookAccessTokenAsync,
   signInWithGoogleIdTokenAsync,
 } from '../firebase/auth';
-import AlertBox from '../components/containers/AlertBox';
-import { setUserId } from '../store/actions/auth';
-import storeGoogleIdTokenAsync from '../services/auth/storeGoogleIdTokenAsync';
-import storeFacebookAccessTokenAsync from '../services/auth/storeFacebookAccessTokenAsync';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '15@s' },
@@ -83,7 +82,7 @@ const LoginSelectScreen = () => {
         })
         .catch((err) => {
           dispatch(setLoading(false));
-          dispatch(setAlert(parseFirebaseError(err)));
+          dispatch(setAlert(err));
         });
     }
   }, [googleRes]);
@@ -101,7 +100,7 @@ const LoginSelectScreen = () => {
         })
         .catch((err) => {
           dispatch(setLoading(false));
-          dispatch(setAlert(parseFirebaseError(err)));
+          dispatch(setAlert(err));
         });
     }
   }, [facebookRes]);

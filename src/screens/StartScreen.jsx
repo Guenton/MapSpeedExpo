@@ -23,6 +23,7 @@ import getStoredFacebookAccessTokenAsync from '../services/auth/getStoredFaceboo
 import biometricPasswordSignInAsync from '../services/auth/biometricPasswordSignInAsync';
 import biometricGoogleSignInAsync from '../services/auth/biometricGoogleSignInAsync';
 import biometricFacebookSignInAsync from '../services/auth/biometricFacebokSignInAsync';
+import AlertBox from '../components/containers/AlertBox';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: {
@@ -121,6 +122,7 @@ const StartScreen = () => {
           <StartFab />
 
           <View style={styles.options}>
+            <AlertBox />
             <View>
               {showLanguageSelectForm && <SelectAppLangForm />}
 

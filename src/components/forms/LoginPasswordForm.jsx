@@ -8,6 +8,10 @@ import { useTranslation } from 'react-i18next';
 import EmailInput from '../inputs/EmailInput';
 import PasswordInput from '../inputs/PasswordInput';
 import ForgotPasswordButton from '../buttons/ForgotPasswordButton';
+import LoginButton from '../buttons/LoginButton';
+
+import storeEmailAndPasswordAsync from '../../services/auth/storeEmailAndPasswordAsync';
+import { getCurrentUserId, signInWithPasswordAsync } from '../../firebase/auth';
 
 import { setAlert, setLoading } from '../../store/actions/core';
 import {
@@ -17,9 +21,6 @@ import {
   setErrEmail,
   setErrPassword,
 } from '../../store/actions/auth';
-import LoginButton from '../buttons/LoginButton';
-import { getCurrentUserId, parseFirebaseError, signInWithPasswordAsync } from '../../firebase/auth';
-import storeEmailAndPasswordAsync from '../../services/auth/storeEmailAndPasswordAsync';
 
 const styles = ScaledSheet.create({
   container: {},
@@ -82,7 +83,7 @@ const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
         onGoMain();
       } catch (err) {
         dispatch(setLoading(false));
-        dispatch(setAlert(parseFirebaseError(err)));
+        dispatch(setAlert(err));
       }
     }
   };

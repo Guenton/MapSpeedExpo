@@ -9,6 +9,9 @@ import EmailInput from '../inputs/EmailInput';
 import PasswordInput from '../inputs/PasswordInput';
 import SignupButton from '../buttons/SignupButton';
 
+import storeEmailAndPasswordAsync from '../../services/auth/storeEmailAndPasswordAsync';
+import { createSignInWithPasswordAsync, getCurrentUserId } from '../../firebase/auth';
+
 import { setAlert, setLoading } from '../../store/actions/core';
 import {
   setUserId,
@@ -19,13 +22,6 @@ import {
   setPasswordConfirm,
   setErrPasswordConfirm,
 } from '../../store/actions/auth';
-
-import {
-  createSignInWithPasswordAsync,
-  getCurrentUserId,
-  parseFirebaseError,
-} from '../../firebase/auth';
-import storeEmailAndPasswordAsync from '../../services/auth/storeEmailAndPasswordAsync';
 
 const styles = ScaledSheet.create({
   container: {},
@@ -107,7 +103,7 @@ const LoginSignupForm = ({ style, onGoMain }) => {
         onGoMain();
       } catch (err) {
         dispatch(setLoading(false));
-        dispatch(setAlert(parseFirebaseError(err)));
+        dispatch(setAlert(err));
       }
     }
   };

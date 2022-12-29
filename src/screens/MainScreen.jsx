@@ -13,9 +13,15 @@ import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/
 import { setRoute } from '../store/actions/core';
 import { getCurrentUserId } from '../firebase/auth';
 import { setUserId } from '../store/actions/auth';
+import AlertBox from '../components/containers/AlertBox';
+import AddVinForm from '../components/forms/AddVinForm';
 
 const styles = ScaledSheet.create({
   container: {},
+  bottom: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
 });
 
 const MainScreen = () => {
@@ -48,6 +54,10 @@ const MainScreen = () => {
       {!transitioning && (
         <FadeInAppContent>
           <TopBar />
+          <View style={styles.bottom}>
+            <AddVinForm />
+            <AlertBox />
+          </View>
         </FadeInAppContent>
       )}
     </AppBackground>
