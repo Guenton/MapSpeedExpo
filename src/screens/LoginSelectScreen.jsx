@@ -28,6 +28,8 @@ import {
 } from '../firebase/auth';
 import AlertBox from '../components/containers/AlertBox';
 import { setUserId } from '../store/actions/auth';
+import storeGoogleIdTokenAsync from '../services/auth/storeGoogleIdTokenAsync';
+import storeFacebookAccessTokenAsync from '../services/auth/storeFacebookAccessTokenAsync';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '15@s' },
@@ -74,6 +76,7 @@ const LoginSelectScreen = () => {
       dispatch(setLoading());
       signInWithGoogleIdTokenAsync(id_token)
         .then(() => {
+          storeGoogleIdTokenAsync(id_token).catch((err) => setAlert(err));
           dispatch(setUserId(getCurrentUserId()));
           dispatch(setLoading(false));
           dispatch(setRoute('main'));
@@ -91,6 +94,7 @@ const LoginSelectScreen = () => {
       dispatch(setLoading());
       signInWithFacebookAccessTokenAsync(access_token)
         .then(() => {
+          storeFacebookAccessTokenAsync(access_token).catch((err) => setAlert(err));
           dispatch(setUserId(getCurrentUserId()));
           dispatch(setLoading(false));
           dispatch(setRoute('main'));

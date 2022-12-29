@@ -15,6 +15,14 @@ import StartFab from '../components/buttons/StartFab';
 import DarkModeFab from '../components/buttons/DarkModeFab';
 
 import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
+import hasBiometricsAsync from '../services/auth/hasBiometricsAsync';
+import { setAlert, setRoute } from '../store/actions/core';
+import getStoredPasswordAsync from '../services/auth/getStoredPasswordAsync';
+import getStoredGoogleIdTokenAsync from '../services/auth/getStoredGoogleIdTokenAsync';
+import getStoredFacebookAccessTokenAsync from '../services/auth/getStoredFacebookAccessTokenAsync';
+import biometricPasswordSignInAsync from '../services/auth/biometricPasswordSignInAsync';
+import biometricGoogleSignInAsync from '../services/auth/biometricGoogleSignInAsync';
+import biometricFacebookSignInAsync from '../services/auth/biometricFacebokSignInAsync';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: {
@@ -45,6 +53,10 @@ const StartScreen = () => {
 
   const [showLanguageSelectForm, setShowLanguageSelectForm] = useState(false);
 
+  const [password, setPassword] = useState(null);
+  const [googleId, setGoogleId] = useState(null);
+  const [facebookAccess, setFacebookAccess] = useState(null);
+
   useBackHandler(() => {
     BackHandler.exitApp();
     return true;
@@ -58,6 +70,44 @@ const StartScreen = () => {
   useEffect(() => {
     setShowLanguageSelectForm(false);
   }, [currentLang]);
+
+  useEffect(() => {
+    getStoredPasswordAsync()
+      .then((storedPassword) => setPassword(storedPassword))
+      .catch((err) => dispatch(setAlert(err)));
+  }, []);
+
+  useEffect(() => {
+    getStoredGoogleIdTokenAsync()
+      .then((idToken) => setGoogleId(idToken))
+      .catch((err) => dispatch(setAlert(err)));
+  }, []);
+
+  useEffect(() => {
+    getStoredFacebookAccessTokenAsync()
+      .then((accessToken) => setFacebookAccess(accessToken))
+      .catch((err) => dispatch(setAlert(err)));
+  }, []);
+
+  useEffect(() => {
+    hasBiometricsAsync()
+      .then((isAvailable) => {
+        if (isAvailable && password) {
+          biometricPasswordSignInAsync(password)
+            .then(() => dispatch(setRoute('main')))
+            .catch((err) => dispatch(setAlert(err)));
+        } else if (isAvailable && googleId) {
+          biometricGoogleSignInAsync(googleId)
+            .then(() => dispatch(setRoute('main')))
+            .catch((err) => dispatch(setAlert(err)));
+        } else if (isAvailable && facebookAccess) {
+          biometricFacebookSignInAsync(facebookAccess)
+            .then(() => dispatch(setRoute('main')))
+            .catch((err) => dispatch(setAlert(err)));
+        }
+      })
+      .catch((err) => dispatch(setAlert(err)));
+  }, [password, googleId, facebookAccess]);
 
   const toggleLanguageSelectForm = () => setShowLanguageSelectForm(!showLanguageSelectForm);
 

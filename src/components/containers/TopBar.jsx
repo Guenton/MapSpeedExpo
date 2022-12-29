@@ -6,7 +6,8 @@ import { useTranslation } from 'react-i18next';
 
 import FlatButton from '../buttons/FlatButton';
 
-import { setRoute } from '../../store/actions/core';
+import { setAlert, setRoute } from '../../store/actions/core';
+import signOutAsync from '../../services/auth/signOutAsync';
 
 const styles = ScaledSheet.create({
   container: {
@@ -24,10 +25,16 @@ const TopBar = ({ style }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  const signOut = () => {
+    signOutAsync()
+      .then(() => dispatch(setRoute('start')))
+      .catch((err) => dispatch(setAlert(err)));
+  };
+
   return (
     <View style={{ ...styles.container, ...style }}>
       <View style={styles.leftContainer}>
-        <FlatButton name="bars" onPress={() => dispatch(setRoute('start'))} />
+        <FlatButton name="bars" onPress={() => signOut()} />
       </View>
 
       <View style={styles.titleContainer}>
