@@ -3,10 +3,10 @@ import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBackHandler } from '@react-native-community/hooks';
 import { ScaledSheet, scale } from 'react-native-size-matters';
+import { ResponseType } from 'expo-auth-session';
 import Constants from 'expo-constants';
 import * as Google from 'expo-auth-session/providers/google';
 import * as Facebook from 'expo-auth-session/providers/facebook';
-import { ResponseType } from 'expo-auth-session';
 
 import AppBackground from '../components/containers/AppBackground';
 import SlidingCircles from '../components/animations/SlidingCircles';
@@ -22,7 +22,6 @@ import storeGoogleIdTokenAsync from '../services/auth/storeGoogleIdTokenAsync';
 import storeFacebookAccessTokenAsync from '../services/auth/storeFacebookAccessTokenAsync';
 import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
 import { setAlert, setLoading, setRoute } from '../store/actions/core';
-
 import { setUserId } from '../store/actions/auth';
 import {
   getCurrentUserId,
@@ -76,7 +75,6 @@ const LoginSelectScreen = () => {
       signInWithGoogleIdTokenAsync(id_token)
         .then(() => {
           storeGoogleIdTokenAsync(id_token).catch((err) => setAlert(err));
-          dispatch(setUserId(getCurrentUserId()));
           dispatch(setLoading(false));
           dispatch(setRoute('main'));
         })

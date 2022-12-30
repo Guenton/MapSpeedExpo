@@ -15,6 +15,9 @@ import { getCurrentUserId } from '../firebase/auth';
 import { setUserId } from '../store/actions/auth';
 import AlertBox from '../components/containers/AlertBox';
 import AddVinForm from '../components/forms/AddVinForm';
+import SlideInVehicleImage from '../components/animations/SlideInVehicleImage';
+import FormHeader from '../components/labels/FormHeader';
+import MainBottomContainer from '../components/containers/MainBottomContainer';
 
 const styles = ScaledSheet.create({
   container: {},
@@ -43,21 +46,23 @@ const MainScreen = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(setNextTopCirclePosition(scale(-765)));
-    dispatch(setNextBottomCirclePosition(scale(300)));
+    dispatch(setNextTopCirclePosition(scale(-775)));
+    dispatch(setNextBottomCirclePosition(scale(250)));
   }, [topCirclePosition, bottomCirclePosition]);
 
   return (
     <AppBackground>
       <SlidingCircles />
+      {/* <SlideInVehicleImage /> */}
 
       {!transitioning && (
         <FadeInAppContent>
           <TopBar />
-          <View style={styles.bottom}>
+
+          <MainBottomContainer>
             <AddVinForm />
             <AlertBox />
-          </View>
+          </MainBottomContainer>
         </FadeInAppContent>
       )}
     </AppBackground>
