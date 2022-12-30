@@ -8,6 +8,7 @@ import FlatButton from '../buttons/FlatButton';
 
 import { setAlert, setRoute } from '../../store/actions/core';
 import signOutAsync from '../../services/auth/signOutAsync';
+import Header from '../labels/Header';
 
 const styles = ScaledSheet.create({
   container: {
@@ -17,7 +18,7 @@ const styles = ScaledSheet.create({
     alignItems: 'center',
   },
   leftContainer: { margin: '3@s' },
-  titleContainer: {},
+  titleContainer: { marginRight: '20@s', marginTop: '5@s' },
   rightContainer: { margin: '3@s' },
 });
 
@@ -38,7 +39,7 @@ const TopBar = ({ style }) => {
       </View>
 
       <View style={styles.titleContainer}>
-        <Text>{t('myVehicles')}</Text>
+        <Header label={t('myVehicles')} />
       </View>
 
       <View style={styles.rightContainer}></View>

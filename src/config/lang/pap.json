@@ -16,7 +16,11 @@
   "signUp": "Registra",
   "signup": "Registra",
   "login": "Lògin",
-  "myVehicles": "My Vehículonan",
+  "add": "Añadi",
+  "myVehicles": "My Vehíkulonan",
+  "vinNumber": "Number di VIN",
+  "addVinNumber": "Añadi number di VIN",
+  "addVinNumberDesc": "Por fabor registra un number di VIN pa añadi e vehíkulo na bo flota",
   "err": {
     "notFilled": "Mester wòrdu yená",
     "notEmail": "Mester ta un E-Mail valido",

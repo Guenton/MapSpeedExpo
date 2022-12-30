@@ -16,7 +16,11 @@
   "signUp": "Regístrate",
   "signup": "Regístrate",
   "login": "Iniciar",
-  "myVehicles": "My Vehícles",
+  "add": "Agregar",
+  "myVehicles": "Mis Vehículos",
+  "vinNumber": "Número de VIN",
+  "addVinNumber": "Agregar número de VIN",
+  "addVinNumberDesc": "Por favor agrege un número de VIN para sumar el vehículo a su flota",
   "err": {
     "notFilled": "Debe ser provisto",
     "notEmail": "Debe ser un correo clectrónico válido",

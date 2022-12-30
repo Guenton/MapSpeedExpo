@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
 
-import { white, black } from '../../config/colors';
+import { white, black, primary } from '../../config/colors';
 
 const styles = ScaledSheet.create({
   container: {
@@ -14,10 +15,12 @@ const styles = ScaledSheet.create({
   },
 });
 
-const Header = ({ label, isBlack, style }) => {
+const Header = ({ style, label }) => {
+  const isDark = useSelector((state) => state.core.isDark);
+
   return (
     <View style={{ ...styles.container, ...style }}>
-      <Text style={{ ...styles.text, color: isBlack ? black : white }}>{label}</Text>
+      <Text style={{ ...styles.text, color: primary }}>{label}</Text>
     </View>
   );
 };

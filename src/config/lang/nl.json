@@ -16,7 +16,11 @@
   "signUp": "Registreer",
   "signup": "Registreer",
   "login": "Inloggen",
+  "add": "Toevoegen",
   "myVehicles": "Mijn Voertuigen",
+  "vinNumber": "VIN Nummer",
+  "addVinNumber": "VIN Nummer Toevoegen",
+  "addVinNumberDesc": "Voer aub een VIN Nummer in om het voertuig tot uw bestand toe te voegen",
   "err": {
     "notFilled": "Moet worden ingevuld",
     "notEmail": "Moet een geldig e-mailadres zijn",

@@ -6,18 +6,20 @@ import { isEmpty, isUppercase } from 'validator';
 import { useTranslation } from 'react-i18next';
 
 import VinInput from '../inputs/VinInput';
-import LoginButton from '../buttons/LoginButton';
+import AddButton from '../buttons/AddButton';
+import FormHeader from '../labels/FormHeader';
 
 import { setAlert, setLoading } from '../../store/actions/core';
 import { setErrVin, setVin } from '../../store/actions/vehicle';
-import { fetchVinApiEndpoint, fetchVinApiKey } from '../../firebase/vinApi';
+import { decodeVin } from '../../services/vin';
 
 const styles = ScaledSheet.create({
   container: { height: '250@s' },
   inputContainer: { width: '290@s', alignSelf: 'center' },
+  header: { marginBottom: '18@s' },
   input: { marginBottom: '18@s' },
   center: { alignSelf: 'center' },
-  loginButton: { marginTop: '30@s' },
+  addButton: { marginTop: '30@s' },
 });
 
 const AddVinForm = ({ style }) => {
@@ -27,17 +29,6 @@ const AddVinForm = ({ style }) => {
   const vinRef = createRef();
   const vin = useSelector((state) => state.vehicle.vin);
   const errVin = useSelector((state) => state.vehicle.errVin);
-
-  const [vinApiEndpoint, setVinApiEndpoint] = useState(null);
-  const [vinApiKey, setVinApiKey] = useState(null);
-
-  useEffect(() => {
-    return fetchVinApiEndpoint(setVinApiEndpoint);
-  }, [vinApiEndpoint]);
-
-  useEffect(() => {
-    return fetchVinApiKey(setVinApiKey);
-  }, [vinApiKey]);
 
   const shakeOnError = () => {
     if (errVin) vinRef.current.shake();
@@ -62,7 +53,7 @@ const AddVinForm = ({ style }) => {
         dispatch(setLoading());
 
         // Run Vin Decoder
-        console.log(vin);
+        const vehicleInfo = await decodeVin(vin);
 
         // Dispatch Result
 
@@ -79,6 +70,11 @@ const AddVinForm = ({ style }) => {
   return (
     <View style={{ ...styles.container, ...style }}>
       <View style={styles.inputContainer}>
+        <FormHeader
+          style={styles.header}
+          label={t('addVinNumber')}
+          subLabel={t('addVinNumberDesc')}
+        />
         <VinInput
           inputRef={vinRef}
           containerStyle={styles.input}
@@ -87,7 +83,11 @@ const AddVinForm = ({ style }) => {
           onBlur={() => resolveVinNumber()}
           onChange={(val) => validateAndSetVin(val)}
         />
-        <LoginButton style={styles.loginButton} onPress={() => resolveVinNumber()} />
+        <AddButton
+          style={styles.addButton}
+          disabled={!vin || errVin}
+          onPress={() => resolveVinNumber()}
+        />
       </View>
     </View>
   );
