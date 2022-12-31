@@ -9,7 +9,7 @@ const paths = () => ({
 // Refferences
 const refs = () => ({
   endpoint: ref(db, paths().vinApi + 'endpoint'),
-  key: ref(db, paths().vinApi + 'key'),
+  autoDevKey: ref(db, paths().vinApi + 'autoDevKey'),
 });
 
 export const watchVinApiEndpoint = (handler = () => {}) => {
@@ -30,16 +30,16 @@ export const fetchVinApiEndpoint = () => {
     });
 };
 
-export const watchVinApiKey = (handler = () => {}) => {
-  return onValue(refs().key, (snapshot) => {
-    console.log('Firebase - Fetching VIN Api Key');
+export const watchAutoDevKey = (handler = () => {}) => {
+  return onValue(refs().autoDevKey, (snapshot) => {
+    console.log('Firebase - Watching auto.dev Api Key');
     if (snapshot.exists()) handler(snapshot.val());
   });
 };
 
-export const fetchVinApiKey = () => {
-  console.log('Firebase - Fetching VIN Api Key');
-  return get(refs().key)
+export const fetchAutoDevKey = () => {
+  console.log('Firebase - Fetching auto.dev Api Key');
+  return get(refs().autoDevKey)
     .then((snapshot) => {
       if (snapshot.exists()) return snapshot.val();
     })

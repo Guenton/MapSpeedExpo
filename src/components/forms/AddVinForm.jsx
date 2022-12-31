@@ -11,7 +11,8 @@ import FormHeader from '../labels/FormHeader';
 
 import { setAlert, setLoading } from '../../store/actions/core';
 import { setErrVin, setVin } from '../../store/actions/vehicle';
-import { decodeVin } from '../../services/vin';
+import decodeVinWithAutoDev from '../../services/vin/decodeVinWIthAutoDev';
+import decodeVinWithNhtsa from '../../services/vin/decodeVinWithNhtsa';
 
 const styles = ScaledSheet.create({
   container: { height: '250@s' },
@@ -53,7 +54,8 @@ const AddVinForm = ({ style }) => {
         dispatch(setLoading());
 
         // Run Vin Decoder
-        const vehicleInfo = await decodeVin(vin);
+        const vehicleInfo = await decodeVinWithNhtsa(vin);
+        // const vehicleInfo = await decodeVinWithAutoDev(vin);
 
         // Dispatch Result
 

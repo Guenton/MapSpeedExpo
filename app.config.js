@@ -23,6 +23,8 @@ export default {
       MEASUREMENT_ID: process.env.MEASUREMENT_ID,
       GOOGLE_WEB_CLIENT_ID: process.env.GOOGLE_WEB_CLIENT_ID,
       FACEBOOK_ID: process.env.FACEBOOK_ID,
+      AUTO_DEV_URL: process.env.AUTO_DEV_URL,
+      NHTSA_URL: process.env.NHTSA_URL,
     },
     splash: {
       image: './assets/splash.png',
