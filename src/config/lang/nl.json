@@ -1,4 +1,5 @@
 {
+  "mapSpeed": "M.A.P. Speed",
   "loginWith": "Inloggen met",
   "and": "en",
   "username": "Gebruikersnaam",
@@ -18,6 +19,7 @@
   "login": "Inloggen",
   "add": "Toevoegen",
   "myVehicles": "Mijn Voertuigen",
+  "vehicleDetails": "Voertuig Eigenschappen",
   "vinNumber": "VIN Nummer",
   "addVinNumber": "VIN Nummer Toevoegen",
   "addVinNumberDesc": "Voer aub een VIN Nummer in om het voertuig tot uw bestand toe te voegen",

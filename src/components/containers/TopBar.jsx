@@ -22,7 +22,7 @@ const styles = ScaledSheet.create({
   rightContainer: { margin: '3@s' },
 });
 
-const TopBar = ({ style }) => {
+const TopBar = ({ style, label }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -39,7 +39,7 @@ const TopBar = ({ style }) => {
       </View>
 
       <View style={styles.titleContainer}>
-        <Header label={t('myVehicles')} />
+        <Header label={label || t('mapSpeed')} />
       </View>
 
       <View style={styles.rightContainer}></View>

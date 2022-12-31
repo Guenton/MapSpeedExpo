@@ -1,4 +1,5 @@
 {
+  "mapSpeed": "M.A.P. Speed",
   "loginWith": "Iniciar con",
   "and": "y",
   "username": "Usuario",
@@ -18,6 +19,7 @@
   "login": "Iniciar",
   "add": "Agregar",
   "myVehicles": "Mis Vehículos",
+  "vehicleDetails": "Detalles de Vehículo",
   "vinNumber": "Número de VIN",
   "addVinNumber": "Agregar número de VIN",
   "addVinNumberDesc": "Por favor agrege un número de VIN para sumar el vehículo a su flota",

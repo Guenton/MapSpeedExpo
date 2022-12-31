@@ -5,7 +5,7 @@ import { ScaledSheet } from 'react-native-size-matters';
 import { isEmpty, isUppercase } from 'validator';
 import { useTranslation } from 'react-i18next';
 
-import VinInput from '../inputs/VinInput';
+import VinInputSmall from '../inputs/VinInputSmall';
 import AddButton from '../buttons/AddButton';
 import FormHeader from '../labels/FormHeader';
 
@@ -15,15 +15,15 @@ import { setErrVin, setVin, setVehicleDetails } from '../../store/actions/vehicl
 import decodeVinWithNhtsa from '../../services/vin/decodeVinWithNhtsa';
 
 const styles = ScaledSheet.create({
-  container: { height: '250@s' },
-  inputContainer: { width: '290@s', alignSelf: 'center' },
+  container: { flex: 1 },
+  inputContainer: { marginLeft: '3@s' },
   header: { marginBottom: '18@s' },
   input: { marginBottom: '18@s' },
   center: { alignSelf: 'center' },
   addButton: { marginTop: '30@s' },
 });
 
-const AddVinForm = ({ style }) => {
+const VehicleDetailForm = ({ style }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -69,12 +69,7 @@ const AddVinForm = ({ style }) => {
   return (
     <View style={{ ...styles.container, ...style }}>
       <View style={styles.inputContainer}>
-        <FormHeader
-          style={styles.header}
-          label={t('addVinNumber')}
-          subLabel={t('addVinNumberDesc')}
-        />
-        <VinInput
+        <VinInputSmall
           inputRef={vinRef}
           containerStyle={styles.input}
           value={vin}
@@ -92,4 +87,4 @@ const AddVinForm = ({ style }) => {
   );
 };
 
-export default AddVinForm;
+export default VehicleDetailForm;

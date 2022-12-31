@@ -121,8 +121,8 @@ const StartScreen = () => {
           <MapSpeedLogo style={styles.mapSpeedlogo} />
           <StartFab />
 
+          <AlertBox />
           <View style={styles.options}>
-            <AlertBox />
             <View>
               {showLanguageSelectForm && <SelectAppLangForm />}
 

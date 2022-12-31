@@ -1,4 +1,5 @@
 {
+  "mapSpeed": "M.A.P. Speed",
   "loginWith": "Login with",
   "and": "and",
   "username": "Username",
@@ -18,6 +19,7 @@
   "login": "Login",
   "add": "Add",
   "myVehicles": "My Vehicles",
+  "vehicleDetails": "Vehicle Details",
   "vinNumber": "VIN Number",
   "addVinNumber": "Add VIN number",
   "addVinNumberDesc": "Please submit a VIN Number to add the Vehicle to your fleet",

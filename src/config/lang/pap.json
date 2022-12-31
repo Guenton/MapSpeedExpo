@@ -1,4 +1,5 @@
 {
+  "mapSpeed": "M.A.P. Speed",
   "loginWith": "Lògin ku",
   "and": "i",
   "username": "Usuario",
@@ -17,7 +18,8 @@
   "signup": "Registra",
   "login": "Lògin",
   "add": "Añadi",
-  "myVehicles": "My Vehíkulonan",
+  "myVehicles": "Mi Vehíkulonan",
+  "vehicleDetails": "Spesifikashon di Vehíkulo",
   "vinNumber": "Number di VIN",
   "addVinNumber": "Añadi number di VIN",
   "addVinNumberDesc": "Por fabor registra un number di VIN pa añadi e vehíkulo na bo flota",

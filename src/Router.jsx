@@ -17,6 +17,7 @@ import LoginSelectScreen from './screens/LoginSelectScreen';
 import { white, black } from './config/colors';
 import MainScreen from './screens/MainScreen';
 import isAndroid from './services/core/isAndroid';
+import VehicleDetailScreen from './screens/VehicleDetailScreen';
 
 const Router = () => {
   const dispatch = useDispatch();
@@ -59,6 +60,8 @@ const Router = () => {
       {/* {route === 'login-reset' && <LoginResetScreen />} */}
 
       {route === 'main' && <MainScreen />}
+
+      {route === 'vehicle-detail' && <VehicleDetailScreen />}
     </SafeAreaView>
   );
 };
