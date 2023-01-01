@@ -34,6 +34,7 @@ const VinInputSmall = ({
   errorMessage,
   onFocus,
   onBlur,
+  onSubmit,
   onChange,
 }) => {
   const { t } = useTranslation();
@@ -57,9 +58,10 @@ const VinInputSmall = ({
       textContentType="none"
       placeholder={t('vinNumber')}
       leftIcon={<Icon type="font-awesome-5" name="barcode" size={scale(14)} color={primary} />}
-      onFocus={() => (onFocus ? onFocus() : {})}
-      onBlur={() => (onBlur ? onBlur() : {})}
-      onChangeText={(val) => (onChange ? onChange(val) : {})}
+      onFocus={() => (onFocus ? onFocus() : null)}
+      onBlur={() => (onBlur ? onBlur() : null)}
+      onSubmitEditing={() => (onSubmit ? onSubmit() : null)}
+      onChangeText={(val) => (onChange ? onChange(val) : null)}
     />
   );
 };

@@ -41,6 +41,7 @@
     "notEmail": "Mester ta un E-Mail valido",
     "notLongPassword": "Klave ta muchu kòrtiku",
     "notStrongPassword": "Klave no ta sufisientemente fuerte",
-    "notMatchingPassword": "E klavenan no ta kuadra ku otro"
+    "notMatchingPassword": "E klavenan no ta kuadra ku otro",
+    "wrongYearLength": "Aña mester ta 4 sifra"
   }
 }

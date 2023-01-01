@@ -34,6 +34,7 @@ const NumberOfDoorsInput = ({
   errorMessage,
   onFocus,
   onBlur,
+  onSubmit,
   onChange,
 }) => {
   const { t } = useTranslation();
@@ -56,9 +57,10 @@ const NumberOfDoorsInput = ({
       keyboardType="default"
       textContentType="none"
       placeholder={t('doors')}
-      onFocus={() => (onFocus ? onFocus() : {})}
-      onBlur={() => (onBlur ? onBlur() : {})}
-      onChangeText={(val) => (onChange ? onChange(val) : {})}
+      onFocus={() => (onFocus ? onFocus() : null)}
+      onBlur={() => (onBlur ? onBlur() : null)}
+      onSubmitEditing={() => (onSubmit ? onSubmit() : null)}
+      onChangeText={(val) => (onChange ? onChange(val) : null)}
     />
   );
 };

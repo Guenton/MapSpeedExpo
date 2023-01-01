@@ -23,3 +23,9 @@ export const initLanguages = () => {
     compatibilityJSON: 'v3',
   });
 };
+
+export const setLanguageAsync = (language = '') => {
+  return i18n.changeLanguage(language).catch((err) => {
+    throw err;
+  });
+};

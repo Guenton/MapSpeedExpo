@@ -34,6 +34,7 @@ const YearInput = ({
   errorMessage,
   onFocus,
   onBlur,
+  onSubmit,
   onChange,
 }) => {
   const { t } = useTranslation();
@@ -56,9 +57,10 @@ const YearInput = ({
       keyboardType="default"
       textContentType="none"
       placeholder={t('year')}
-      onFocus={() => (onFocus ? onFocus() : {})}
-      onBlur={() => (onBlur ? onBlur() : {})}
-      onChangeText={(val) => (onChange ? onChange(val) : {})}
+      onFocus={() => (onFocus ? onFocus() : null)}
+      onBlur={() => (onBlur ? onBlur() : null)}
+      onSubmitEditing={() => (onSubmit ? onSubmit() : null)}
+      onChangeText={(val) => (onChange ? onChange(val) : null)}
     />
   );
 };

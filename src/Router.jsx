@@ -3,20 +3,22 @@ import { SafeAreaView, Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as NavigationBar from 'expo-navigation-bar';
 
-import { setKeyboardOpen } from './store/actions/core';
+import { setAlert, setKeyboardOpen } from './store/actions/core';
 import { setFirebaseLanguage } from './firebase/auth';
+import { setLanguageAsync } from './config/lang';
+import { white, black } from './config/colors';
+import isAndroid from './services/core/isAndroid';
 
+import StartScreen from './screens/StartScreen';
+
+import LoginSelectScreen from './screens/LoginSelectScreen';
 // import LoginBiometricScreen from './screens/LoginBiometricScreen';
 import LoginPasswordScreen from './screens/LoginPasswordScreen';
 // import LoginResetScreen from './screens/LoginResetScreen';
 // import LoginSignupScreen from './screens/LoginSignupScreen';
 
-import StartScreen from './screens/StartScreen';
-import LoginSelectScreen from './screens/LoginSelectScreen';
-
-import { white, black } from './config/colors';
 import MainScreen from './screens/MainScreen';
-import isAndroid from './services/core/isAndroid';
+
 import VehicleDetailScreen from './screens/VehicleDetailScreen';
 
 const Router = () => {
@@ -47,6 +49,7 @@ const Router = () => {
 
   useEffect(() => {
     setFirebaseLanguage(currentLang);
+    setLanguageAsync(currentLang).catch((err) => dispatch(setAlert(err)));
   }, [currentLang]);
 
   return (

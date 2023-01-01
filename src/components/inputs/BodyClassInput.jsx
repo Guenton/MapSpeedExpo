@@ -35,6 +35,7 @@ const BodyClassInput = ({
   onFocus,
   onBlur,
   onChange,
+  onSubmit,
 }) => {
   const { t } = useTranslation();
 
@@ -56,9 +57,10 @@ const BodyClassInput = ({
       keyboardType="default"
       textContentType="none"
       placeholder={t('bodyClass')}
-      onFocus={() => (onFocus ? onFocus() : {})}
-      onBlur={() => (onBlur ? onBlur() : {})}
-      onChangeText={(val) => (onChange ? onChange(val) : {})}
+      onFocus={() => (onFocus ? onFocus() : null)}
+      onBlur={() => (onBlur ? onBlur() : null)}
+      onSubmitEditing={() => (onSubmit ? onSubmit() : null)}
+      onChangeText={(val) => (onChange ? onChange(val) : null)}
     />
   );
 };

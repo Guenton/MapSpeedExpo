@@ -33,7 +33,7 @@ const AddVinForm = ({ style }) => {
 
   const shakeOnError = () => {
     if (errVin) vinRef.current.shake();
-    if (!vinRef) return vinRef.current.focus();
+    if (!vin) return vinRef.current.focus();
   };
 
   const validateAndSetVin = (val) => {

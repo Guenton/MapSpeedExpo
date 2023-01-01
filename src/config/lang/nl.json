@@ -25,13 +25,13 @@
   "addVinNumberDesc": "Voer aub een VIN Nummer in om het voertuig tot uw bestand toe te voegen",
   "make": "Merk",
   "model": "Model",
-  "year": "BouwJaar",
+  "year": "Bouwjaar",
   "bodyClass": "Clase",
   "numOfDoors": "Deuren",
   "engineInfo": "Motor",
-  "engineCylinders": "engineCylinders",
-  "engineCC": "engineCC",
-  "engineL": "engineL",
+  "engineCylinders": "Cilinders",
+  "engineCC": "CC",
+  "engineL": "Liters",
   "transmissionType": "Transmissie",
   "transmissionSpeeds": "Versnellingen",
   "fuel": "Brandstof",
@@ -41,6 +41,7 @@
     "notEmail": "Moet een geldig e-mailadres zijn",
     "notLongPassword": "Wachtwoord is te kort",
     "notStrongPassword": "Wachtwoord is niet sterk genoeg",
-    "notMatchingPassword": "Wachtwoorden komen niet overeen"
+    "notMatchingPassword": "Wachtwoorden komen niet overeen",
+    "wrongYearLength": "Bouwjaar moet 4 cijfers zijn"
   }
 }

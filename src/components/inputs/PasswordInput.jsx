@@ -29,6 +29,7 @@ const PasswordInput = ({
   errorMessage,
   onFocus,
   onBlur,
+  onSubmit,
   onChange,
 }) => {
   const { t } = useTranslation();
@@ -55,9 +56,10 @@ const PasswordInput = ({
       secureTextEntry
       placeholder={t(variant())}
       leftIcon={<Icon type="font-awesome-5" name="key" size={scale(16)} color={primary} />}
-      onFocus={() => (onFocus ? onFocus() : {})}
-      onBlur={() => (onBlur ? onBlur() : {})}
-      onChangeText={(val) => (onChange ? onChange(val) : {})}
+      onFocus={() => (onFocus ? onFocus() : null)}
+      onBlur={() => (onBlur ? onBlur() : null)}
+      onSubmitEditing={() => (onSubmit ? onSubmit() : null)}
+      onChangeText={(val) => (onChange ? onChange(val) : null)}
     />
   );
 };

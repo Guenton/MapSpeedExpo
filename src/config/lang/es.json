@@ -41,6 +41,7 @@
     "notEmail": "Debe ser un correo clectrónico válido",
     "notLongPassword": "La contraseña es demasiado corta",
     "notStrongPassword": "La contraseña no es lo suficientemente fuerte",
-    "notMatchingPassword": "Las contraseñas no coinciden"
+    "notMatchingPassword": "Las contraseñas no coinciden",
+    "wrongYearLength": "Año tiene que ser 4 cifras"
   }
 }

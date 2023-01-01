@@ -20,7 +20,16 @@ const styles = ScaledSheet.create({
   },
 });
 
-const VinInput = ({ inputRef, containerStyle, value, errorMessage, onFocus, onBlur, onChange }) => {
+const VinInput = ({
+  inputRef,
+  containerStyle,
+  value,
+  errorMessage,
+  onFocus,
+  onBlur,
+  onSubmit,
+  onChange,
+}) => {
   const { t } = useTranslation();
 
   const isDark = useSelector((state) => state.core.isDark);
@@ -39,9 +48,10 @@ const VinInput = ({ inputRef, containerStyle, value, errorMessage, onFocus, onBl
       textContentType="none"
       placeholder={t('vinNumber')}
       leftIcon={<Icon type="font-awesome-5" name="barcode" size={scale(16)} color={primary} />}
-      onFocus={() => (onFocus ? onFocus() : {})}
-      onBlur={() => (onBlur ? onBlur() : {})}
-      onChangeText={(val) => (onChange ? onChange(val) : {})}
+      onFocus={() => (onFocus ? onFocus() : null)}
+      onBlur={() => (onBlur ? onBlur() : null)}
+      onSubmitEditing={() => (onSubmit ? onSubmit() : null)}
+      onChangeText={(val) => (onChange ? onChange(val) : null)}
     />
   );
 };

@@ -34,6 +34,7 @@ const LabeledFormInput = ({
   flex,
   onFocus,
   onBlur,
+  onSubmit,
   onChange,
 }) => {
   const isDark = useSelector((state) => state.core.isDark);
@@ -52,9 +53,10 @@ const LabeledFormInput = ({
       keyboardType="default"
       textContentType="none"
       placeholder={label}
-      onFocus={() => (onFocus ? onFocus() : {})}
-      onBlur={() => (onBlur ? onBlur() : {})}
-      onChangeText={(val) => (onChange ? onChange(val) : {})}
+      onFocus={() => (onFocus ? onFocus() : null)}
+      onBlur={() => (onBlur ? onBlur() : null)}
+      onSubmitEditing={() => (onSubmit ? onSubmit() : null)}
+      onChangeText={(val) => (onChange ? onChange(val) : null)}
     />
   );
 };
