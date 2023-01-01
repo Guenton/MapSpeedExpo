@@ -1,13 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Icon, Input } from 'react-native-elements';
 import { ScaledSheet, scale } from 'react-native-size-matters';
 import { useTranslation } from 'react-i18next';
 
-import { primary } from '../../config/colors';
+import { primary, white } from '../../config/colors';
 
 const styles = ScaledSheet.create({
   container: {
-    height: '30@s',
+    height: '50@s',
     width: '250@s',
   },
   inputContainer: {
@@ -37,6 +38,8 @@ const VinInputSmall = ({
 }) => {
   const { t } = useTranslation();
 
+  const isDark = useSelector((state) => state.core.isDark);
+
   return (
     <Input
       ref={inputRef}
@@ -44,7 +47,7 @@ const VinInputSmall = ({
       errorMessage={errorMessage}
       containerStyle={{ ...styles.container, ...containerStyle }}
       errorStyle={styles.error}
-      inputStyle={styles.text}
+      inputStyle={{ ...styles.text, color: isDark ? white : null }}
       inputContainerStyle={styles.inputContainer}
       labelStyle={styles.label}
       label={t('vinNumber')}

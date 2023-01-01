@@ -5,22 +5,28 @@ import { ScaledSheet } from 'react-native-size-matters';
 import { isEmpty, isUppercase } from 'validator';
 import { useTranslation } from 'react-i18next';
 
+import ColumnFormRow from '../containers/ColumnFormRow';
+import ConfirmButton from '../buttons/ConfirmButton';
 import VinInputSmall from '../inputs/VinInputSmall';
-import AddButton from '../buttons/AddButton';
-import FormHeader from '../labels/FormHeader';
 
 import { setAlert, setLoading, setRoute } from '../../store/actions/core';
 import { setErrVin, setVin, setVehicleDetails } from '../../store/actions/vehicle';
 
 import decodeVinWithNhtsa from '../../services/vin/decodeVinWithNhtsa';
+import MakeInput from '../inputs/MakeInput';
+import ModelInput from '../inputs/ModelInput';
+import BodyClassInput from '../inputs/BodyClassInput';
+import YearInput from '../inputs/YearInput';
+import NumberOfDoorsInput from '../inputs/NumberOfDoorsInput';
+import Spacer from '../containers/Spacer';
+import LabeledFormInput from '../inputs/LabeledFormInput';
 
 const styles = ScaledSheet.create({
   container: { flex: 1 },
-  inputContainer: { marginLeft: '3@s' },
+  inputContainer: { marginHorizontal: '3@s' },
   header: { marginBottom: '18@s' },
-  input: { marginBottom: '18@s' },
   center: { alignSelf: 'center' },
-  addButton: { marginTop: '30@s' },
+  button: { marginTop: '30@s' },
 });
 
 const VehicleDetailForm = ({ style }) => {
@@ -28,7 +34,25 @@ const VehicleDetailForm = ({ style }) => {
   const dispatch = useDispatch();
 
   const vinRef = createRef();
+
   const vin = useSelector((state) => state.vehicle.vin);
+  const make = useSelector((state) => state.vehicle.make);
+  const model = useSelector((state) => state.vehicle.model);
+  const year = useSelector((state) => state.vehicle.year);
+  const bodyClass = useSelector((state) => state.vehicle.bodyClass);
+  const numOfDoors = useSelector((state) => state.vehicle.numOfDoors);
+
+  const engineInfo = useSelector((state) => state.vehicle.engineInfo);
+  const engineCylinders = useSelector((state) => state.vehicle.engineCylinders);
+  const engineCC = useSelector((state) => state.vehicle.engineCC);
+  const engineL = useSelector((state) => state.vehicle.engineL);
+
+  const transmissionType = useSelector((state) => state.vehicle.transmissionType);
+  const transmissionSpeeds = useSelector((state) => state.vehicle.transmissionSpeeds);
+
+  const fuel = useSelector((state) => state.vehicle.fuel);
+  const valveTrain = useSelector((state) => state.vehicle.valveTrain);
+
   const errVin = useSelector((state) => state.vehicle.errVin);
 
   const shakeOnError = () => {
@@ -57,8 +81,6 @@ const VehicleDetailForm = ({ style }) => {
 
         dispatch(setVehicleDetails(vehicleInfo));
         dispatch(setLoading(false));
-
-        dispatch(setRoute('vehicle-detail'));
       } catch (err) {
         dispatch(setLoading(false));
         dispatch(setAlert(err));
@@ -77,8 +99,58 @@ const VehicleDetailForm = ({ style }) => {
           onBlur={() => resolveVinNumber()}
           onChange={(val) => validateAndSetVin(val)}
         />
-        <AddButton
-          style={styles.addButton}
+
+        <Spacer />
+
+        <ColumnFormRow>
+          <MakeInput value={make} onBlur={() => null} onChange={(val) => {}} />
+          <ModelInput value={model} onBlur={() => null} onChange={(val) => {}} />
+        </ColumnFormRow>
+
+        <ColumnFormRow>
+          <BodyClassInput value={bodyClass} onBlur={() => null} onChange={(val) => {}} />
+          <YearInput value={year} onBlur={() => null} onChange={(val) => {}} />
+          <NumberOfDoorsInput value={numOfDoors} onBlur={() => null} onChange={(val) => {}} />
+        </ColumnFormRow>
+
+        <Spacer />
+
+        <ColumnFormRow>
+          <LabeledFormInput
+            value={engineCylinders}
+            label={t('engineCylinders')}
+            onChange={(val) => {}}
+          />
+          <LabeledFormInput value={engineCC} label={t('engineCC')} onChange={(val) => {}} />
+          <LabeledFormInput value={engineL} label={t('engineL')} onChange={(val) => {}} />
+        </ColumnFormRow>
+
+        <ColumnFormRow>
+          <LabeledFormInput value={engineInfo} label={t('engineInfo')} onChange={(val) => {}} />
+        </ColumnFormRow>
+
+        <Spacer />
+
+        <ColumnFormRow>
+          <LabeledFormInput
+            value={transmissionType}
+            label={t('transmissionType')}
+            onChange={(val) => {}}
+          />
+          <LabeledFormInput
+            value={transmissionSpeeds}
+            label={t('transmissionSpeeds')}
+            onChange={(val) => {}}
+          />
+        </ColumnFormRow>
+
+        <ColumnFormRow>
+          <LabeledFormInput value={fuel} label={t('fuel')} onChange={(val) => {}} />
+          <LabeledFormInput value={valveTrain} label={t('valveTrain')} onChange={(val) => {}} />
+        </ColumnFormRow>
+
+        <ConfirmButton
+          style={styles.button}
           disabled={!vin || errVin}
           onPress={() => resolveVinNumber()}
         />

@@ -14,7 +14,7 @@ const decodeVinWithNhtsa = async (vin = '') => {
       make: data.Results[7].Value,
       model: data.Results[9].Value,
       year: data.Results[10].Value,
-      class: data.Results[23].Value,
+      bodyClass: data.Results[23].Value,
       numOfDoors: data.Results[24].Value,
       transmissionType: data.Results[49].Value,
       transmissionSpeeds: data.Results[50].Value,

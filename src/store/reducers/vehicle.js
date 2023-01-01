@@ -2,11 +2,10 @@ import { SET_ERR_VIN, SET_VEHICLE_DETAILS, SET_VIN } from '../actions/vehicle';
 
 const initialState = {
   vin: '',
-  errVin: '',
   make: '',
   model: '',
   year: '',
-  class: '',
+  bodyClass: '',
   numOfDoors: '',
   transmissionType: '',
   transmissionSpeeds: '',
@@ -16,6 +15,7 @@ const initialState = {
   engineInfo: '',
   fuel: '',
   valveTrain: '',
+  errVin: '',
 };
 
 const vehicleReducer = (state = initialState, action) => {

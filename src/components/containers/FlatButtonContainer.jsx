@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
 import { TouchableOpacity } from 'react-native';
 
-import { primary, white, grey } from '../../config/colors';
+import { primary, white, black } from '../../config/colors';
 
 const width = Dimensions.get('window').width * 0.08;
 const styles = ScaledSheet.create({
@@ -22,7 +22,7 @@ const FlatButtonContainer = ({ style, children, size, reverse, onPress }) => {
 
   useEffect(() => {
     if (reverse) setBackgroundColor(primary);
-    else setBackgroundColor(isDark ? grey : white);
+    else setBackgroundColor(isDark ? black : white);
   }, [isDark, primary, reverse]);
 
   const customSize = size ? { width: size, height: size, borderRadius: size } : {};

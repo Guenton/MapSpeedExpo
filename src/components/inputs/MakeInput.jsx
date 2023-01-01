@@ -1,14 +1,21 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Icon, Input } from 'react-native-elements';
-import { ScaledSheet, scale } from 'react-native-size-matters';
+import { Input } from 'react-native-elements';
+import { ScaledSheet } from 'react-native-size-matters';
 import { useTranslation } from 'react-i18next';
 
-import { primary, white } from '../../config/colors';
+import { white } from '../../config/colors';
 
 const styles = ScaledSheet.create({
   container: {
-    height: '40@s',
+    height: '30@s',
+    flex: 1,
+  },
+  inputContainer: {
+    height: '30@s',
+  },
+  label: {
+    fontSize: '12@s',
   },
   error: {
     marginTop: 0,
@@ -20,11 +27,9 @@ const styles = ScaledSheet.create({
   },
 });
 
-const PasswordInput = ({
+const MakeInput = ({
   inputRef,
   containerStyle,
-  isConfirm,
-  isNew,
   value,
   errorMessage,
   onFocus,
@@ -35,12 +40,6 @@ const PasswordInput = ({
 
   const isDark = useSelector((state) => state.core.isDark);
 
-  const variant = () => {
-    if (isConfirm) return 'confirmPassword';
-    else if (isNew) return 'newPassword';
-    else return 'password';
-  };
-
   return (
     <Input
       ref={inputRef}
@@ -49,12 +48,12 @@ const PasswordInput = ({
       containerStyle={{ ...styles.container, ...containerStyle }}
       errorStyle={styles.error}
       inputStyle={{ ...styles.text, color: isDark ? white : null }}
-      autoCapitalize="none"
-      autoCompleteType="password"
-      textContentType={isNew ? 'newPassword' : 'password'}
-      secureTextEntry
-      placeholder={t(variant())}
-      leftIcon={<Icon type="font-awesome-5" name="key" size={scale(16)} color={primary} />}
+      inputContainerStyle={styles.inputContainer}
+      labelStyle={styles.label}
+      label={t('make')}
+      keyboardType="default"
+      textContentType="none"
+      placeholder={t('make')}
       onFocus={() => (onFocus ? onFocus() : {})}
       onBlur={() => (onBlur ? onBlur() : {})}
       onChangeText={(val) => (onChange ? onChange(val) : {})}
@@ -62,4 +61,4 @@ const PasswordInput = ({
   );
 };
 
-export default PasswordInput;
+export default MakeInput;
