@@ -35,10 +35,10 @@ const initialState = {
   engineInfo: '',
   fuel: '',
   valveTrain: '',
-  errVin: '',
-  errMake: '',
-  errModel: '',
-  errYear: '',
+  errVin: null,
+  errMake: null,
+  errModel: null,
+  errYear: null,
 };
 
 const vehicleReducer = (state = initialState, action) => {

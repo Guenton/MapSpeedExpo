@@ -37,7 +37,7 @@ export const setValveTrain = (input = '') => ({ type: SET_VALVE_TRAIN, input });
 
 export const setVehicleDetails = (object = {}) => ({ type: SET_VEHICLE_DETAILS, object });
 
-export const setErrVin = (err = '') => ({ type: SET_ERR_VIN, err });
-export const setErrMake = (err = '') => ({ type: SET_ERR_MAKE, err });
-export const setErrModel = (err = '') => ({ type: SET_ERR_MODEL, err });
-export const setErrYear = (err = '') => ({ type: SET_ERR_YEAR, err });
+export const setErrVin = (err = null) => ({ type: SET_ERR_VIN, err });
+export const setErrMake = (err = null) => ({ type: SET_ERR_MAKE, err });
+export const setErrModel = (err = null) => ({ type: SET_ERR_MODEL, err });
+export const setErrYear = (err = null) => ({ type: SET_ERR_YEAR, err });

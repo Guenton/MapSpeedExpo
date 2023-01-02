@@ -10,7 +10,7 @@ import FadeInAppContent from '../components/animations/FadeInAppContent';
 import TopBar from '../components/containers/TopBar';
 
 import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
-import { setRoute } from '../store/actions/core';
+import { setAlert, setLoading, setRoute, setVehicleArray } from '../store/actions/core';
 import { getCurrentUserId } from '../firebase/auth';
 import { setUserId } from '../store/actions/auth';
 import AlertBox from '../components/containers/AlertBox';
@@ -18,6 +18,7 @@ import AddVinForm from '../components/forms/AddVinForm';
 import SlideInVehicleImage from '../components/animations/SlideInVehicleImage';
 import FormHeader from '../components/labels/FormHeader';
 import MainBottomContainer from '../components/containers/MainBottomContainer';
+import { fetchVehicleArray } from '../firebase/vehicle';
 
 const styles = ScaledSheet.create({
   container: {},
@@ -34,6 +35,11 @@ const MainScreen = () => {
   const topCirclePosition = useSelector((state) => state.animation.topCirclePosition);
   const bottomCirclePosition = useSelector((state) => state.animation.bottomCirclePosition);
 
+  const isLoading = useSelector((state) => state.core.isLoading);
+  const vehicleArray = useSelector((state) => state.core.vehicleArray);
+
+  const hasStoredVehicles = vehicleArray.length > 0 ? true : false;
+
   useBackHandler(() => {
     BackHandler.exitApp();
     return true;
@@ -42,7 +48,15 @@ const MainScreen = () => {
   useEffect(() => {
     const userId = getCurrentUserId();
     if (userId) dispatch(setUserId(userId));
-    else dispatch(setRoute(main));
+    else dispatch(setRoute('start'));
+  }, []);
+
+  useEffect(() => {
+    dispatch(setLoading());
+    fetchVehicleArray()
+      .then((array) => dispatch(setVehicleArray(array)))
+      .catch((err) => dispatch(setAlert(err)))
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -53,14 +67,14 @@ const MainScreen = () => {
   return (
     <AppBackground>
       <SlidingCircles />
-      {/* <SlideInVehicleImage /> */}
+      {hasStoredVehicles && <SlideInVehicleImage />}
 
       {!transitioning && (
         <FadeInAppContent>
           <TopBar />
 
           <MainBottomContainer>
-            <AddVinForm />
+            {!hasStoredVehicles && !isLoading && <AddVinForm />}
             <AlertBox />
           </MainBottomContainer>
         </FadeInAppContent>

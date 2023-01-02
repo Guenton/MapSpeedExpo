@@ -6,8 +6,18 @@ import { isEmpty, isUppercase } from 'validator';
 import { useTranslation } from 'react-i18next';
 
 import ColumnFormRow from '../containers/ColumnFormRow';
+import Spacer from '../containers/Spacer';
 import ConfirmButton from '../buttons/ConfirmButton';
 import VinInputSmall from '../inputs/VinInputSmall';
+import MakeInput from '../inputs/MakeInput';
+import ModelInput from '../inputs/ModelInput';
+import BodyClassInput from '../inputs/BodyClassInput';
+import YearInput from '../inputs/YearInput';
+import NumberOfDoorsInput from '../inputs/NumberOfDoorsInput';
+import LabeledFormInput from '../inputs/LabeledFormInput';
+
+import { storeVehicleByVin } from '../../firebase/vehicle';
+import decodeVinWithNhtsa from '../../services/vin/decodeVinWithNhtsa';
 
 import { setAlert, setLoading, setRoute } from '../../store/actions/core';
 import {
@@ -31,15 +41,6 @@ import {
   setFuel,
   setValveTrain,
 } from '../../store/actions/vehicle';
-
-import decodeVinWithNhtsa from '../../services/vin/decodeVinWithNhtsa';
-import MakeInput from '../inputs/MakeInput';
-import ModelInput from '../inputs/ModelInput';
-import BodyClassInput from '../inputs/BodyClassInput';
-import YearInput from '../inputs/YearInput';
-import NumberOfDoorsInput from '../inputs/NumberOfDoorsInput';
-import Spacer from '../containers/Spacer';
-import LabeledFormInput from '../inputs/LabeledFormInput';
 
 const styles = ScaledSheet.create({
   container: { flex: 1 },
@@ -87,6 +88,8 @@ const VehicleDetailForm = ({ style }) => {
   const errMake = useSelector((state) => state.vehicle.errMake);
   const errModel = useSelector((state) => state.vehicle.errModel);
   const errYear = useSelector((state) => state.vehicle.errYear);
+
+  const vehicle = useSelector((state) => state.vehicle);
 
   const shakeOnError = () => {
     if (errVin) vinRef.current.shake();
@@ -151,7 +154,11 @@ const VehicleDetailForm = ({ style }) => {
     validateRequiredFields();
     if (errVin || errMake || errModel || errYear) return;
 
-    console.log('all good');
+    dispatch(setLoading());
+    storeVehicleByVin(vin, vehicle)
+      .then(() => dispatch(setRoute('main')))
+      .catch((err) => dispatch(setAlert(err)))
+      .finally(() => dispatch(setLoading(false)));
   };
 
   return (
