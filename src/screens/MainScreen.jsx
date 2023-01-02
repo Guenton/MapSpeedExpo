@@ -19,6 +19,7 @@ import SlideInVehicleImage from '../components/animations/SlideInVehicleImage';
 import FormHeader from '../components/labels/FormHeader';
 import MainBottomContainer from '../components/containers/MainBottomContainer';
 import { fetchVehicleArray } from '../firebase/vehicle';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const styles = ScaledSheet.create({
   container: {},
@@ -35,6 +36,7 @@ const MainScreen = () => {
   const bottomCirclePosition = useSelector((state) => state.animation.bottomCirclePosition);
 
   const isLoading = useSelector((state) => state.core.isLoading);
+  const isKeyboardOpen = useSelector((state) => state.core.isKeyboardOpen);
   const vehicleArray = useSelector((state) => state.core.vehicleArray);
 
   const hasStoredVehicles = vehicleArray.length > 0 ? true : false;
@@ -60,24 +62,25 @@ const MainScreen = () => {
 
   useEffect(() => {
     dispatch(setNextTopCirclePosition(scale(-775)));
-    dispatch(setNextBottomCirclePosition(scale(250)));
-  }, [topCirclePosition, bottomCirclePosition]);
+    if (isKeyboardOpen) dispatch(setNextBottomCirclePosition(scale(150)));
+    else dispatch(setNextBottomCirclePosition(scale(250)));
+  }, [topCirclePosition, bottomCirclePosition, isKeyboardOpen]);
 
   return (
     <AppBackground>
       <SlidingCircles />
       {hasStoredVehicles && <SlideInVehicleImage />}
 
-      {!transitioning && (
-        <FadeInAppContent>
-          <TopBar />
+      <FadeInAppContent>
+        <TopBar />
 
+        <KeyboardAwareScrollView>
           <MainBottomContainer>
             {!hasStoredVehicles && !isLoading && <AddVinForm style={styles.vinForm} />}
             <AlertBox />
           </MainBottomContainer>
-        </FadeInAppContent>
-      )}
+        </KeyboardAwareScrollView>
+      </FadeInAppContent>
     </AppBackground>
   );
 };

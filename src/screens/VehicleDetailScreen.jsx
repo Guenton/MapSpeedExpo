@@ -20,6 +20,7 @@ import FormHeader from '../components/labels/FormHeader';
 import MainBottomContainer from '../components/containers/MainBottomContainer';
 import { useTranslation } from 'react-i18next';
 import VehicleDetailForm from '../components/forms/VehicleDetailForm';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const styles = ScaledSheet.create({
   container: {},
@@ -56,9 +57,9 @@ const VehicleDetailScreen = () => {
         <FadeInAppContent>
           <TopBar label={t('vehicleDetails')} />
 
-          <View style={styles.bottom}>
+          <KeyboardAwareScrollView style={styles.bottom}>
             <VehicleDetailForm />
-          </View>
+          </KeyboardAwareScrollView>
         </FadeInAppContent>
       )}
     </AppBackground>

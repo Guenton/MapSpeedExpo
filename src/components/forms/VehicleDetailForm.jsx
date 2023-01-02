@@ -291,6 +291,8 @@ const VehicleDetailForm = ({ style }) => {
           disabled={!vin || !make || !model || !year || errVin}
           onPress={() => confirmVehicleDetails()}
         />
+
+        <Spacer />
       </View>
     </View>
   );
