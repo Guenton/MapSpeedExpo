@@ -22,9 +22,8 @@ import { fetchVehicleArray } from '../firebase/vehicle';
 
 const styles = ScaledSheet.create({
   container: {},
-  bottom: {
-    flex: 1,
-    justifyContent: 'flex-end',
+  vinForm: {
+    marginTop: '-40@s',
   },
 });
 
@@ -56,7 +55,7 @@ const MainScreen = () => {
     fetchVehicleArray()
       .then((array) => dispatch(setVehicleArray(array)))
       .catch((err) => dispatch(setAlert(err)))
-      .finally(() => setLoading(false));
+      .finally(() => dispatch(setLoading(false)));
   }, []);
 
   useEffect(() => {
@@ -74,7 +73,7 @@ const MainScreen = () => {
           <TopBar />
 
           <MainBottomContainer>
-            {!hasStoredVehicles && !isLoading && <AddVinForm />}
+            {!hasStoredVehicles && !isLoading && <AddVinForm style={styles.vinForm} />}
             <AlertBox />
           </MainBottomContainer>
         </FadeInAppContent>
