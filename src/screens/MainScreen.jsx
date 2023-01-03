@@ -22,9 +22,13 @@ import { fetchVehicleArray } from '../firebase/vehicle';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import AvatarFab from '../components/buttons/AvatarFab';
 import FadeInVehicleAvatar from '../components/animations/FadeInVehicleAvatar';
+import VehicleInfoView from '../components/views/VehicleInfoView';
 
 const styles = ScaledSheet.create({
   container: {},
+  vehicleView: {
+    marginTop: '-65@s',
+  },
   vinForm: {
     marginTop: '-40@s',
   },
@@ -78,7 +82,10 @@ const MainScreen = () => {
 
         <KeyboardAwareScrollView>
           <MainBottomContainer>
+            {hasStoredVehicles && <VehicleInfoView style={styles.vehicleView} />}
+
             {!hasStoredVehicles && !isLoading && <AddVinForm style={styles.vinForm} />}
+
             <AlertBox />
           </MainBottomContainer>
         </KeyboardAwareScrollView>

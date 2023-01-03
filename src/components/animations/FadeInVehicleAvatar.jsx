@@ -11,6 +11,7 @@ import { setVehicleArrayPosition } from '../../store/actions/core';
 const styles = ScaledSheet.create({
   container: {
     height: '175@s',
+    width: '340@s',
     marginTop: '210@s',
     marginHorizontal: '5@s',
     flexDirection: 'row',

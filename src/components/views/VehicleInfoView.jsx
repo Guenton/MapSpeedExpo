@@ -13,14 +13,20 @@ import { setAlert, setLoading, setRoute } from '../../store/actions/core';
 import { setErrVin, setVin, setVehicleDetails } from '../../store/actions/vehicle';
 
 import decodeVinWithNhtsa from '../../services/vin/decodeVinWithNhtsa';
+import BoldText from '../labels/BoldText';
+import { ScrollView } from 'react-native';
+import VehicleLabelRow from '../labels/VehicleLabelRow';
+import VehicleTitleBox from '../labels/VehicleTitleBox';
+import VehicleButton from '../buttons/VehicleButton';
+import ServiceButton from '../buttons/ServiceButton';
+import IconFab from '../buttons/IconFab';
 
 const styles = ScaledSheet.create({
-  container: { height: '250@s' },
-  inputContainer: { width: '290@s', alignSelf: 'center' },
+  container: { height: '360@s', width: '325@s', alignSelf: 'center' },
   header: { marginBottom: '18@s' },
   input: { marginBottom: '18@s' },
   center: { alignSelf: 'center' },
-  addButton: { marginTop: '30@s' },
+  buttonContainer: { marginVertical: '30@s', flexDirection: 'row', justifyContent: 'space-around' },
 });
 
 const VehicleInfoView = ({ style }) => {
@@ -30,21 +36,26 @@ const VehicleInfoView = ({ style }) => {
   const vehicleArray = useSelector((state) => state.core.vehicleArray);
   const vehicleArrayPosition = useSelector((state) => state.core.vehicleArrayPosition);
   const vin = useSelector((state) => state.vehicle.vin);
+  const make = useSelector((state) => state.vehicle.make);
+  const model = useSelector((state) => state.vehicle.model);
+  const year = useSelector((state) => state.vehicle.year);
 
   useEffect(() => {
     dispatch(setVehicleDetails(vehicleArray[vehicleArrayPosition]));
   }, [vehicleArrayPosition]);
 
   return (
-    <View style={{ ...styles.container, ...style }}>
-      <View style={styles.inputContainer}>
-        <AddButton
-          style={styles.addButton}
-          disabled={!vin || errVin}
-          onPress={() => resolveVinNumber()}
-        />
+    <ScrollView style={{ ...styles.container, ...style }}>
+      <VehicleTitleBox make={make} model={model} year={year} />
+      <VehicleLabelRow label={t('vinNumber')} text={vin} />
+      <VehicleLabelRow label="Previous Service" text="Not Available" />
+      <VehicleLabelRow label="Suggested Next Service" text="Not Available" />
+      <VehicleLabelRow label="Next Appointment" text="Not Booked" />
+      <View style={styles.buttonContainer}>
+        <VehicleButton disabled={!vin} onPress={() => null} />
+        <ServiceButton disabled={!vin} onPress={() => null} />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
