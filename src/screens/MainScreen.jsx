@@ -21,6 +21,7 @@ import MainBottomContainer from '../components/containers/MainBottomContainer';
 import { fetchVehicleArray } from '../firebase/vehicle';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import AvatarFab from '../components/buttons/AvatarFab';
+import FadeInVehicleAvatar from '../components/animations/FadeInVehicleAvatar';
 
 const styles = ScaledSheet.create({
   container: {},
@@ -70,14 +71,13 @@ const MainScreen = () => {
   return (
     <AppBackground>
       <SlidingCircles />
-      {hasStoredVehicles && <SlideInVehicleImage />}
+      {hasStoredVehicles && <FadeInVehicleAvatar />}
 
       <FadeInAppContent>
         <TopBar />
 
         <KeyboardAwareScrollView>
           <MainBottomContainer>
-            <AvatarFab />
             {!hasStoredVehicles && !isLoading && <AddVinForm style={styles.vinForm} />}
             <AlertBox />
           </MainBottomContainer>

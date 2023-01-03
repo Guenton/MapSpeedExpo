@@ -5,6 +5,7 @@ import {
   SET_KEYBOARD_OPEN,
   SET_ALERT,
   SET_VEHICLE_ARRAY,
+  SET_VEHICLE_ARRAY_POSITION,
 } from '../actions/core';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   isKeyboardOpen: false,
   route: 'start',
   vehicleArray: [],
+  vehicleArrayPosition: 0,
   alert: {
     text: '',
     severity: 'error',
@@ -31,6 +33,8 @@ const coreReducer = (state = initialState, action) => {
       return { ...state, isKeyboardOpen: action.bool };
     case SET_VEHICLE_ARRAY:
       return { ...state, vehicleArray: action.array };
+    case SET_VEHICLE_ARRAY_POSITION:
+      return { ...state, vehicleArrayPosition: action.int };
     case SET_ALERT:
       return { ...state, alert: { ...state.alert, text: action.text, severity: action.severity } };
     default:

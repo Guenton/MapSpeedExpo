@@ -6,15 +6,18 @@ import FabContainer from '../containers/FabContainer';
 
 import { grey } from '../../config/colors';
 
-const AvatarFab = ({ style, uri, onPress }) => {
+const AvatarFab = ({ style, selected, uri, onPress }) => {
   return (
-    <FabContainer style={style} size={scale(80)} onPress={() => (onPress ? onPress() : null)}>
+    <FabContainer
+      style={style}
+      size={selected ? scale(83) : scale(80)}
+      onPress={() => (onPress ? onPress() : null)}>
       <Avatar
         rounded
         containerStyle={{ backgroundColor: grey }}
         size="large"
         icon={{ name: 'car', type: 'font-awesome-5' }}
-        source={{ uri }}
+        // source={{ uri: uri || null }}
       />
     </FabContainer>
   );
