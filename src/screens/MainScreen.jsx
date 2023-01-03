@@ -20,6 +20,7 @@ import FormHeader from '../components/labels/FormHeader';
 import MainBottomContainer from '../components/containers/MainBottomContainer';
 import { fetchVehicleArray } from '../firebase/vehicle';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import AvatarFab from '../components/buttons/AvatarFab';
 
 const styles = ScaledSheet.create({
   container: {},
@@ -76,6 +77,7 @@ const MainScreen = () => {
 
         <KeyboardAwareScrollView>
           <MainBottomContainer>
+            <AvatarFab />
             {!hasStoredVehicles && !isLoading && <AddVinForm style={styles.vinForm} />}
             <AlertBox />
           </MainBottomContainer>
