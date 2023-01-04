@@ -7,6 +7,7 @@ import { animated, useSpring, useSpringRef, useChain } from '@react-spring/nativ
 import AvatarFab from '../buttons/AvatarFab';
 import IconFab from '../buttons/IconFab';
 import { setVehicleArrayPosition } from '../../store/actions/core';
+import { setMorphing } from '../../store/actions/animation';
 
 const styles = ScaledSheet.create({
   container: {
@@ -32,24 +33,29 @@ const FadeInVehicleAvatar = () => {
   const avatarThreeSpring = useSpringRef();
 
   const vehicleArray = useSelector((state) => state.core.vehicleArray);
-  const transitioning = useSelector((state) => state.animation.transitioning);
 
   const avatarOne = useSpring({
     ref: avatarOneSpring,
-    to: { ...styles.avatar1, opacity: transitioning ? 0 : 1 },
-    from: { opacity: transitioning ? 1 : 0 },
+    to: { ...styles.avatar1, opacity: 1 },
+    from: { opacity: 0 },
+    onStart: () => dispatch(setMorphing(true)),
+    onRest: () => dispatch(setMorphing(false)),
   });
 
   const avatarTwo = useSpring({
     ref: avatarTwoSpring,
-    to: { ...styles.avatar2, opacity: transitioning ? 0 : 1 },
-    from: { opacity: transitioning ? 1 : 0 },
+    to: { ...styles.avatar2, opacity: 1 },
+    from: { opacity: 0 },
+    onStart: () => dispatch(setMorphing(true)),
+    onRest: () => dispatch(setMorphing(false)),
   });
 
   const avatarThree = useSpring({
     ref: avatarThreeSpring,
-    to: { ...styles.avatar3, opacity: transitioning ? 0 : 1 },
-    from: { opacity: transitioning ? 1 : 0 },
+    to: { ...styles.avatar3, opacity: 1 },
+    from: { opacity: 0 },
+    onStart: () => dispatch(setMorphing(true)),
+    onRest: () => dispatch(setMorphing(false)),
   });
 
   useChain([avatarOneSpring, avatarTwoSpring, avatarThreeSpring]);

@@ -38,6 +38,12 @@
   "transmissionSpeeds": "Velocidades",
   "fuel": "Combustible",
   "valveTrain": "Válvula",
+  "previousService": "Servicio Anterior",
+  "suggestedService": "Servicio Sugerido",
+  "nextAppointment": "Próxima Sita",
+  "notAvailable": "No Disponible",
+  "notBooked": "No Reservada",
+  "pendingConfirmation": "Pendiente Confirmación",
   "err": {
     "notFilled": "Debe ser provisto",
     "notEmail": "Debe ser un correo clectrónico válido",

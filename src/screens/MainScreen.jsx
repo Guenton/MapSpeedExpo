@@ -45,7 +45,7 @@ const MainScreen = () => {
   const isKeyboardOpen = useSelector((state) => state.core.isKeyboardOpen);
   const vehicleArray = useSelector((state) => state.core.vehicleArray);
 
-  const hasStoredVehicles = vehicleArray.length > 0 ? true : false;
+  const [hasStoredVehicles, setHasStoredVehicles] = useState(false);
 
   useBackHandler(() => {
     BackHandler.exitApp();
@@ -57,6 +57,11 @@ const MainScreen = () => {
     if (userId) dispatch(setUserId(userId));
     else dispatch(setRoute('start'));
   }, []);
+
+  useEffect(() => {
+    if (vehicleArray.length > 0) setHasStoredVehicles(true);
+    else setHasStoredVehicles(false);
+  }, [vehicleArray]);
 
   useEffect(() => {
     dispatch(setLoading());
@@ -75,7 +80,7 @@ const MainScreen = () => {
   return (
     <AppBackground>
       <SlidingCircles />
-      {hasStoredVehicles && <FadeInVehicleAvatar />}
+      {hasStoredVehicles && !transitioning && <FadeInVehicleAvatar />}
 
       <FadeInAppContent>
         <TopBar />

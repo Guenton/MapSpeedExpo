@@ -38,6 +38,12 @@
   "transmissionSpeeds": "Versnellingen",
   "fuel": "Brandstof",
   "valveTrain": "Motor Kleppen",
+  "previousService": "Vorige Onderhoud",
+  "suggestedService": "Aanbevolen Onderhoud",
+  "nextAppointment": "Volgende Afspraak",
+  "notAvailable": "Niet Beschikbaar",
+  "notBooked": "Niet Geboekt",
+  "pendingConfirmation": "In Afwachting",
   "err": {
     "notFilled": "Moet worden ingevuld",
     "notEmail": "Moet een geldig e-mailadres zijn",

@@ -48,9 +48,9 @@ const VehicleInfoView = ({ style }) => {
     <ScrollView style={{ ...styles.container, ...style }}>
       <VehicleTitleBox make={make} model={model} year={year} />
       <VehicleLabelRow label={t('vinNumber')} text={vin} />
-      <VehicleLabelRow label="Previous Service" text="Not Available" />
-      <VehicleLabelRow label="Suggested Next Service" text="Not Available" />
-      <VehicleLabelRow label="Next Appointment" text="Not Booked" />
+      <VehicleLabelRow label={t('previousService')} text={t('notAvailable')} />
+      <VehicleLabelRow label={t('suggestedService')} text={t('notAvailable')} />
+      <VehicleLabelRow label={t('nextAppointment')} text={t('notBooked')} />
       <View style={styles.buttonContainer}>
         <VehicleButton disabled={!vin} onPress={() => null} />
         <ServiceButton disabled={!vin} onPress={() => null} />

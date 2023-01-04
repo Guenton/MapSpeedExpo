@@ -38,6 +38,12 @@
   "transmissionSpeeds": "Speeds",
   "fuel": "Fuel",
   "valveTrain": "Valve Train",
+  "previousService": "Previous Service",
+  "suggestedService": "Suggested Service",
+  "nextAppointment": "Next Appointment",
+  "notAvailable": "Not Available",
+  "notBooked": "Not Booked",
+  "pendingConfirmation": "Pending Confirmation",
   "err": {
     "notFilled": "Must be filled in",
     "notEmail": "Must be a valid Email Address",

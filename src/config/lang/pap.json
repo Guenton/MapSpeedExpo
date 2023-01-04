@@ -38,6 +38,12 @@
   "transmissionSpeeds": "Spit",
   "fuel": "Kombustibel",
   "valveTrain": "Valvula",
+  "previousService": "Servisio Anterior",
+  "suggestedService": "Servisio Sugerí",
+  "nextAppointment": "Sigiente Sita",
+  "notAvailable": "No Disponibel",
+  "notBooked": "No Establesé",
+  "pendingConfirmation": "Pendiente Konfirmashon",
   "err": {
     "notFilled": "Mester wòrdu yená",
     "notEmail": "Mester ta un E-Mail valido",
