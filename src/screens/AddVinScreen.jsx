@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BackHandler, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { BackHandler } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBackHandler } from '@react-native-community/hooks';
 import { ScaledSheet, scale } from 'react-native-size-matters';
@@ -10,15 +10,13 @@ import SlidingCircles from '../components/animations/SlidingCircles';
 import FadeInAppContent from '../components/animations/FadeInAppContent';
 import TopBar from '../components/containers/TopBar';
 import AlertBox from '../components/containers/AlertBox';
-import FadeInVehicleAvatar from '../components/animations/FadeInVehicleAvatar';
-import VehicleInfoView from '../components/views/VehicleInfoView';
+import AddVinForm from '../components/forms/AddVinForm';
 import FlexSpacer from '../components/containers/FlexSpacer';
 
 import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
-import { setAlert, setLoading, setRoute, setVehicleArray } from '../store/actions/core';
+import { setRoute } from '../store/actions/core';
 import { getCurrentUserId } from '../firebase/auth';
 import { setUserId } from '../store/actions/auth';
-import { fetchVehicleArray } from '../firebase/vehicle';
 
 const styles = ScaledSheet.create({
   container: {
@@ -32,7 +30,7 @@ const styles = ScaledSheet.create({
   },
 });
 
-const MainScreen = () => {
+const AddVinScreen = () => {
   const dispatch = useDispatch();
 
   const transitioning = useSelector((state) => state.animation.transitioning);
@@ -42,7 +40,7 @@ const MainScreen = () => {
   const isKeyboardOpen = useSelector((state) => state.core.isKeyboardOpen);
 
   useBackHandler(() => {
-    BackHandler.exitApp();
+    dispatch(setRoute('main'));
     return true;
   });
 
@@ -50,17 +48,6 @@ const MainScreen = () => {
     const userId = getCurrentUserId();
     if (userId) dispatch(setUserId(userId));
     else dispatch(setRoute('start'));
-  }, []);
-
-  useEffect(() => {
-    dispatch(setLoading());
-    fetchVehicleArray()
-      .then((array) => {
-        if (array.length < 1) dispatch(setRoute('vehicle-add-vin'));
-        else dispatch(setVehicleArray(array));
-      })
-      .catch((err) => dispatch(setAlert(err)))
-      .finally(() => dispatch(setLoading(false)));
   }, []);
 
   useEffect(() => {
@@ -73,15 +60,13 @@ const MainScreen = () => {
     <AppBackground>
       <SlidingCircles />
 
-      {!transitioning && <FadeInVehicleAvatar />}
       {!transitioning && (
         <FadeInAppContent>
           <TopBar />
           <FlexSpacer />
 
           <KeyboardAwareScrollView style={styles.container} contentContainerStyle={styles.content}>
-            <VehicleInfoView />
-
+            <AddVinForm />
             <AlertBox />
           </KeyboardAwareScrollView>
         </FadeInAppContent>
@@ -90,4 +75,4 @@ const MainScreen = () => {
   );
 };
 
-export default MainScreen;
+export default AddVinScreen;

@@ -15,12 +15,11 @@ import { setErrVin, setVin, setVehicleDetails } from '../../store/actions/vehicl
 import decodeVinWithNhtsa from '../../services/vin/decodeVinWithNhtsa';
 
 const styles = ScaledSheet.create({
-  container: { height: '250@s' },
-  inputContainer: { width: '290@s', alignSelf: 'center' },
+  container: { flex: 1 },
+  inputContainer: { width: '250@s' },
   header: { marginBottom: '18@s' },
   input: { marginBottom: '18@s' },
-  center: { alignSelf: 'center' },
-  addButton: { marginTop: '30@s' },
+  addButton: { marginVertical: '30@s' },
 });
 
 const AddVinForm = ({ style }) => {
@@ -82,12 +81,12 @@ const AddVinForm = ({ style }) => {
           onBlur={() => resolveVinNumber()}
           onChange={(val) => validateAndSetVin(val)}
         />
-        <AddButton
-          style={styles.addButton}
-          disabled={!vin || errVin}
-          onPress={() => resolveVinNumber()}
-        />
       </View>
+      <AddButton
+        style={styles.addButton}
+        disabled={!vin || errVin}
+        onPress={() => resolveVinNumber()}
+      />
     </View>
   );
 };

@@ -10,8 +10,8 @@ const styles = ScaledSheet.create({
   container: {
     alignSelf: 'center',
     borderRadius: '21@s',
-    height: '40@s',
-    width: '125@s',
+    height: '38@s',
+    width: '115@s',
     // Shadows
     shadowColor: '#000',
     shadowOffset: {
@@ -24,8 +24,8 @@ const styles = ScaledSheet.create({
     zIndex: 9,
   },
   button: {
-    height: '40@s',
-    width: '125@s',
+    height: '38@s',
+    width: '115@s',
     borderRadius: '21@s',
     backgroundColor: primary,
   },

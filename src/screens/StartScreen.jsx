@@ -97,14 +97,6 @@ const StartScreen = () => {
           biometricPasswordSignInAsync(password)
             .then(() => dispatch(setRoute('main')))
             .catch((err) => dispatch(setAlert(err)));
-        } else if (isAvailable && googleId) {
-          biometricGoogleSignInAsync(googleId)
-            .then(() => dispatch(setRoute('main')))
-            .catch((err) => dispatch(setAlert(err)));
-        } else if (isAvailable && facebookAccess) {
-          biometricFacebookSignInAsync(facebookAccess)
-            .then(() => dispatch(setRoute('main')))
-            .catch((err) => dispatch(setAlert(err)));
         }
       })
       .catch((err) => dispatch(setAlert(err)));

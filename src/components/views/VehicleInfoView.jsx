@@ -1,25 +1,16 @@
 import React, { createRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
-import { isEmpty, isUppercase } from 'validator';
 import { useTranslation } from 'react-i18next';
 
-import VinInput from '../inputs/VinInput';
-import AddButton from '../buttons/AddButton';
-import FormHeader from '../labels/FormHeader';
-
-import { setAlert, setLoading, setRoute } from '../../store/actions/core';
-import { setErrVin, setVin, setVehicleDetails } from '../../store/actions/vehicle';
-
-import decodeVinWithNhtsa from '../../services/vin/decodeVinWithNhtsa';
-import BoldText from '../labels/BoldText';
-import { ScrollView } from 'react-native';
 import VehicleLabelRow from '../labels/VehicleLabelRow';
 import VehicleTitleBox from '../labels/VehicleTitleBox';
 import VehicleButton from '../buttons/VehicleButton';
 import ServiceButton from '../buttons/ServiceButton';
-import IconFab from '../buttons/IconFab';
+
+import { setRoute } from '../../store/actions/core';
+import { setVehicleDetails } from '../../store/actions/vehicle';
 
 const styles = ScaledSheet.create({
   container: { height: '360@s', width: '325@s', alignSelf: 'center' },
@@ -52,7 +43,7 @@ const VehicleInfoView = ({ style }) => {
       <VehicleLabelRow label={t('suggestedService')} text={t('notAvailable')} />
       <VehicleLabelRow label={t('nextAppointment')} text={t('notBooked')} />
       <View style={styles.buttonContainer}>
-        <VehicleButton disabled={!vin} onPress={() => null} />
+        <VehicleButton disabled={!vin} onPress={() => dispatch(setRoute('vehicle-detail'))} />
         <ServiceButton disabled={!vin} onPress={() => null} />
       </View>
     </ScrollView>

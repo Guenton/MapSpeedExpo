@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Pressable } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { ScaledSheet } from 'react-native-size-matters';
-import { animated, useSpring, useSpringRef, useChain } from '@react-spring/native';
+import { animated, useSpring } from '@react-spring/native';
 
 import AvatarFab from '../buttons/AvatarFab';
 import IconFab from '../buttons/IconFab';
@@ -25,64 +25,54 @@ const styles = ScaledSheet.create({
 });
 
 const AnimatedView = animated(View);
+const AnimatedPressable = animated(Pressable);
 
 const FadeInVehicleAvatar = () => {
   const dispatch = useDispatch();
-  const avatarOneSpring = useSpringRef();
-  const avatarTwoSpring = useSpringRef();
-  const avatarThreeSpring = useSpringRef();
 
   const vehicleArray = useSelector((state) => state.core.vehicleArray);
 
   const avatarOne = useSpring({
-    ref: avatarOneSpring,
-    to: { ...styles.avatar1, opacity: 1 },
+    to: { ...styles.avatar1, opacity: vehicleArray.length > 0 ? 1 : 0 },
     from: { opacity: 0 },
     onStart: () => dispatch(setMorphing(true)),
     onRest: () => dispatch(setMorphing(false)),
   });
 
   const avatarTwo = useSpring({
-    ref: avatarTwoSpring,
-    to: { ...styles.avatar2, opacity: 1 },
+    to: { ...styles.avatar2, opacity: vehicleArray.length > 1 ? 1 : 0 },
     from: { opacity: 0 },
+    delay: 500,
     onStart: () => dispatch(setMorphing(true)),
     onRest: () => dispatch(setMorphing(false)),
   });
 
   const avatarThree = useSpring({
-    ref: avatarThreeSpring,
-    to: { ...styles.avatar3, opacity: 1 },
+    to: { ...styles.avatar3, opacity: vehicleArray.length > 2 ? 1 : 0 },
     from: { opacity: 0 },
+    delay: 1000,
     onStart: () => dispatch(setMorphing(true)),
     onRest: () => dispatch(setMorphing(false)),
   });
 
-  useChain([avatarOneSpring, avatarTwoSpring, avatarThreeSpring]);
-
   const selectVehicleByPosition = (position = 0) => {
+    console.log('pressed');
     dispatch(setVehicleArrayPosition(position));
   };
 
   return (
     <View style={styles.container}>
-      {vehicleArray.length > 0 && (
-        <AnimatedView style={avatarOne}>
-          <AvatarFab onPress={selectVehicleByPosition(0)} />
-        </AnimatedView>
-      )}
+      <AnimatedView style={avatarOne}>
+        <AvatarFab onPress={() => selectVehicleByPosition(0)} />
+      </AnimatedView>
 
-      {vehicleArray.length > 1 && (
-        <AnimatedView style={avatarTwo}>
-          <AvatarFab onPress={selectVehicleByPosition(1)} />
-        </AnimatedView>
-      )}
+      <AnimatedView style={avatarTwo}>
+        <AvatarFab onPress={() => selectVehicleByPosition(0)} />
+      </AnimatedView>
 
-      {vehicleArray.length > 2 && (
-        <AnimatedView style={avatarThree}>
-          <AvatarFab onPress={selectVehicleByPosition(2)} />
-        </AnimatedView>
-      )}
+      <AnimatedView style={avatarThree}>
+        <AvatarFab onPress={() => selectVehicleByPosition(2)} />
+      </AnimatedView>
 
       {vehicleArray.length > 3 && (
         <IconFab name="angle-double-right" style={{ ...styles.nextIcon }} />

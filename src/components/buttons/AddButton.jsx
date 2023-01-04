@@ -1,17 +1,17 @@
 import React from 'react';
-import { Button } from 'react-native-elements';
-import { ScaledSheet } from 'react-native-size-matters';
+import { Button, Icon } from 'react-native-elements';
+import { ScaledSheet, scale } from 'react-native-size-matters';
 import { useTranslation } from 'react-i18next';
 
 import { useSelector } from 'react-redux';
-import { primary } from '../../config/colors';
+import { primary, white } from '../../config/colors';
 
 const styles = ScaledSheet.create({
   container: {
     alignSelf: 'center',
     borderRadius: '21@s',
-    height: '36@s',
-    width: '95@s',
+    height: '38@s',
+    width: '115@s',
     // Shadows
     shadowColor: '#000',
     shadowOffset: {
@@ -24,10 +24,13 @@ const styles = ScaledSheet.create({
     zIndex: 9,
   },
   button: {
-    height: '36@s',
-    width: '95@s',
+    height: '38@s',
+    width: '115@s',
     borderRadius: '21@s',
     backgroundColor: primary,
+  },
+  buttonIcon: {
+    marginRight: '5@s',
   },
 });
 
@@ -44,6 +47,7 @@ const AddButton = ({ style, disabled, onPress }) => {
       loading={isLoading}
       onPress={() => onPress()}
       raised
+      icon={<Icon name="plus" type="font-awesome-5" color={white} style={styles.buttonIcon} />}
     />
   );
 };

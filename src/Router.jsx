@@ -20,6 +20,7 @@ import LoginPasswordScreen from './screens/LoginPasswordScreen';
 import MainScreen from './screens/MainScreen';
 
 import VehicleDetailScreen from './screens/VehicleDetailScreen';
+import AddVinScreen from './screens/AddVinScreen';
 
 const Router = () => {
   const dispatch = useDispatch();
@@ -63,7 +64,9 @@ const Router = () => {
       {/* {route === 'login-reset' && <LoginResetScreen />} */}
 
       {route === 'main' && <MainScreen />}
+      {/* {route === 'main' && <AddVinScreen />} */}
 
+      {route === 'vehicle-add-vin' && <AddVinScreen />}
       {route === 'vehicle-detail' && <VehicleDetailScreen />}
     </SafeAreaView>
   );

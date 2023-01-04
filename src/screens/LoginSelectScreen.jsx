@@ -43,8 +43,8 @@ const styles = ScaledSheet.create({
 
 const LoginSelectScreen = () => {
   const dispatch = useDispatch();
-  const transitioning = useSelector((state) => state.animation.transitioning);
 
+  const transitioning = useSelector((state) => state.animation.transitioning);
   const topCirclePosition = useSelector((state) => state.animation.topCirclePosition);
   const bottomCirclePosition = useSelector((state) => state.animation.bottomCirclePosition);
 
