@@ -1,7 +1,7 @@
 import React, { createRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View } from 'react-native';
-import { ScaledSheet } from 'react-native-size-matters';
+import { scale, ScaledSheet } from 'react-native-size-matters';
 import { isEmpty, isUppercase } from 'validator';
 import { useTranslation } from 'react-i18next';
 
@@ -41,13 +41,21 @@ import {
   setFuel,
   setValveTrain,
 } from '../../store/actions/vehicle';
+import IconFab from '../buttons/IconFab';
 
 const styles = ScaledSheet.create({
   container: { flex: 1 },
   inputContainer: { marginHorizontal: '3@s' },
+  buttonContainer: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: '30@s',
+    width: '220@s',
+  },
   header: { marginBottom: '18@s' },
   center: { alignSelf: 'center' },
-  button: { marginTop: '30@s' },
 });
 
 const VehicleDetailForm = ({ style }) => {
@@ -286,13 +294,13 @@ const VehicleDetailForm = ({ style }) => {
           />
         </ColumnFormRow>
 
-        <ConfirmButton
-          style={styles.button}
-          disabled={!vin || !make || !model || !year || errVin}
-          onPress={() => confirmVehicleDetails()}
-        />
-
-        <Spacer />
+        <View style={styles.buttonContainer}>
+          <ConfirmButton
+            disabled={!vin || !make || !model || !year || errVin}
+            onPress={() => confirmVehicleDetails()}
+          />
+          <IconFab name="trash" size={scale(30)} reverse />
+        </View>
       </View>
     </View>
   );

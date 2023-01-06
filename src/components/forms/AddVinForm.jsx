@@ -78,7 +78,7 @@ const AddVinForm = ({ style }) => {
           containerStyle={styles.input}
           value={vin}
           errorMessage={errVin}
-          onBlur={() => resolveVinNumber()}
+          onSubmit={() => resolveVinNumber()}
           onChange={(val) => validateAndSetVin(val)}
         />
       </View>

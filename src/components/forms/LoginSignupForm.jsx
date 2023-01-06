@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import EmailInput from '../inputs/EmailInput';
 import PasswordInput from '../inputs/PasswordInput';
 import SignupButton from '../buttons/SignupButton';
+import ScaleInView from '../animations/ScaleInView';
 
 import storeEmailAndPasswordAsync from '../../services/auth/storeEmailAndPasswordAsync';
 import { createSignInWithPasswordAsync, getCurrentUserId } from '../../firebase/auth';
@@ -25,10 +26,10 @@ import {
 
 const styles = ScaledSheet.create({
   container: {},
-  inputContainer: { width: '290@s', alignSelf: 'center' },
+  inputContainer: { width: '290@s', marginLeft: '8@s' },
   input: { marginBottom: '18@s' },
   center: { alignSelf: 'center' },
-  signupButton: { marginTop: '15@s' },
+  signupButton: { marginVertical: '20@s' },
 });
 
 const LoginSignupForm = ({ style, onGoMain }) => {
@@ -109,14 +110,14 @@ const LoginSignupForm = ({ style, onGoMain }) => {
   };
 
   return (
-    <View style={{ ...styles.container, ...style }}>
+    <ScaleInView style={{ ...styles.container, ...style }}>
       <View style={styles.inputContainer}>
         <EmailInput
           inputRef={emailRef}
           containerStyle={styles.input}
           value={email}
           errorMessage={errEmail}
-          onBlur={() => shakeOnError()}
+          onSubmit={() => shakeOnError()}
           onChange={(val) => validateAndSetEmail(val)}
         />
         <PasswordInput
@@ -124,7 +125,7 @@ const LoginSignupForm = ({ style, onGoMain }) => {
           containerStyle={styles.input}
           value={password}
           errorMessage={errPassword}
-          onBlur={() => shakeOnError()}
+          onSubmit={() => shakeOnError()}
           onChange={(val) => validateAndSetPassword(val)}
         />
         <PasswordInput
@@ -133,12 +134,12 @@ const LoginSignupForm = ({ style, onGoMain }) => {
           inputRef={passwordConfirmRef}
           value={passwordConfirm}
           errorMessage={errPasswordConfirm}
-          onBlur={() => signupWithFirebase()}
+          onSubmit={() => signupWithFirebase()}
           onChange={(val) => validateAndSetPasswordConfirm(val)}
         />
-        <SignupButton style={styles.signupButton} onPress={() => signupWithFirebase()} />
       </View>
-    </View>
+      <SignupButton style={styles.signupButton} onPress={() => signupWithFirebase()} />
+    </ScaleInView>
   );
 };
 

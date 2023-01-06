@@ -21,13 +21,13 @@ import {
   setErrEmail,
   setErrPassword,
 } from '../../store/actions/auth';
+import ScaleInView from '../animations/ScaleInView';
 
 const styles = ScaledSheet.create({
-  container: {},
-  inputContainer: { width: '290@s', alignSelf: 'center' },
+  container: { flex: 1 },
+  inputContainer: { width: '290@s', marginLeft: '8@s' },
   input: { marginBottom: '18@s' },
-  center: { alignSelf: 'center' },
-  loginButton: { marginTop: '30@s' },
+  loginButton: { marginVertical: '20@s' },
 });
 
 const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
@@ -89,27 +89,29 @@ const LoginPasswordForm = ({ style, onGoReset, onGoMain }) => {
   };
 
   return (
-    <View style={{ ...styles.container, ...style }}>
+    <ScaleInView style={{ ...styles.container, ...style }}>
       <View style={styles.inputContainer}>
         <EmailInput
           inputRef={emailRef}
           containerStyle={styles.input}
           value={email}
           errorMessage={errEmail}
-          onBlur={() => shakeOnError()}
+          onSubmit={() => shakeOnError()}
           onChange={(val) => validateAndSetEmail(val)}
         />
+
         <PasswordInput
           inputRef={passwordRef}
           value={password}
           errorMessage={errPassword}
-          onBlur={() => loginWithFirebase()}
+          onSubmit={() => loginWithFirebase()}
           onChange={(val) => validateAndSetPassword(val)}
         />
-        <ForgotPasswordButton onPress={() => onGoReset()} />
-        <LoginButton style={styles.loginButton} onPress={() => loginWithFirebase()} />
+
+        <ForgotPasswordButton style={styles.input} onPress={() => onGoReset()} />
       </View>
-    </View>
+      <LoginButton style={styles.loginButton} onPress={() => loginWithFirebase()} />
+    </ScaleInView>
   );
 };
 

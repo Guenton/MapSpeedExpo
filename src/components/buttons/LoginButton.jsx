@@ -48,12 +48,7 @@ const LoginButton = ({ style, disabled, onPress }) => {
       onPress={() => onPress()}
       raised
       icon={
-        <Icon
-          name="right-to-bracket"
-          type="font-awesome-5"
-          color={white}
-          style={styles.buttonIcon}
-        />
+        <Icon name="sign-in-alt" type="font-awesome-5" color={white} style={styles.buttonIcon} />
       }
     />
   );

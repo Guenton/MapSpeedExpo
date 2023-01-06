@@ -12,7 +12,8 @@ const styles = ScaledSheet.create({
   container: {
     height: '50@s',
     flexDirection: 'row',
-    marginLeft: '15@s',
+    marginLeft: '10@s',
+    marginBottom: '18@s',
   },
   link: {
     justifyContent: 'center',

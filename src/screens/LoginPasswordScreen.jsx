@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBackHandler } from '@react-native-community/hooks';
 import { ScaledSheet, scale } from 'react-native-size-matters';
@@ -17,6 +18,7 @@ import SelectLoginPasswordOptionForm from '../components/forms/SelectLoginPasswo
 import LoginSignupForm from '../components/forms/LoginSignupForm';
 import ScaleInView from '../components/animations/ScaleInView';
 import AlertBox from '../components/containers/AlertBox';
+import FlexSpacer from '../components/containers/FlexSpacer';
 
 import { setAlert, setRoute } from '../store/actions/core';
 import {
@@ -28,6 +30,15 @@ import {
 const styles = ScaledSheet.create({
   mapSpeedlogo: { marginTop: '15@s' },
   topMessage: { alignSelf: 'center', marginTop: '-10@s' },
+  container: {
+    flex: 1,
+    marginTop: '-10@s',
+    marginBottom: '10@s',
+    marginHorizontal: '10@s',
+  },
+  content: {
+    height: '300@s',
+  },
   form: {
     height: '250@s',
     marginTop: '15@s',
@@ -45,7 +56,7 @@ const LoginPasswordScreen = () => {
   const topCirclePosition = useSelector((state) => state.animation.topCirclePosition);
   const bottomCirclePosition = useSelector((state) => state.animation.bottomCirclePosition);
 
-  const [subScreen, setSubScreen] = useState('login');
+  const [form, setForm] = useState('login');
 
   useBackHandler(() => {
     dispatch(setRoute('login-select'));
@@ -62,7 +73,7 @@ const LoginPasswordScreen = () => {
     delay(500)
       .then(() => dispatch(setMorphing(false)))
       .catch((err) => dispatch(setAlert(err)));
-  }, [subScreen]);
+  }, [form]);
 
   return (
     <AppBackground>
@@ -71,49 +82,36 @@ const LoginPasswordScreen = () => {
       {!transitioning && (
         <FadeInAppContent>
           <MapSpeedLogo style={styles.mapSpeedlogo} />
+          <SubHeader label={t('pleaseLogin')} style={styles.topMessage} />
 
-          <View style={{ flex: 1 }}>
-            <SubHeader label={t('pleaseLogin')} style={styles.topMessage} />
-          </View>
+          <FlexSpacer style={{ flex: 0.5 }} />
 
-          {!isKeyboardOpen && (
+          <KeyboardAwareScrollView style={styles.container} contentContainerStyle={styles.content}>
             <SelectLoginPasswordOptionForm
-              isLogin={subScreen === 'login'}
-              isSignup={subScreen === 'signup'}
-              onPressLogin={() => setSubScreen('login')}
-              onPressSignup={() => setSubScreen('signup')}
+              isLogin={form === 'login'}
+              isSignup={form === 'signup'}
+              onPressLogin={() => setForm('login')}
+              onPressSignup={() => setForm('signup')}
             />
-          )}
 
-          {subScreen === 'login' && (
-            <ScaleInView>
+            {form === 'login' && (
               <LoginPasswordForm
-                style={{
-                  ...styles.form,
-                  justifyContent: isKeyboardOpen ? 'flex-end' : 'flex-start',
-                }}
-                onGoSignup={() => setSubScreen('signup')}
+                onGoSignup={() => setForm('signup')}
                 onGoReset={() => dispatch(setRoute('login-reset'))}
                 onGoMain={() => dispatch(setRoute('main'))}
               />
-            </ScaleInView>
-          )}
+            )}
 
-          {subScreen === 'signup' && (
-            <ScaleInView>
+            {form === 'signup' && (
               <LoginSignupForm
-                style={{
-                  ...styles.form,
-                  justifyContent: isKeyboardOpen ? 'flex-end' : 'flex-start',
-                }}
-                onGoLogin={() => setSubScreen('login')}
+                onGoLogin={() => setForm('login')}
                 onGoReset={() => dispatch(setRoute('login-reset'))}
                 onGoMain={() => dispatch(setRoute('main'))}
               />
-            </ScaleInView>
-          )}
+            )}
 
-          <AlertBox />
+            <AlertBox />
+          </KeyboardAwareScrollView>
 
           {!isKeyboardOpen && <GuentonBotomRight />}
         </FadeInAppContent>
