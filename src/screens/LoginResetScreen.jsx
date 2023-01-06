@@ -26,6 +26,7 @@ import {
   setNextBottomCirclePosition,
   setNextTopCirclePosition,
 } from '../store/actions/animation';
+import LoginResetForm from '../components/forms/LoginResetForm';
 import BottomBackButtonLogo from '../components/containers/BottomBackButtonLogo';
 
 const styles = ScaledSheet.create({
@@ -47,7 +48,7 @@ const styles = ScaledSheet.create({
   },
 });
 
-const LoginPasswordScreen = () => {
+const LoginResetScreen = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -60,7 +61,7 @@ const LoginPasswordScreen = () => {
   const [form, setForm] = useState('login');
 
   useBackHandler(() => {
-    dispatch(setRoute('login-select'));
+    dispatch(setRoute('login-password'));
     return true;
   });
 
@@ -88,34 +89,12 @@ const LoginPasswordScreen = () => {
           <FlexSpacer style={{ flex: 0.5 }} />
 
           <KeyboardAwareScrollView style={styles.container} contentContainerStyle={styles.content}>
-            <SelectLoginPasswordOptionForm
-              isLogin={form === 'login'}
-              isSignup={form === 'signup'}
-              onPressLogin={() => setForm('login')}
-              onPressSignup={() => setForm('signup')}
-            />
-
-            {form === 'login' && (
-              <LoginPasswordForm
-                onGoSignup={() => setForm('signup')}
-                onGoReset={() => dispatch(setRoute('login-reset'))}
-                onGoMain={() => dispatch(setRoute('main'))}
-              />
-            )}
-
-            {form === 'signup' && (
-              <LoginSignupForm
-                onGoLogin={() => setForm('login')}
-                onGoReset={() => dispatch(setRoute('login-reset'))}
-                onGoMain={() => dispatch(setRoute('main'))}
-              />
-            )}
-
+            <LoginResetForm />
             <AlertBox />
           </KeyboardAwareScrollView>
 
           {!isKeyboardOpen && (
-            <BottomBackButtonLogo onPress={() => dispatch(setRoute('login-select'))} />
+            <BottomBackButtonLogo onPress={() => dispatch(setRoute('login-password'))} />
           )}
         </FadeInAppContent>
       )}
@@ -123,4 +102,4 @@ const LoginPasswordScreen = () => {
   );
 };
 
-export default LoginPasswordScreen;
+export default LoginResetScreen;

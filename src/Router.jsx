@@ -9,16 +9,11 @@ import { setLanguageAsync } from './config/lang';
 import { white, black } from './config/colors';
 import isAndroid from './services/core/isAndroid';
 
-import StartScreen from './screens/StartScreen';
-
-import LoginSelectScreen from './screens/LoginSelectScreen';
-// import LoginBiometricScreen from './screens/LoginBiometricScreen';
-import LoginPasswordScreen from './screens/LoginPasswordScreen';
-// import LoginResetScreen from './screens/LoginResetScreen';
-// import LoginSignupScreen from './screens/LoginSignupScreen';
-
 import MainScreen from './screens/MainScreen';
-
+import StartScreen from './screens/StartScreen';
+import LoginResetScreen from './screens/LoginResetScreen';
+import LoginSelectScreen from './screens/LoginSelectScreen';
+import LoginPasswordScreen from './screens/LoginPasswordScreen';
 import VehicleDetailScreen from './screens/VehicleDetailScreen';
 import AddVinScreen from './screens/AddVinScreen';
 
@@ -58,13 +53,10 @@ const Router = () => {
       {route === 'start' && <StartScreen />}
 
       {route === 'login-select' && <LoginSelectScreen />}
-      {/* {route === 'login-biometric' && <LoginBiometricScreen />} */}
       {route === 'login-password' && <LoginPasswordScreen />}
-      {/* {route === 'login-signup' && <LoginSignupScreen />} */}
-      {/* {route === 'login-reset' && <LoginResetScreen />} */}
+      {route === 'login-reset' && <LoginResetScreen />}
 
       {route === 'main' && <MainScreen />}
-      {/* {route === 'main' && <AddVinScreen />} */}
 
       {route === 'vehicle-add-vin' && <AddVinScreen />}
       {route === 'vehicle-detail' && <VehicleDetailScreen />}

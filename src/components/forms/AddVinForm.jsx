@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useState } from 'react';
+import React, { createRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
@@ -13,6 +13,7 @@ import { setAlert, setLoading, setRoute } from '../../store/actions/core';
 import { setErrVin, setVin, setVehicleDetails } from '../../store/actions/vehicle';
 
 import decodeVinWithNhtsa from '../../services/vin/decodeVinWithNhtsa';
+import ScaleInView from '../animations/ScaleInView';
 
 const styles = ScaledSheet.create({
   container: { flex: 1 },
@@ -66,7 +67,7 @@ const AddVinForm = ({ style }) => {
   };
 
   return (
-    <View style={{ ...styles.container, ...style }}>
+    <ScaleInView style={{ ...styles.container, ...style }}>
       <View style={styles.inputContainer}>
         <FormHeader
           style={styles.header}
@@ -87,7 +88,7 @@ const AddVinForm = ({ style }) => {
         disabled={!vin || errVin}
         onPress={() => resolveVinNumber()}
       />
-    </View>
+    </ScaleInView>
   );
 };
 

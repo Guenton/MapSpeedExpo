@@ -3,6 +3,7 @@ import {
   GoogleAuthProvider,
   FacebookAuthProvider,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signInWithRedirect,
   signOut,
   signInWithEmailAndPassword,
@@ -43,6 +44,12 @@ export const signInWithPasswordAsync = (email = '', password = '') =>
       console.log('Firebase - Signed in with Email and Password');
       return userCredential.user;
     })
+    .catch((err) => {
+      throw err;
+    });
+export const emailPasswordResetAsync = (email = '') =>
+  sendPasswordResetEmail(auth, email)
+    .then(() => console.log(`Firebase - Sent Password Reset to: ${email}`))
     .catch((err) => {
       throw err;
     });

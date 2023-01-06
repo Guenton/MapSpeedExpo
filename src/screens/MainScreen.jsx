@@ -74,6 +74,7 @@ const MainScreen = () => {
       <SlidingCircles />
 
       {!transitioning && <FadeInVehicleAvatar />}
+
       {!transitioning && (
         <FadeInAppContent>
           <TopBar />
@@ -81,7 +82,6 @@ const MainScreen = () => {
 
           <KeyboardAwareScrollView style={styles.container} contentContainerStyle={styles.content}>
             <VehicleInfoView />
-
             <AlertBox />
           </KeyboardAwareScrollView>
         </FadeInAppContent>
