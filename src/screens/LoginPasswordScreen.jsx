@@ -85,7 +85,7 @@ const LoginPasswordScreen = () => {
           <MapSpeedLogo style={styles.mapSpeedlogo} />
           <SubHeader label={t('pleaseLogin')} style={styles.topMessage} />
 
-          <FlexSpacer style={{ flex: 0.5 }} />
+          <FlexSpacer style={{ flex: 0.4 }} />
 
           <KeyboardAwareScrollView style={styles.container} contentContainerStyle={styles.content}>
             <SelectLoginPasswordOptionForm

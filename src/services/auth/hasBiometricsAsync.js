@@ -2,9 +2,9 @@ import * as LocalAuthentication from 'expo-local-authentication';
 
 const hasBiometricsAsync = async () => {
   try {
-    const type = await LocalAuthentication.getEnrolledLevelAsync();
-    if (type === 'NONE') return false;
+    const securityLevel = await LocalAuthentication.getEnrolledLevelAsync();
 
+    if (securityLevel === 'NONE') return false;
     return true;
   } catch (err) {
     throw err;

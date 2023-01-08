@@ -6,7 +6,7 @@ import * as NavigationBar from 'expo-navigation-bar';
 import { setAlert, setKeyboardOpen } from './store/actions/core';
 import { setFirebaseLanguage } from './firebase/auth';
 import { setLanguageAsync } from './config/lang';
-import { white, black } from './config/colors';
+import { white, darkBlack } from './config/colors';
 import isAndroid from './services/core/isAndroid';
 
 import MainScreen from './screens/MainScreen';
@@ -35,7 +35,7 @@ const Router = () => {
 
   useEffect(() => {
     if (isDark && isAndroid) {
-      NavigationBar.setBackgroundColorAsync(black);
+      NavigationBar.setBackgroundColorAsync(darkBlack);
       NavigationBar.setButtonStyleAsync('light');
     } else if (isAndroid) {
       NavigationBar.setBackgroundColorAsync(white);

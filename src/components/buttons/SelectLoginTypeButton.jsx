@@ -8,7 +8,7 @@ import FacebookFab from './FacebookFab';
 import GoogleFab from './GoogleFab';
 import IconFab from './IconFab';
 
-import { white, black, grey } from '../../config/colors';
+import { white, black, darkGrey } from '../../config/colors';
 
 const styles = ScaledSheet.create({
   container: { flexDirection: 'row', alignItems: 'center' },
@@ -44,7 +44,7 @@ const SelectLoginTypeButton = ({ style, type, onSubmit }) => {
         <View style={{ ...styles.container, ...style }}>
           <IconFab name="user-alt" onPress={() => onSubmit('user')} />
           <TouchableOpacity
-            style={{ ...styles.textBox, backgroundColor: isDark ? grey : white }}
+            style={{ ...styles.textBox, backgroundColor: isDark ? darkGrey : white }}
             onPress={() => onSubmit('user')}>
             <Text style={{ ...styles.text, color: isDark ? white : black }}>
               {t('loginWith')} {t('username')} {t('and')} {t('password')}
@@ -58,7 +58,7 @@ const SelectLoginTypeButton = ({ style, type, onSubmit }) => {
         <View style={{ ...styles.container, ...style }}>
           <FacebookFab onPress={() => onSubmit('facebook')} />
           <TouchableOpacity
-            style={{ ...styles.textBox, backgroundColor: isDark ? grey : white }}
+            style={{ ...styles.textBox, backgroundColor: isDark ? darkGrey : white }}
             onPress={() => onSubmit('facebook')}>
             <Text style={{ ...styles.text, color: isDark ? white : black }}>
               {t('loginWith')} {t('facebook')}
@@ -72,7 +72,7 @@ const SelectLoginTypeButton = ({ style, type, onSubmit }) => {
         <View style={{ ...styles.container, ...style }}>
           <GoogleFab onPress={() => onSubmit('google')} />
           <TouchableOpacity
-            style={{ ...styles.textBox, backgroundColor: isDark ? grey : white }}
+            style={{ ...styles.textBox, backgroundColor: isDark ? darkGrey : white }}
             onPress={() => onSubmit('google')}>
             <Text style={{ ...styles.text, color: isDark ? white : black }}>
               {t('loginWith')} {t('google')}

@@ -6,7 +6,7 @@ import { useSpring, animated } from '@react-spring/native';
 
 import { setBottomCirclePosition, setTransitioning } from '../../store/actions/animation';
 
-import { black, white } from '../../config/colors';
+import { darkBlack, white } from '../../config/colors';
 
 const width = Dimensions.get('window').width * 3;
 const styles = ScaledSheet.create({
@@ -45,7 +45,7 @@ const SlideInBottomCircle = () => {
     to: {
       ...styles.circle,
       marginTop: nextBottomCirclePosition,
-      backgroundColor: isDark ? black : white,
+      backgroundColor: isDark ? darkBlack : white,
     },
     from: {
       ...styles.circle,

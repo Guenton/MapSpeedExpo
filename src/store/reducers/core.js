@@ -6,6 +6,7 @@ import {
   SET_ALERT,
   SET_VEHICLE_ARRAY,
   SET_VEHICLE_ARRAY_POSITION,
+  SET_DARK_MODE,
 } from '../actions/core';
 
 const initialState = {
@@ -25,6 +26,8 @@ const coreReducer = (state = initialState, action) => {
   switch (action.type) {
     case TOGGLE_DARK_MODE:
       return { ...state, isDark: !state.isDark };
+    case SET_DARK_MODE:
+      return { ...state, isDark: action.bool };
     case SET_ROUTE:
       return { ...state, route: action.route };
     case SET_LOADING:

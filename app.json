@@ -22,6 +22,9 @@
       "jsEngine": "hermes",
       "supportsTablet": true,
       "bundleIdentifier": "com.guenton.mapspeed",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "MapSpeed uses FaceID to improve your login persistence"
+      },
       "config": {
         "googleSignIn": {
           "reservedClientId": "com.googleusercontent.apps.541211848793-lggdn4e9q4i4kdl3tnv156cn3fkdt3ps"

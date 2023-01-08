@@ -18,8 +18,6 @@ import SelectAppLangForm from '../components/forms/SelectAppLangForm';
 import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
 import AlertBox from '../components/containers/AlertBox';
 
-import storeGoogleIdTokenAsync from '../services/auth/storeGoogleIdTokenAsync';
-import storeFacebookAccessTokenAsync from '../services/auth/storeFacebookAccessTokenAsync';
 import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
 import { setAlert, setLoading, setRoute } from '../store/actions/core';
 import { setUserId } from '../store/actions/auth';
@@ -74,7 +72,6 @@ const LoginSelectScreen = () => {
       dispatch(setLoading());
       signInWithGoogleIdTokenAsync(id_token)
         .then(() => {
-          storeGoogleIdTokenAsync(id_token).catch((err) => setAlert(err));
           dispatch(setLoading(false));
           dispatch(setRoute('main'));
         })
@@ -91,7 +88,6 @@ const LoginSelectScreen = () => {
       dispatch(setLoading());
       signInWithFacebookAccessTokenAsync(access_token)
         .then(() => {
-          storeFacebookAccessTokenAsync(access_token).catch((err) => setAlert(err));
           dispatch(setUserId(getCurrentUserId()));
           dispatch(setLoading(false));
           dispatch(setRoute('main'));

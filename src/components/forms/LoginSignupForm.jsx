@@ -10,7 +10,6 @@ import PasswordInput from '../inputs/PasswordInput';
 import SignupButton from '../buttons/SignupButton';
 import ScaleInView from '../animations/ScaleInView';
 
-import storeEmailAndPasswordAsync from '../../services/auth/storeEmailAndPasswordAsync';
 import { createSignInWithPasswordAsync, getCurrentUserId } from '../../firebase/auth';
 
 import { setAlert, setLoading } from '../../store/actions/core';
@@ -93,8 +92,6 @@ const LoginSignupForm = ({ style, onGoMain }) => {
       try {
         dispatch(setLoading());
         await createSignInWithPasswordAsync(email, password);
-
-        await storeEmailAndPasswordAsync(email, password);
 
         dispatch(setUserId(getCurrentUserId()));
         dispatch(setPassword());

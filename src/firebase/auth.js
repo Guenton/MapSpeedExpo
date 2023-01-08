@@ -1,5 +1,6 @@
 import {
   getAuth,
+  initializeAuth,
   GoogleAuthProvider,
   FacebookAuthProvider,
   createUserWithEmailAndPassword,
@@ -11,8 +12,12 @@ import {
 } from 'firebase/auth';
 import { app } from './app';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getReactNativePersistence } from 'firebase/auth/react-native';
+
 // Initialize Auth Handler
-export const auth = getAuth(app);
+// export const auth = getAuth(app);
+export const auth = initializeAuth(app, { persistence: getReactNativePersistence(AsyncStorage) });
 
 // Localize Auth Handler
 export const setFirebaseLanguage = (language = '') => {

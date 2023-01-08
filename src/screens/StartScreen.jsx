@@ -13,17 +13,15 @@ import SelectAppLangForm from '../components/forms/SelectAppLangForm';
 import LanguageSelectFab from '../components/buttons/LanguageSelectFab';
 import StartFab from '../components/buttons/StartFab';
 import DarkModeFab from '../components/buttons/DarkModeFab';
+import AlertBox from '../components/containers/AlertBox';
 
 import { setNextBottomCirclePosition, setNextTopCirclePosition } from '../store/actions/animation';
+import { setAlert, setDarkMode, setRoute } from '../store/actions/core';
+import { getCurrentUserId } from '../firebase/auth';
 import hasBiometricsAsync from '../services/auth/hasBiometricsAsync';
-import { setAlert, setRoute } from '../store/actions/core';
-import getStoredPasswordAsync from '../services/auth/getStoredPasswordAsync';
-import getStoredGoogleIdTokenAsync from '../services/auth/getStoredGoogleIdTokenAsync';
-import getStoredFacebookAccessTokenAsync from '../services/auth/getStoredFacebookAccessTokenAsync';
-import biometricPasswordSignInAsync from '../services/auth/biometricPasswordSignInAsync';
-import biometricGoogleSignInAsync from '../services/auth/biometricGoogleSignInAsync';
-import biometricFacebookSignInAsync from '../services/auth/biometricFacebokSignInAsync';
-import AlertBox from '../components/containers/AlertBox';
+import biometricCheckAsync from '../services/auth/biometricCheckAsync';
+import { setUserId } from '../store/actions/auth';
+import getKeyValueAsync from '../services/auth/getKeyValueAsync';
 
 const styles = ScaledSheet.create({
   mapSpeedlogo: {
@@ -53,15 +51,42 @@ const StartScreen = () => {
   const currentLang = useSelector((state) => state.lang.currentLang);
 
   const [showLanguageSelectForm, setShowLanguageSelectForm] = useState(false);
-
-  const [password, setPassword] = useState(null);
-  const [googleId, setGoogleId] = useState(null);
-  const [facebookAccess, setFacebookAccess] = useState(null);
+  const [hasStoredSession, setHasStoredSession] = useState(false);
 
   useBackHandler(() => {
     BackHandler.exitApp();
     return true;
   });
+
+  useEffect(() => {
+    getKeyValueAsync('isDark')
+      .then((storedDark) => {
+        if (storedDark === 'true') dispatch(setDarkMode());
+        else dispatch(setDarkMode(false));
+      })
+      .catch((err) => dispatch(setAlert(err)));
+  }, []);
+
+  useEffect(() => {
+    hasBiometricsAsync()
+      .then((ok) => {
+        if (ok && getCurrentUserId()) setHasStoredSession(true);
+        else setHasStoredSession(false);
+      })
+      .catch((err) => dispatch(setAlert(err)));
+  }, [getCurrentUserId()]);
+
+  useEffect(() => {
+    if (!hasStoredSession) return;
+
+    biometricCheckAsync()
+      .then((ok) => {
+        if (!ok) return;
+        dispatch(setUserId(getCurrentUserId()));
+        dispatch(setRoute('main'));
+      })
+      .catch((err) => dispatch(setAlert(err)));
+  }, [hasStoredSession, getCurrentUserId()]);
 
   useEffect(() => {
     dispatch(setNextTopCirclePosition(scale(-550)));
@@ -71,36 +96,6 @@ const StartScreen = () => {
   useEffect(() => {
     setShowLanguageSelectForm(false);
   }, [currentLang]);
-
-  useEffect(() => {
-    getStoredPasswordAsync()
-      .then((storedPassword) => setPassword(storedPassword))
-      .catch((err) => dispatch(setAlert(err)));
-  }, []);
-
-  useEffect(() => {
-    getStoredGoogleIdTokenAsync()
-      .then((idToken) => setGoogleId(idToken))
-      .catch((err) => dispatch(setAlert(err)));
-  }, []);
-
-  useEffect(() => {
-    getStoredFacebookAccessTokenAsync()
-      .then((accessToken) => setFacebookAccess(accessToken))
-      .catch((err) => dispatch(setAlert(err)));
-  }, []);
-
-  useEffect(() => {
-    hasBiometricsAsync()
-      .then((isAvailable) => {
-        if (isAvailable && password) {
-          biometricPasswordSignInAsync(password)
-            .then(() => dispatch(setRoute('main')))
-            .catch((err) => dispatch(setAlert(err)));
-        }
-      })
-      .catch((err) => dispatch(setAlert(err)));
-  }, [password, googleId, facebookAccess]);
 
   const toggleLanguageSelectForm = () => setShowLanguageSelectForm(!showLanguageSelectForm);
 
