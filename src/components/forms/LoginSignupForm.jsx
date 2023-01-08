@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React, { createRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
@@ -46,6 +46,14 @@ const LoginSignupForm = ({ style, onGoMain }) => {
   const errEmail = useSelector((state) => state.auth.errEmail);
   const errPassword = useSelector((state) => state.auth.errPassword);
   const errPasswordConfirm = useSelector((state) => state.auth.errPasswordConfirm);
+
+  const [disableSubmit, setDisableSubmit] = useState(true);
+
+  useEffect(() => {
+    if (!email || !password || !passwordConfirm) return setDisableSubmit(true);
+    else if (errEmail || errPassword || errPasswordConfirm) return setDisableSubmit(true);
+    else setDisableSubmit(false);
+  });
 
   const shakeOnError = () => {
     if (errEmail) emailRef.current.shake();
@@ -135,7 +143,11 @@ const LoginSignupForm = ({ style, onGoMain }) => {
           onChange={(val) => validateAndSetPasswordConfirm(val)}
         />
       </View>
-      <SignupButton style={styles.signupButton} onPress={() => signupWithFirebase()} />
+      <SignupButton
+        style={styles.signupButton}
+        disabled={disableSubmit}
+        onPress={() => signupWithFirebase()}
+      />
     </ScaleInView>
   );
 };

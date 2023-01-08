@@ -6,7 +6,7 @@ import { ScaledSheet } from 'react-native-size-matters';
 import LanguageSelectFab from '../buttons/LanguageSelectFab';
 import { setCurrentLang } from '../../store/actions/lang';
 
-import { white, grey } from '../../config/colors';
+import { white, darkGrey } from '../../config/colors';
 
 const styles = ScaledSheet.create({
   container: {
@@ -48,7 +48,7 @@ const SelectAppLangForm = ({ style }) => {
   const selectLanguage = (languageCode = '') => dispatch(setCurrentLang(languageCode));
 
   return (
-    <View style={{ ...styles.container, ...style, backgroundColor: isDark ? grey : white }}>
+    <View style={{ ...styles.container, ...style, backgroundColor: isDark ? darkGrey : white }}>
       <LanguageSelectFab
         style={styles.topButton}
         flag={langArray[0]}
